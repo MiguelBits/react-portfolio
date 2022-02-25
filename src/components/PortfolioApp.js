@@ -39,13 +39,15 @@ class PortfolioApp extends Component {
                             </div>
                             <div className="overlay">
                                 <div className='text'>
-                                    <Overlay stack_item={i} />
-                                    <button id="viewcode">
-                                        <a href={this.state.projects_github[i]} target="_blank">View Code</a>
-                                    </button>
-                                    <button id="gotoapp">
-                                        <a href={this.state.projects_github[i]} target="_blank">Go to App</a>
-                                    </button>
+                                    <div>   <Overlay stack_item={i} /></div>
+                                    <div className='buttons_overlay'>
+                                        <button id="viewcode">
+                                            <a href={this.state.projects_github[i]} target="_blank">View Code</a>
+                                        </button>
+                                        <button id="gotoapp">
+                                            <a href={this.state.projects_github[i]} target="_blank">Go to App</a>
+                                        </button>
+                                    </div>
                                 </div> 
                             </div>
                         </div>
