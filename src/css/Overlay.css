@@ -1,19 +1,37 @@
 .js {
+    margin-left: 45px;
+    border-radius: 25px;
+    width: 100px;
     background-color: orange;
   }
 
 .web3 {
+    margin-left: 45px;
+    border-radius: 25px;
+    width: 100px;
     background-color: green;
 }
 .defi{
+    margin-left: 45px;
+    border-radius: 25px;
+    width: 100px;
     background-color: rgb(94, 158, 255);
 }
 .nft{
+    margin-left: 45px;
+    border-radius: 25px;
+    width: 100px;
     background-color: red;
 }
 .sol{
+    margin-left: 45px;
+    border-radius: 25px;
+    width: 100px;
     background-color: blue;
 }
 .css{
+    margin-left: 45px;
+    border-radius: 25px;
+    width: 100px;
     background-color: yellow;
 }

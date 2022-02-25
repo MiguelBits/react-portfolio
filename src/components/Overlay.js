@@ -6,7 +6,7 @@ class Overlay extends Component {
     decide_stack_used(item){
         switch (item){
             case 0:
-                return ("ERC1155, Solidity, Ethers.js")
+                return ("ERC1155, Solidity, Ethers.js, Web3")
             case 1:
                 return ("Defi, Solidity, Ethers.js")
             case 2:
@@ -48,13 +48,15 @@ class Overlay extends Component {
     }
     render(){
         return (
-        <div>
-            Stack: {this.decide_stack_used(this.props.stack_item).split(", ").map( item => {
-                return( 
-                <div className={this.conditionalCss(item)}>
-                    {item}
-                </div>)
-            })}
+        <div className='stack'>Stack: 
+            <div>
+                {this.decide_stack_used(this.props.stack_item).split(", ").map( item => {
+                    return( 
+                    <div className={this.conditionalCss(item)}>
+                        {item}
+                    </div>)
+                })}
+            </div>
         </div>
         )
     }
