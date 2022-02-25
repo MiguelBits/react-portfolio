@@ -1,5 +1,6 @@
 import React from 'react'
 import './../css/PortfolioApp.css';
+import Overlay from './Overlay';
 import { Component } from 'react/cjs/react.production.min';
 
 class PortfolioApp extends Component {
@@ -11,6 +12,13 @@ class PortfolioApp extends Component {
     
         projects_name: [
             "NFT", "Defi", "Frontend", "Social Media"
+        ],
+
+        projects_github:[
+            "https://github.com/mcruzvas/nft_duel",
+            "",
+            "",
+            ""
         ]
     }
 
@@ -20,19 +28,25 @@ class PortfolioApp extends Component {
             {this.state.projects_collection.map(
                 (item,i) => {
                     return(
-                        <div key={i}>
-                            <div id="container">
-                                <div id="block-name">
-                                    <div className="box_title" >
-                                        <p>{this.state.projects_name[i]}</p>
-                                    </div>
+                        <div className='container' key={i}>
+                            <div>
+                                <div>
+                                    <p>{this.state.projects_name[i]}</p>
                                 </div>
-                                <div className="column">
-                                    <img alt={i} className="image_nft" src={item} ></img>
-                                </div>
-                                <div className="middle">
-                                    <div> Hello </div> 
-                                </div>
+                            </div>
+                            <div className="column">
+                                <img alt={i} className="image" src={item} ></img>
+                            </div>
+                            <div className="overlay">
+                                <div className='text'>
+                                    <Overlay stack_item={i} />
+                                    <button id="viewcode">
+                                        <a href={this.state.projects_github[i]} target="_blank">View Code</a>
+                                    </button>
+                                    <button id="gotoapp">
+                                        <a href={this.state.projects_github[i]} target="_blank">Go to App</a>
+                                    </button>
+                                </div> 
                             </div>
                         </div>
                 )})}         
