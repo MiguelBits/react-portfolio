@@ -16,10 +16,45 @@ class Overlay extends Component {
         }
 
     }
+    conditionalCss(subject){
+        switch (subject){
+            case "Next.js":
+                return "js"
+            case "Defi":
+                return "defi"
+            case "database":
+                return "db"
+            case "Javascript":
+                return "js"
+            case "Web3":
+                return "web3"
+            case "Solidity":
+                return "sol"
+            case "ERC1155":
+                return "nft"
+            case "Tailwind.css":
+                return "css"
+            case "CSS":
+                return "css"
+            case "Ether.js":
+                return "js"
+            case "React":
+                return "js"
+            case "NFT":
+                return "nft"
+            default:
+                return "js"
+        }
+    }
     render(){
         return (
         <div>
-            Stack: {this.decide_stack_used(this.props.stack_item)}
+            Stack: {this.decide_stack_used(this.props.stack_item).split(", ").map( item => {
+                return( 
+                <div className={this.conditionalCss(item)}>
+                    {item}
+                </div>)
+            })}
         </div>
         )
     }
