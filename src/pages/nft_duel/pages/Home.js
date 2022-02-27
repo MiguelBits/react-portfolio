@@ -3,6 +3,7 @@ import './../css/Home.css';
 import {contractAddress, contractABI} from '../contracts/contract_abi';
 import { ethers } from 'ethers';
 import "./../css/Duel.css"
+import Nav from "./../components/Nav"
 
 class Home extends React.Component {
   state = {
@@ -104,6 +105,7 @@ class Home extends React.Component {
   render() {
     return (
       <div id="home-page">
+        <Nav/>
           <button onClick={() => this.mintNftHandler(1)} className="cyber_button">
             <span aria-hidden>Robot</span>
             <span aria-hidden className="cyber_button__tag">Population:{this.state.Robot_planets_population}</span>

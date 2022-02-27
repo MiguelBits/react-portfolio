@@ -1,6 +1,7 @@
 import React from 'react'
 import './../css/Collection.css';
 import "./../css/Duel.css"
+import Nav from "./../components/Nav"
 
 import {contractAddress, contractABI} from '../contracts/contract_abi';
 import { ethers } from 'ethers';
@@ -214,7 +215,7 @@ class Collection extends Component {
     return (
         <div className='collection-page'>
             <h1 className="neon-title-app">NFT Galaxy</h1>
-
+            <Nav/>
             <div >
               {this.upgradeNftButton()}
             </div>

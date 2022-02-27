@@ -3,6 +3,8 @@ import {contractAddress, contractABI} from '../contracts/contract_abi';
 import { ethers } from 'ethers';
 import './../css/Battle.css';
 import "./../css/Duel.css"
+import Nav from "./../components/Nav"
+
 
 class Battle extends React.Component {
   state = {
@@ -75,6 +77,7 @@ class Battle extends React.Component {
     return (
       <div className='battle-page'>
         <div>
+        <Nav/>
             <div >
               {this.upgradeNftButton("Hero Id")}
             </div>

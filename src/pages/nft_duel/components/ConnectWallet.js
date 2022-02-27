@@ -44,7 +44,7 @@ class ConnectWallet extends Component {
         } catch (err) {
             console.log(err)
         }
-    
+        
     }
 
     connectWalletButton = () => {
@@ -52,7 +52,8 @@ class ConnectWallet extends Component {
             <div>
             <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"></link>
             <button onClick={this.connectWalletHandler} id="connect-wallet" className="mx-auto rounded-md p-2 bg-purple-700 text-white underline decoration-double">
-                Connect Wallet  ➤➤➤ Enter App
+                    Connect Wallet  ➤➤➤ 
+                <a href="/nftDuel/Home" >Enter App</a>
             </button>
             </div>
         )
@@ -60,7 +61,10 @@ class ConnectWallet extends Component {
     afterConnectWallet = () =>{
         return(
             <div>
-                <a href='/nftDuel/Home'>num carilé</a>
+            <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"></link>
+            <button id="connect-wallet" className="mx-auto rounded-md p-2 bg-purple-700 text-white underline decoration-double">
+                <a href="/nftDuel/Home" >Enter App</a>
+            </button>
             </div>
         )
     }
