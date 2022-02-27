@@ -19,6 +19,12 @@ class PortfolioApp extends Component {
             "",
             "",
             ""
+        ],
+        projects_links:[
+            "/nft_duel",
+            "",
+            "",
+            ""
         ]
     }
 
@@ -45,7 +51,7 @@ class PortfolioApp extends Component {
                                             <a href={this.state.projects_github[i]} target="_blank">View Code</a>
                                         </button>
                                         <button id="gotoapp">
-                                            <a href={this.state.projects_github[i]} target="_blank">Go to App</a>
+                                            <a href={this.state.projects_links[i]} target="_blank">Go to App</a>
                                         </button>
                                     </div>
                                 </div> 
