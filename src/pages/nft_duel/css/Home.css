@@ -10,11 +10,16 @@
 }
 #robot-planet{
     width: 400px;
-    margin-top: -310px;
+    margin-top: -200px;
+    margin-left: 230px;
 }
-#god-planet, #alien-planet{
+#god-planet{
     margin-left: -200px;
     margin-top: -175px;
+}
+#alien-planet{
+    margin-bottom: 260px;
+    margin-left: -200px;
 }
 #superhuman-planet{
     margin-left: 230px;
@@ -31,7 +36,7 @@
 }
 
 .cyber_button{
-    margin-left: 200px;
+    margin-left: 300px;
     margin-top: 200px;
 }
 
@@ -84,7 +89,7 @@
     font-weight: normal;
     color: white;
     font-size: small;
-  }
+}
 @keyframes glitch {
     0% {
         clip-path: var(--slice-1);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Component } from 'react/cjs/react.production.min';
+import "./../css/Duel.css"
 
 class ConnectWallet extends Component {
     state = {
@@ -56,13 +57,23 @@ class ConnectWallet extends Component {
             </div>
         )
     }
+    afterConnectWallet = () =>{
+        return(
+            <div>
+                <a href='/nftDuel/Home'>num carilé</a>
+            </div>
+        )
+    }
     componentDidMount = () => {
         this.checkWalletIsConnected();
+        document.body.style.backgroundImage = 'url("https://wallpaperaccess.com/full/130220.jpg")';
     };
     render() {
       return (
-        <div id="about-page">
-            {this.state.currentAccount ? "this.showAbout()" : this.connectWalletButton()}
+        <div className='Duel'>
+            <div id="about-page">
+                {this.state.currentAccount ? this.afterConnectWallet() : this.connectWalletButton()}
+            </div>
         </div>
 
       );

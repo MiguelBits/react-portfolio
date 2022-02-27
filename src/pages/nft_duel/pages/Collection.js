@@ -1,5 +1,6 @@
 import React from 'react'
 import './../css/Collection.css';
+import "./../css/Duel.css"
 
 import {contractAddress, contractABI} from '../contracts/contract_abi';
 import { ethers } from 'ethers';
@@ -205,6 +206,7 @@ class Collection extends Component {
     //nft collection array
     this.collectionNftHandler()
     //TODO event to refresh when staked
+    document.body.style.backgroundImage = 'url("https://wallpaperaccess.com/full/130220.jpg")';
   };
 
 

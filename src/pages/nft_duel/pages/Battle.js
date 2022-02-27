@@ -2,6 +2,7 @@ import React from 'react';
 import {contractAddress, contractABI} from '../contracts/contract_abi';
 import { ethers } from 'ethers';
 import './../css/Battle.css';
+import "./../css/Duel.css"
 
 class Battle extends React.Component {
   state = {
@@ -28,6 +29,7 @@ class Battle extends React.Component {
   }
   componentDidMount = () => {
     this.getStakedPopulation();
+    document.body.style.backgroundImage = 'url("https://wallpaperaccess.com/full/130220.jpg")';
   }
   upgradeNftButton = (frase) => {
     return (

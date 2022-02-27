@@ -2,6 +2,7 @@ import React from 'react'
 import './../css/Home.css';
 import {contractAddress, contractABI} from '../contracts/contract_abi';
 import { ethers } from 'ethers';
+import "./../css/Duel.css"
 
 class Home extends React.Component {
   state = {
@@ -97,6 +98,7 @@ class Home extends React.Component {
     this.getPopulation(4);
     this.getPopulation(5);
     this.getPopulation(6);
+    document.body.style.backgroundImage = 'url("https://wallpaperaccess.com/full/130220.jpg")';
   }
   
   render() {
@@ -125,6 +127,7 @@ class Home extends React.Component {
             <span aria-hidden className="cyber_button__tag">Population:{this.state.Alien_planets_population}</span>
             <img alt="" id="alien-planet" src="https://github.com/mcruzvas/react_web3/blob/main/public/planets/alien.png?raw=true"></img>
           </button>
+          
           <button onClick={() => this.mintNftHandler(5)} className="cyber_button">
             <span aria-hidden>Animal</span>
             <span aria-hidden className="cyber_button__tag">Population:{this.state.Animal_planets_population}</span>
@@ -133,7 +136,7 @@ class Home extends React.Component {
           
           <button onClick={() => this.mintNftHandler(6)} className="cyber_button">
             <span aria-hidden>Darklink</span>
-            <span aria-hidden className="cyber_button__tag">Population:{this.state.Darklink_planets_population}</span>
+            <span aria-hidden className="cyber_button__tag"><div id="population">Population:{this.state.Darklink_planets_population}</div></span>
             <img alt="" id="darklink-planet" src="https://github.com/mcruzvas/react_web3/blob/main/public/planets/darklink4.png?raw=true"></img>
           </button>
           

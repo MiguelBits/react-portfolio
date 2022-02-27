@@ -22,10 +22,10 @@ class PortfolioApp extends Component {
             ""
         ],
         projects_links:[
-            "/nft_duel",
-            "",
-            "",
-            ""
+            "/nftDuel",
+            "/Defi",
+            "/FullStack",
+            "/SocialMedia"
         ]
     }
 
