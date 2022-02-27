@@ -50,12 +50,14 @@ class Overlay extends Component {
         return (
         <div className='stack'>Stack: 
             <div>
-                {this.decide_stack_used(this.props.stack_item).split(", ").map( item => {
-                    return( 
-                    <div className={this.conditionalCss(item)}>
-                        {item}
-                    </div>)
-                })}
+                <div>
+                    {this.decide_stack_used(this.props.stack_item).split(", ").map( item => {
+                        return( 
+                        <div className={this.conditionalCss(item)}>
+                            {item}
+                        </div>)
+                    })}
+                </div>
             </div>
         </div>
         )

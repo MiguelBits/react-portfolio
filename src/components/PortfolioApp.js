@@ -1,5 +1,6 @@
 import React from 'react'
 import './../css/PortfolioApp.css';
+import './../css/Overlay.css';
 import Overlay from './Overlay';
 import { Component } from 'react/cjs/react.production.min';
 
@@ -44,7 +45,7 @@ class PortfolioApp extends Component {
                                 <img alt={i} className="image" src={item} ></img>
                             </div>
                             <div className="overlay">
-                                <div className='text'>
+                                <div className='overlay-text'>
                                     <div>   <Overlay stack_item={i} /></div>
                                     <div className='buttons_overlay'>
                                         <button id="viewcode">

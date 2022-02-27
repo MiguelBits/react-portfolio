@@ -1,6 +1,7 @@
 import React from 'react'
 import './css/App.css';
 import PortfolioApp from "./components/PortfolioApp"
+import NFT_DApp from "./pages/nft_duel/App"
 import { Component } from 'react/cjs/react.production.min';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
