@@ -76,21 +76,23 @@ class Battle extends React.Component {
   render() {
     return (
       <div className='battle-page'>
-        <div>
-        <Nav/>
-            <div >
-              {this.upgradeNftButton("Hero Id")}
-            </div>
-            <div >
-              {this.upgradeNftButton("Enemy Id")}
-            </div>
-
+          <Nav/>
+        
+          <div className='form-input'>
+              <div className='form-input'>
+                {this.upgradeNftButton("Hero1 Id")}
+              </div>
+              <div className='form-input' >
+                {this.upgradeNftButton("Hero2 Id")}
+              </div>
+          </div>
             <button onClick={() => this.mintNftHandler(1)} className="battle_cyber_button">
               <span aria-hidden>Duel</span>
               <span aria-hidden className="battle_cyber_button__tag">Staked Population:{this.state.stakedPopulation}</span>
-              <img alt="" id="versus" src="https://github.com/mcruzvas/react_web3/blob/battle_staked-version1/public/planets/vs.png?raw=true"></img>
             </button>
-        </div>
+            <img alt="" id="versus" src="https://images.vectorhq.com/images/istock/previews/8566/85666815-versus-screen-with-fire-frames.jpg"></img>
+
+        
       </div>
     );
   }

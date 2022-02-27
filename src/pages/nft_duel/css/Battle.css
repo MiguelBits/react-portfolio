@@ -17,12 +17,11 @@
     margin-bottom: 100px;
 
 }
-#stake_form_overlay{
-    margin-top: 0px;
-}
 
 #versus{
-    margin-top: -243px;
+    width: 800px;
+    opacity: 100px;
+    margin-left: 500px;
 }
 .battle_cyber_button, .battle_cyber_button::after {
     width: 280px;
@@ -122,6 +121,11 @@
     
 }
 .battle_cyber_button{
-    margin-left: -50px;
-    margin-top: 200px;
+    position: relative;
+    left: 750px;
+    bottom: 95px;
+}
+
+#unlock{
+    margin-left: 150px;
 }
