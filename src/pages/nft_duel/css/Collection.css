@@ -3,48 +3,6 @@
   #text{
     color: white;
   }
-  /* Style the navbar */
-  #navbar {
-    overflow: hidden;
-    background-color: #273043;
-    position:fixed;
-    left:0;
-    top:0;
-    right:0;
-    text-align:right;
-    border-radius: 25px;
-    border: 2px solid #5e2f2f;
-    justify-content: space-around;
-    
-  }
-  /* Navbar links */
-  #navbar a {
-    float: center;
-    display: inline;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 280px;
-    font-size: x-large;
-    text-shadow:
-    0 0 5px rgb(243, 7, 7),
-    0 0 10px rgb(246, 5, 5),
-    0 0 20px rgb(207, 1, 1),
-    0 0 40px rgb(174, 4, 4),
-    0 0 80px rgb(180, 16, 16),
-    0 0 90px rgb(172, 4, 4),
-    0 0 100px rgb(107, 4, 4),
-    0 0 150px rgb(87, 2, 2);
-  }
-  /* The sticky class is added to the navbar with JS when it reaches its scroll position */
-  .sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-  }
-  /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
-  .sticky + .content {
-    padding-top: 60px;
-  }
   
   .neon-title-app {
     font-size: xx-large;
@@ -58,6 +16,9 @@
       0 0 90px #0ff,
       0 0 100px #0ff,
       0 0 150px #0ff;
+      position: relative;
+      top: 40px;
+      left: 69px;
       
   }
   
@@ -99,6 +60,7 @@
       cubic-bezier(.3, .7, .4, 1);
   }
   
+
   .button-82-edge {
     margin-left: 5px;
     position: absolute;
@@ -118,6 +80,7 @@
   
   .button-82-front {
     margin-left: 10px;
+    margin-bottom: 7px;
     display: block;
     position: relative;
     border-radius: 12px;
@@ -178,11 +141,8 @@
   }
   
   #form_overlay{
-    background-color: #273043; 
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 0px;
-    padding-right: 40px;
+    position: absolute;
+    left: 400px;
   }
   #form_input{
     background-color: #ffffff;
@@ -195,11 +155,7 @@
   #unlock{
     color:white;
   }
-  body {
-    margin: 0;
-    padding: 0;
-    font: 10px/13px 'Lucida Sans',sans-serif;
-  }
+
   .wrap {
     border-radius: 25px;
     border: 2px solid #a30000;
@@ -210,12 +166,15 @@
     max-width: 1500px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 100px;
   }
   .box {
     float: left;
     position: relative;
     width: 20%;
     padding-bottom: 20%;
+    top: 10px;
+    left: 10px;
   }
   
   .boxInner {
@@ -295,7 +254,7 @@
   
   .nft_name_title
   {
-    margin-top: -50px;
+    position: relative;
     text-transform: uppercase;
     background-image: linear-gradient(
       -225deg,
@@ -334,4 +293,106 @@
 }
 .getStakedTimeLeft{
     margin-left: -20px;
+}
+.battle_cyber_button, .battle_cyber_button::after {
+  width: 280px;
+  height: 86px;
+  font-size: 36px;
+  font-family: 'Cyber', sans-serif;    
+  background: linear-gradient(45deg, transparent 5%, #FF013C 5%);
+  border: 0;
+  color: #fff;
+  letter-spacing: 3px;
+  line-height: 88px;
+  box-shadow: 6px 0px 0px #8a0378;
+  outline: transparent;
+  position: relative;
+}
+
+.battle_cyber_button::after {
+  --slice-0: inset(50% 50% 50% 50%);
+  --slice-1: inset(80% -6px 0 0);
+  --slice-2: inset(50% -6px 30% 0);
+  --slice-3: inset(10% -6px 85% 0);
+  --slice-4: inset(40% -6px 43% 0);
+  --slice-5: inset(80% -6px 5% 0);
+
+  content: 'Duel';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 3%, #00E6F6 3%, #00E6F6 5%, #FF013C 5%);
+  text-shadow: -3px -3px 0px #F8F005, 3px 3px 0px #00E6F6;
+  clip-path: var(--slice-0);
+  }
+
+  .battle_cyber_button:hover::after {
+  animation: 1s glitch;
+  animation-timing-function: steps(2, end);
+}
+.battle_cyber_button__tag {
+  position: absolute;
+  padding: 1px 4px;
+  letter-spacing: 1px;
+  line-height: 1;
+  bottom: 5%;
+  right: 5%;
+  font-weight: normal;
+  color: white;
+  font-size: small;
+}
+@keyframes glitch {
+  0% {
+      clip-path: var(--slice-1);
+      transform: translate(-20px, -10px);
+  }
+  10% {
+      clip-path: var(--slice-3);
+      transform: translate(10px, 10px);
+  }
+  20% {
+      clip-path: var(--slice-1);
+      transform: translate(-10px, 10px);
+  }
+  30% {
+      clip-path: var(--slice-3);
+      transform: translate(0px, 5px);
+  }
+  40% {
+      clip-path: var(--slice-2);
+      transform: translate(-5px, 0px);
+  }
+  50% {
+      clip-path: var(--slice-3);
+      transform: translate(5px, 0px);
+  }
+  60% {
+      clip-path: var(--slice-4);
+      transform: translate(5px, 10px);
+  }
+  70% {
+      clip-path: var(--slice-2);
+      transform: translate(-10px, 10px);
+  }
+  80% {
+      clip-path: var(--slice-5);
+      transform: translate(20px, -10px);
+  }
+  90% {
+      clip-path: var(--slice-1);
+      transform: translate(-10px, 0px);
+  }
+  100% {
+      clip-path: var(--slice-1);
+      transform: translate(0);
+  }
+  
+}
+.battle_cyber_button{
+  position: relative;
+  left: 750px;
+  bottom: 95px;
 }
