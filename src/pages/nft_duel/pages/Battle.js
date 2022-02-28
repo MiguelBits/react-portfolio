@@ -11,6 +11,8 @@ class Battle extends React.Component {
     stakedPopulation: 0,
     stakedIDs: [],
     openDropMenu: false,
+    playerHero: 0,
+    enemyHero: 0,
   }
   getStakedPopulation = () => {
     const { ethereum } = window;
@@ -22,7 +24,7 @@ class Battle extends React.Component {
   
         nftContract.getStakedPopulation().then(result => {
           this.setState({stakedPopulation:result.length})
-          for(var i = 0; i<=result.length;i++){
+          for(var i = 0; i < result.length;i++){
             const previous_state_element = this.state.stakedIDs;
             console.log(result[i])
             const updated_state_nft_element = previous_state_element.concat(parseInt(result[i]._hex))
@@ -57,7 +59,7 @@ class Battle extends React.Component {
       window.location.reload(false);
   }
   handleOnClick = (item) => {
-
+    this.setState({playerHero:item})
   }
   toggle = () => {
     this.setState({openDropMenu: !this.state.openDropMenu})
@@ -79,14 +81,14 @@ class Battle extends React.Component {
                   <p className="dd-header__title--bold">Your Duel Galaxy Heroes:</p>
                 </div>
                 <div className="dd-header__action">
-                  <p>{this.state.openDropMenu ? console.log(this.state.stakedIDs) : 'Open'}</p>
+                  <p>{this.state.openDropMenu ? 'Close' : 'Open'}</p>
                 </div>
               </div>
               {this.state.openDropMenu && (
                 <ul className="dd-list">
                   {this.state.stakedIDs.map((item,i) => (
                     <li className="dd-list-item" key={i}>
-                      <button type="button">
+                      <button type="button" onClick={() => this.handleOnClick(item)}>
                         <span>{item}</span>
                       </button>
                     </li>
