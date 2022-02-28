@@ -166,9 +166,9 @@
 
 #enemy-form{
   color:rgb(4, 154, 255);
-  position: relative;
-  left: 885px;
-  bottom: -150px;
+  position: absolute;
+  right: 200px;
+  bottom: 450px;
 }
 
 #enemy-form_input{
@@ -176,15 +176,15 @@
   text-align: center;
   font-family: 'Courier New', Courier, monospace;
   font-size: large;
-  position: relative;
-  left: 700px;
-  top: 200px;
+  position: absolute;
+  right: 150px;
+  top: 500px;
   
 }
 
 .enemyImg{
-  position: relative;
-  left: 765px;
-  bottom: 500px;
+  position: absolute;
+  right: 130px;
+  top: 100px;
   scale: 80%;
 }
