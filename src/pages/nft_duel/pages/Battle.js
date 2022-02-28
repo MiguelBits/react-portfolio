@@ -18,6 +18,13 @@ class Battle extends React.Component {
     collection_tokenElement: [],
     collection_tokenAttack: [],
     collection_tokenStars: [],
+    enemyId: 0,
+    enemy_tokenImg: "",
+    enemy_tokenName: "",
+    enemy_tokenClass: "",
+    enemy_tokenElement: "",
+    enemy_tokenAttack: "",
+    enemy_tokenStars: "",
   }
   getStakedPopulation = () => {
     const { ethereum } = window;
@@ -123,7 +130,42 @@ class Battle extends React.Component {
   toggle = () => {
     this.setState({openDropMenu: !this.state.openDropMenu})
   }
+  selectEnemy = async (enemy) => {
+    const { ethereum } = window;
+  
+    if (ethereum) {
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = provider.getSigner();
+      const nftContract = new ethers.Contract(contractAddress, contractABI, signer);
 
+      nftContract.uri(enemy).then(urlValue => {
+        //console.log(urlValue)
+        fetch(urlValue)
+            .then(response => response.json())
+            .then((jsonData) => {
+              //update local storage listed by tokenId
+              //img
+              this.setState({collection_tokenImg: jsonData.image})
+              //name
+              this.setState({collection_tokenName: jsonData.name})
+              //class
+              this.setState({collection_tokenClass: jsonData.properties.class})
+              //element
+              this.setState({collection_tokenElement: jsonData.properties.element})
+      })})
+      nftContract.getNFT_attack(enemy).then(result => {
+        //attack
+        this.setState({collection_tokenAttack: result._hex.toString()})
+      })
+      nftContract.getNFT_stars(enemy).then(result => {
+        //stars
+        this.setState({collection_tokenStars: result._hex.toString()})
+      })
+    }
+    else {
+      console.log("Ethereum object does not exist");
+    }
+  }
   render() {
     return (
       <div>
@@ -166,7 +208,23 @@ class Battle extends React.Component {
 
 
             <div className='EnemyHero'>
-
+              <div className='p2-list'>
+                <link rel="preconnect" href="https://fonts.gstatic.com"/>
+                <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet"/>
+                <form onSubmit={this.selectEnemy}>
+                  <div>
+                      <label id="enemy-form">Enemy ID to Duel   </label>
+                      <input
+                        className='shadow sm:rounded-lg'
+                        id='enemy-form_input'
+                        value={this.state.boost_value}
+                        onChange={(e) => this.setState({enemyId: e.target.value})}
+                      />
+                    <a onClick={() => this.selectEnemy(this.state.enemyId)} className="neon-button2">Select</a>
+                  </div>
+                </form>
+                {this.state.enemyId != 0 ? <img className="enemyImg" src={this.state.enemy_tokenImg}/>:<img className="enemyImg" src="https://ms.yugipedia.com//thumb/f/fd/Back-Anime-ZX-2.png/261px-Back-Anime-ZX-2.png"/>}
+              </div>
             </div>
           
 
