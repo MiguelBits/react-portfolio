@@ -25,6 +25,7 @@ class Battle extends React.Component {
     enemy_tokenElement: "",
     enemy_tokenAttack: "",
     enemy_tokenStars: "",
+    enemy_tokenStaked: false,
   }
   getStakedPopulation = () => {
     const { ethereum } = window;
@@ -132,7 +133,9 @@ class Battle extends React.Component {
   }
   selectEnemy = async (enemy) => {
     const { ethereum } = window;
-  
+    if(enemy == 0){
+      this.setState({enemy_tokenImg:0})
+    }
     if (ethereum) {
       const provider = new ethers.providers.Web3Provider(ethereum);
       const signer = provider.getSigner();
@@ -145,26 +148,45 @@ class Battle extends React.Component {
             .then((jsonData) => {
               //update local storage listed by tokenId
               //img
-              this.setState({collection_tokenImg: jsonData.image})
+              this.setState({enemy_tokenImg: jsonData.image})
               //name
-              this.setState({collection_tokenName: jsonData.name})
+              this.setState({enemy_tokenName: jsonData.name})
               //class
-              this.setState({collection_tokenClass: jsonData.properties.class})
+              this.setState({enemy_tokenClass: jsonData.properties.class})
               //element
-              this.setState({collection_tokenElement: jsonData.properties.element})
+              this.setState({enemy_tokenElement: jsonData.properties.element})
       })})
       nftContract.getNFT_attack(enemy).then(result => {
         //attack
-        this.setState({collection_tokenAttack: result._hex.toString()})
+        this.setState({enemy_tokenAttack: result.toString()})
       })
       nftContract.getNFT_stars(enemy).then(result => {
         //stars
-        this.setState({collection_tokenStars: result._hex.toString()})
+        this.setState({enemy_tokenStars: result.toString()})
+      })
+      nftContract.getNFT_staked(enemy).then(result => {
+        //stars
+        this.setState({enemy_tokenStaked: result.toString()})
       })
     }
     else {
       console.log("Ethereum object does not exist");
     }
+  }
+  revealEnemy(){
+    return(
+      <div>
+        <img className="enemyRevealImg" src={this.state.enemy_tokenImg}></img>
+        <ul className='enemyStats'>
+          <p>{this.state.enemy_tokenName}</p>
+          <p>Stars: {this.state.enemy_tokenStars}</p>
+          <p>Attack: {this.state.enemy_tokenAttack}</p>
+          <p>Class: {this.state.enemy_tokenClass}</p>
+          <p>Element: {this.state.enemy_tokenElement}</p>
+          <p>Staked: {this.state.enemy_tokenStaked}</p>
+        </ul>
+      </div>
+    )
   }
   render() {
     return (
@@ -223,7 +245,7 @@ class Battle extends React.Component {
                     <a onClick={() => this.selectEnemy(this.state.enemyId)} className="neon-button2">Select</a>
                   </div>
                 </form>
-                {this.state.enemyId != 0 ? <img className="enemyImg" src={this.state.enemy_tokenImg}/>:<img className="enemyImg" src="https://ms.yugipedia.com//thumb/f/fd/Back-Anime-ZX-2.png/261px-Back-Anime-ZX-2.png"/>}
+                {this.state.enemy_tokenImg != "" ? this.revealEnemy():<img className="enemyImg" src="https://ms.yugipedia.com//thumb/f/fd/Back-Anime-ZX-2.png/261px-Back-Anime-ZX-2.png"/>}
               </div>
             </div>
           

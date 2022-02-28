@@ -188,3 +188,14 @@
   top: 100px;
   scale: 80%;
 }
+.enemyRevealImg{
+  position: absolute;
+  right: 155px;
+  top: 200px;
+}
+.enemyStats{
+  position: absolute;
+  top: 200px;
+  right: 400px;
+
+}
