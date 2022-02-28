@@ -82,8 +82,8 @@
   .buttons_overlay {
     font-size: 16px;
     border-radius: 30px;
-    position: absolute;
-    top: 300%;
+    position: relative;
+    top: 150px;
   }
   
   #gotoapp{
