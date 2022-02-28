@@ -9,7 +9,8 @@ import Nav from "./../components/Nav"
 class Battle extends React.Component {
   state = {
     stakedPopulation: 0,
-    stakedIDs: []
+    stakedIDs: [],
+    openDropMenu: false,
   }
   getStakedPopulation = () => {
     const { ethereum } = window;
@@ -21,7 +22,12 @@ class Battle extends React.Component {
   
         nftContract.getStakedPopulation().then(result => {
           this.setState({stakedPopulation:result.length})
-          this.setState({stakedIDs:result})
+          for(var i = 0; i<=result.length;i++){
+            const previous_state_element = this.state.stakedIDs;
+            console.log(result[i])
+            const updated_state_nft_element = previous_state_element.concat(parseInt(result[i]._hex))
+            this.setState({stakedIDs:updated_state_nft_element})
+          }
         });
         
 
@@ -33,30 +39,7 @@ class Battle extends React.Component {
     this.getStakedPopulation();
     document.body.style.backgroundImage = 'url("https://wallpaperaccess.com/full/130220.jpg")';
   }
-  upgradeNftButton = (frase) => {
-    return (
-    <div id="form_overlay" className='shadow sm:rounded-lg'>
-        <form onSubmit={this.upgradeNftHandler}>
-        <div>
-          <label id="unlock">{frase}</label>
-          <input
-            className='shadow sm:rounded-lg'
-            id='form_input'
-            value={this.state.boost_value}
-            onChange={(e) => this.setState({boost_value: e.target.value})}
-          />
-          <button className="button-82-pushable">
-            <span className="button-82-shadow"></span>
-            <span className="button-82-edge"></span>
-            <span className="button-82-front text">
-              Check ❔
-            </span>
-          </button>
-        </div>
-      </form>
-    </div>
-    )
-  }
+
   Duel = (tokenId,enemyId) => {
     const { ethereum } = window;
       //console.log(id)
@@ -73,24 +56,45 @@ class Battle extends React.Component {
       }
       window.location.reload(false);
   }
+  handleOnClick = (item) => {
+
+  }
+  toggle = () => {
+    this.setState({openDropMenu: !this.state.openDropMenu})
+  }
+
   render() {
     return (
-      <div className='battle-page'>
+      <div>
           <Nav/>
-        
-          <div className='form-input'>
-              <div className='form-input'>
-                {this.upgradeNftButton("Hero1 Id")}
+          <div className="dd-wrapper">
+              <div
+                tabIndex={0}
+                className="dd-header"
+                role="button"
+                onKeyPress={() => this.toggle(!this.state.openDropMenu)}
+                onClick={() => this.toggle(!this.state.openDropMenu)}
+              >
+                <div className="dd-header__title">
+                  <p className="dd-header__title--bold">Your Duel Galaxy Heroes:</p>
+                </div>
+                <div className="dd-header__action">
+                  <p>{this.state.openDropMenu ? console.log(this.state.stakedIDs) : 'Open'}</p>
+                </div>
               </div>
-              <div className='form-input' >
-                {this.upgradeNftButton("Hero2 Id")}
-              </div>
-          </div>
-            <button onClick={() => this.mintNftHandler(1)} className="battle_cyber_button">
-              <span aria-hidden>Duel</span>
-              <span aria-hidden className="battle_cyber_button__tag">Staked Population:{this.state.stakedPopulation}</span>
-            </button>
-            <img alt="" id="versus" src="https://images.vectorhq.com/images/istock/previews/8566/85666815-versus-screen-with-fire-frames.jpg"></img>
+              {this.state.openDropMenu && (
+                <ul className="dd-list">
+                  {this.state.stakedIDs.map((item,i) => (
+                    <li className="dd-list-item" key={i}>
+                      <button type="button">
+                        <span>{item}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          
 
         
       </div>
