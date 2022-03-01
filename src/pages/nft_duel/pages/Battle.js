@@ -11,7 +11,6 @@ class Battle extends React.Component {
     stakedIDs: [],
     openDropMenu: false,
     playerHero: 0,
-    enemyHero: 0,
     collection_tokenImg: [],
     collection_tokenName: [],
     collection_tokenClass: [],
@@ -109,22 +108,6 @@ class Battle extends React.Component {
     this.getUriStakedTokens();
   }
 
-  Duel = (tokenId,enemyId) => {
-    const { ethereum } = window;
-      //console.log(id)
-      if (ethereum) {
-        const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = provider.getSigner();
-        const nftContract = new ethers.Contract(contractAddress, contractABI, signer);
-  
-        nftContract.Duel(tokenId,enemyId);
-        
-
-      }else{
-        console.log("Ethereum object does not exist");
-      }
-      window.location.reload(false);
-  }
   handleOnClick = (item) => {
     this.setState({playerHero:item})
   }
@@ -188,10 +171,53 @@ class Battle extends React.Component {
       </div>
     )
   }
+
+  DuelNow = async (player,enemy) => {
+    
+    const { ethereum } = window;
+    
+    if (ethereum) {
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = provider.getSigner();
+      const nftContract = new ethers.Contract(contractAddress, contractABI, signer);
+      
+      nftContract.ownerOf(player).then(owner => {
+        nftContract.ownerOf(enemy).then(enemyOwner => {
+          if(owner == enemyOwner){
+            alert("Heroes in same account address cannot Duel")
+            return;
+          }
+        })
+      })
+
+      nftContract.getNFT_staked(enemy).then(result => {
+        if(!result){
+          alert("Enemy selected must be staked")
+          return;
+        }
+      })
+
+      nftContract.Duel(player,enemy);
+      
+
+    }else{
+      console.log("Ethereum object does not exist");
+    }
+    
+    
+      
+  }
   render() {
     return (
       <div>
           <Nav/>
+          <div className='clickDuel'>
+              {(this.state.playerHero !== 0) ? <div className='playerVersus'>Player ID: {this.state.playerHero}</div>:<div className='playerVersus'>Choose your Galaxy Hero...</div>}
+              <button className="buttonDuel" onClick={() => this.DuelNow(this.state.playerHero,this.state.enemyId)}>
+                VS
+              </button>
+              <div className='enemyVersus'>{(this.state.enemyId !== 0) ? <div>Enemy ID: {this.state.enemyId}</div>:<div >Select a Duel Enemy...</div>}</div>
+          </div>
           <div className="dd-wrapper">
               <div
                 tabIndex={0}
@@ -228,7 +254,6 @@ class Battle extends React.Component {
               )}
             </div>
 
-
             <div className='EnemyHero'>
               <div className='p2-list'>
                 <link rel="preconnect" href="https://fonts.gstatic.com"/>
@@ -245,7 +270,7 @@ class Battle extends React.Component {
                     <a onClick={() => this.selectEnemy(this.state.enemyId)} className="neon-button2">Select</a>
                   </div>
                 </form>
-                {this.state.enemy_tokenImg != "" ? this.revealEnemy():<img className="enemyImg" src="https://ms.yugipedia.com//thumb/f/fd/Back-Anime-ZX-2.png/261px-Back-Anime-ZX-2.png"/>}
+                {this.state.enemy_tokenImg !== "" ? this.revealEnemy():<img alt="" className="enemyImg" src="https://ms.yugipedia.com//thumb/f/fd/Back-Anime-ZX-2.png/261px-Back-Anime-ZX-2.png"/>}
               </div>
             </div>
           
