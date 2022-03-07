@@ -154,6 +154,10 @@
   }
   #unlock{
     color:white;
+    background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+    border-radius: 25px;
+    margin-left: 100px;
+    text-align: center;
   }
 
   .wrap {
@@ -281,118 +285,74 @@
     }
   }
   
-#unstake{
+.unstake{
     width: 100px;
-    color: white
+    color: white;
+    background: #c33764;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #1d2671, #c33764);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #1d2671, #c33764);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-radius: 25px;
+    font-family: Lato, "Trebuchet MS", "Verdana", "sans-serif";
+
 }
+.stake{
+    width: 100px;
+    color: white;
+    background: #53c337;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #144d17, #37c3a5);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #146d18, #37c3a5);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-radius: 25px;
+    font-family: Lato, "Trebuchet MS", "Verdana", "sans-serif";    
+}
+
+
 #clock-stakedTimeLeft{
     position: absolute;
     width: 60px;
     margin-left: 50px;
-    margin-top: -40px;
-}
-.getStakedTimeLeft{
-    margin-left: -20px;
-}
-.battle_cyber_button, .battle_cyber_button::after {
-  width: 280px;
-  height: 86px;
-  font-size: 36px;
-  font-family: 'Cyber', sans-serif;    
-  background: linear-gradient(45deg, transparent 5%, #FF013C 5%);
-  border: 0;
-  color: #fff;
-  letter-spacing: 3px;
-  line-height: 88px;
-  box-shadow: 6px 0px 0px #8a0378;
-  outline: transparent;
-  position: relative;
+    margin-top: -50px;
 }
 
-.battle_cyber_button::after {
-  --slice-0: inset(50% 50% 50% 50%);
-  --slice-1: inset(80% -6px 0 0);
-  --slice-2: inset(50% -6px 30% 0);
-  --slice-3: inset(10% -6px 85% 0);
-  --slice-4: inset(40% -6px 43% 0);
-  --slice-5: inset(80% -6px 5% 0);
-
-  content: 'Duel';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, transparent 3%, #00E6F6 3%, #00E6F6 5%, #FF013C 5%);
-  text-shadow: -3px -3px 0px #F8F005, 3px 3px 0px #00E6F6;
-  clip-path: var(--slice-0);
-  }
-
-  .battle_cyber_button:hover::after {
-  animation: 1s glitch;
-  animation-timing-function: steps(2, end);
-}
-.battle_cyber_button__tag {
-  position: absolute;
-  padding: 1px 4px;
-  letter-spacing: 1px;
-  line-height: 1;
-  bottom: 5%;
-  right: 5%;
-  font-weight: normal;
+.attributes{
+  background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+  border-radius: 25px;
   color: white;
-  font-size: small;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
-@keyframes glitch {
-  0% {
-      clip-path: var(--slice-1);
-      transform: translate(-20px, -10px);
-  }
-  10% {
-      clip-path: var(--slice-3);
-      transform: translate(10px, 10px);
-  }
-  20% {
-      clip-path: var(--slice-1);
-      transform: translate(-10px, 10px);
-  }
-  30% {
-      clip-path: var(--slice-3);
-      transform: translate(0px, 5px);
-  }
-  40% {
-      clip-path: var(--slice-2);
-      transform: translate(-5px, 0px);
-  }
-  50% {
-      clip-path: var(--slice-3);
-      transform: translate(5px, 0px);
-  }
-  60% {
-      clip-path: var(--slice-4);
-      transform: translate(5px, 10px);
-  }
-  70% {
-      clip-path: var(--slice-2);
-      transform: translate(-10px, 10px);
-  }
-  80% {
-      clip-path: var(--slice-5);
-      transform: translate(20px, -10px);
-  }
-  90% {
-      clip-path: var(--slice-1);
-      transform: translate(-10px, 0px);
-  }
-  100% {
-      clip-path: var(--slice-1);
-      transform: translate(0);
-  }
-  
+#stakeButton{
+  height:30px;
+  border-radius:180px;
+  position:absolute;
+  left:calc(50% - 50px);
+  top:calc(50%+25px);
+  cursor:pointer;
+  line-height:12px;
 }
-.battle_cyber_button{
-  position: relative;
-  left: 750px;
-  bottom: 95px;
+#stakeButton:before {
+  content:'';
+  position:absolute;
+  display:block;
+  width:80%;
+  height:70%;
+  top:15%;
+  left:10%;
+  transition: 0.3s opacity ease-in-out;
+  filter:blur(15px);
+  opacity:0;
+  background: linear-gradient(60deg, #ff0000, #fbff00, #ff0048, #d900ff, #0055ff, #00ddff, #00ffdd, #00ff40);  
+}
+#stakeButton:hover:before {
+  opacity:1;
+  transition: 0.3s opacity ease-in-out;
+  filter:blur(25px);
+  background: linear-gradient(60deg, #ff0000, #fbff00, #ff0048, #d900ff, #0055ff, #00ddff, #00ffdd, #00ff40);  
 }

@@ -6,6 +6,8 @@ import Nav from "./../components/Nav"
 import {contractAddress, contractABI} from '../contracts/contract_abi';
 import { ethers } from 'ethers';
 import { Component } from 'react/cjs/react.production.min';
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 class Collection extends Component {
     state = {
@@ -29,13 +31,14 @@ class Collection extends Component {
         const signer = provider.getSigner();
         const nftContract = new ethers.Contract(contractAddress, contractABI, signer);
   
-        await nftContract.stake(id);
+        let nftTxn = await nftContract.stake(id);
+        await nftTxn.wait();
+        toast("Your Hero "+ id +" is going to the Galaxy")
         
 
       }else{
         console.log("Ethereum object does not exist");
       }
-      window.location.reload(false);
     }
     async unstake(id){
       const { ethereum } = window;
@@ -46,9 +49,12 @@ class Collection extends Component {
         const nftContract = new ethers.Contract(contractAddress, contractABI, signer);
         
         try{
-          await nftContract.unstake(id);
+          let nftTxn = await nftContract.unstake(id);
+          await nftTxn.wait();
+
+          toast.success("Your Hero "+ id +" will now returned from the Galaxy")
         }catch(e){
-          alert("Need to wait more time!")
+          toast.warn("Need to wait more time!")
         }
         
       }else{
@@ -56,19 +62,7 @@ class Collection extends Component {
       }
 
     }
-    stakedTimeLeft(i){
-      let time = this.state.collection_stakedTimeLeft[i]
-      
-      if(this.state.collection_stakedTimeLeft[i] !== 0){
-        return (<div>
-                  <p id="unstake" className='getStakedTimeLeft'>{time}</p>
-                  <img id="clock-stakedTimeLeft" alt="clock" src="https://github.com/mcruzvas/react_web3/blob/battle_staked-version1/public/clock2.png?raw=true"></img>
-                </div>)
-      } else{
-        return ""
-      }
-      
-    }
+
     collectionNftHandler = async () => {
       const { ethereum } = window;
   
@@ -184,7 +178,7 @@ class Collection extends Component {
     <div id="form_overlay" className='shadow sm:rounded-lg'>
         <form onSubmit={this.upgradeNftHandler}>
         <div>
-          <label id="unlock">Token ID to upgrade   </label>
+          <label id="unlock"> -> Hero ID to upgrade  -></label>
           <input
             className='shadow sm:rounded-lg'
             id='form_input'
@@ -204,6 +198,7 @@ class Collection extends Component {
     )
   }
   componentDidMount = () => {
+    toast.configure()
     //nft collection array
     this.collectionNftHandler()
     //TODO event to refresh when staked
@@ -215,7 +210,6 @@ class Collection extends Component {
     return (
         <div className='collection-page'>
             <h1 className="neon-title-app">NFT Galaxy</h1>
-            <Nav/>
             <div >
               {this.upgradeNftButton()}
             </div>
@@ -241,17 +235,19 @@ rel = "noopener noreferrer" href={"https://testnets.opensea.io/assets/"+contract
                           </div>
                           <div className="middle">
                             {/*Stars*/}
-                            <div id="description" className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">Stars: {this.state.collection_tokenStars ? this.printStars(this.state.collection_tokenStars[i]) : ""}</div>
+                            <div id="description" className="attributes">Stars: {this.state.collection_tokenStars ? this.printStars(this.state.collection_tokenStars[i]) : ""}</div>
                             {/*Class*/}
-                            <div id="description" className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">Class: {this.state.collection_tokenClass ? this.state.collection_tokenClass[i] : ""}</div>
+                            <div id="description" className="attributes">Class: {this.state.collection_tokenClass ? this.state.collection_tokenClass[i] : ""}</div>
                             {/*Attributes*/}
-                            <div id="description" className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">Element: {this.state.collection_tokenElement ? this.state.collection_tokenElement[i] : ""}</div>
-                            <div id="description" className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">Attack: {this.state.collection_tokenAttack ? this.state.collection_tokenAttack[i] : ""}</div>
-                            <p>-------</p>
+                            <div id="description" className="attributes">Element: {this.state.collection_tokenElement ? this.state.collection_tokenElement[i] : ""}</div>
+                            <div id="description" className="attributes">Attack: {this.state.collection_tokenAttack ? this.state.collection_tokenAttack[i] : ""}</div>
+                            
+                            <br></br>
+
                             {//staked
                             !this.state.collection_tokenStake[i] ? 
-                            <button onClick={() => this.stake(this.state.collection_tokenId[i])} className='inline-flex px-2 text-xl font-semibold text-white-100 bg-red-500 rounded-full'> Stake </button>:
-                            (<button onClick={() => this.unstake(this.state.collection_tokenId[i])} className='inline-flex px-2 text-xl font-semibold text-white-100 bg-purple-700 rounded-full' id="unstake">{this.state.collection_stakedTimeLeft[i] > 0 ? this.stakedTimeLeft(i):"Unstake"}</button>)
+                            <button onClick={() => this.stake(this.state.collection_tokenId[i])} className='stake' id="stakeButton"> Stake </button>:
+                            (<button onClick={() => this.unstake(this.state.collection_tokenId[i])} className='unstake' id="stakeButton">{this.state.collection_stakedTimeLeft[i] > 0 ? this.state.collection_stakedTimeLeft[i] + " seconds":"Unstake"}</button>)
                             }     
                           </div>
                       </div>
@@ -260,6 +256,7 @@ rel = "noopener noreferrer" href={"https://testnets.opensea.io/assets/"+contract
                 })
             }
             </div>
+            <Nav/>
         </div>
         )
     }

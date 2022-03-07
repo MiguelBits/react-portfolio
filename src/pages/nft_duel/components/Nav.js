@@ -27,7 +27,7 @@ class Nav extends React.Component {
                 <li><a href="/nftDuel/collection">Collection</a>
                 <FaAddressCard/>
                 </li>
-                <li><a href="#">Gallery</a>
+                <li><a href="https://testnets.opensea.io/collection/unidentified-contract-kwclm1cgyp" target="_blank">Gallery</a>
                 <FaAccusoft/>
                 </li>
                 <li><a href="#">Feedback</a>

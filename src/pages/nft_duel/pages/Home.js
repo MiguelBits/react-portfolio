@@ -3,6 +3,8 @@ import './../css/Home.css';
 import {contractAddress, contractABI} from '../contracts/contract_abi';
 import { ethers } from 'ethers';
 import "./../css/Duel.css"
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import Nav from "./../components/Nav"
 
 class Home extends React.Component {
@@ -29,11 +31,10 @@ class Home extends React.Component {
         console.log("Mining... please wait");
         await nftTxn.wait();
 
-        console.log(`Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTxn.hash}`);
+        toast.success(`See transaction: https://rinkeby.etherscan.io/tx/${nftTxn.hash}`);
         
         nftContract.Hero_inAccount().then(result => {
-          //console.log(result[result.length-1]._hex)
-          alert("You minted Hero Id: "+result[result.length-1]._hex)
+          toast.success("You minted Hero Id: "+parseInt(result[result.length-1]._hex.toString()))
         })
 
 
@@ -41,8 +42,6 @@ class Home extends React.Component {
         console.log("Ethereum object does not exist");
       }
       
-      window.location.reload(false);
-
     } catch (err) {
       console.log(err);
     }
@@ -93,6 +92,7 @@ class Home extends React.Component {
   }
   
   componentDidMount = () => {
+    toast.configure();
     this.getPopulation(1);
     this.getPopulation(2);
     this.getPopulation(3);
@@ -105,7 +105,7 @@ class Home extends React.Component {
   render() {
     return (
       <div id="home-page">
-        <Nav/>
+          <h1 className="neon-title-app">NFT Galaxy</h1>
           <button onClick={() => this.mintNftHandler(1)} className="cyber_button">
             <span aria-hidden>Robot</span>
             <span aria-hidden className="cyber_button__tag">Population:{this.state.Robot_planets_population}</span>
@@ -141,7 +141,7 @@ class Home extends React.Component {
             <span aria-hidden className="cyber_button__tag"><div id="population">Population:{this.state.Darklink_planets_population}</div></span>
             <img alt="" id="darklink-planet" src="https://github.com/mcruzvas/react_web3/blob/main/public/planets/darklink4.png?raw=true"></img>
           </button>
-          
+          <Nav/>
       </div>
     )
   }

@@ -3,6 +3,8 @@ import {contractAddress, contractABI} from '../contracts/contract_abi';
 import { ethers } from 'ethers';
 import './../css/Battle.css';
 import "./../css/Duel.css"
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import Nav from "./../components/Nav"
 
 class Battle extends React.Component {
@@ -17,6 +19,7 @@ class Battle extends React.Component {
     collection_tokenElement: [],
     collection_tokenAttack: [],
     collection_tokenStars: [],
+    collection_owner: [],
     enemyId: 0,
     enemy_tokenImg: "",
     enemy_tokenName: "",
@@ -95,6 +98,12 @@ class Battle extends React.Component {
           const updated_state_nft_stars = previous_state_stars.concat(parseInt(result._hex.toString()))
           this.setState({collection_tokenStars: updated_state_nft_stars})
         })
+        nftContract.ownerOf(data[i]).then(result => {
+          //owner
+          const previous_state_owner = this.state.collection_owner;
+          const updated_state_nft_owner = previous_state_owner.concat(result)
+          this.setState({collection_owner: updated_state_nft_owner})
+        })
       }
     }
     else {
@@ -103,6 +112,7 @@ class Battle extends React.Component {
     
   }
   componentDidMount = () => {
+    toast.configure()
     this.getStakedPopulation();
     document.body.style.backgroundImage = 'url("https://wallpaperaccess.com/full/130220.jpg")';
     this.getUriStakedTokens();
@@ -157,6 +167,7 @@ class Battle extends React.Component {
     }
   }
   revealEnemy(){
+    console.log(this.state.collection_owner)
     return(
       <div>
         <img className="enemyRevealImg" src={this.state.enemy_tokenImg}></img>
@@ -184,20 +195,22 @@ class Battle extends React.Component {
       nftContract.ownerOf(player).then(owner => {
         nftContract.ownerOf(enemy).then(enemyOwner => {
           if(owner == enemyOwner){
-            alert("Heroes in same account address cannot Duel")
-            return;
+            toast("Heroes in same account address cannot Duel")
+            return
           }
         })
       })
 
       nftContract.getNFT_staked(enemy).then(result => {
         if(!result){
-          alert("Enemy selected must be staked")
-          return;
+          toast("Hero selected must be staked")
+          return
         }
       })
 
-      nftContract.Duel(player,enemy);
+      nftContract.Duel(player,enemy).then(returned => {
+        toast.success(returned)
+      })
       
 
     }else{
@@ -210,13 +223,14 @@ class Battle extends React.Component {
   render() {
     return (
       <div>
-          <Nav/>
+          <h1 className="neon-title-app">NFT Galaxy</h1>
+          <div className="battleIcon">Battle</div>
           <div className='clickDuel'>
-              {(this.state.playerHero !== 0) ? <div className='playerVersus'>Player ID: {this.state.playerHero}</div>:<div className='playerVersus'>Choose your Galaxy Hero...</div>}
+              {(this.state.playerHero !== 0) ? <div className='playerVersus'>Enemy ID: {this.state.playerHero}</div>:<div className='playerVersus'>Select your opponent ...</div>}
               <button className="buttonDuel" onClick={() => this.DuelNow(this.state.playerHero,this.state.enemyId)}>
                 VS
               </button>
-              <div className='enemyVersus'>{(this.state.enemyId !== 0) ? <div>Enemy ID: {this.state.enemyId}</div>:<div >Select a Duel Enemy...</div>}</div>
+              <div className='enemyVersus'>{(this.state.enemyId !== 0) ? <div>Your Hero ID: {this.state.enemyId}</div>:<div >Choose a Duel Galaxy Hero...</div>}</div>
           </div>
           <div className="dd-wrapper">
               <div
@@ -227,7 +241,7 @@ class Battle extends React.Component {
                 onClick={() => this.toggle(!this.state.openDropMenu)}
               >
                 <div className="dd-header__title">
-                  <p className="dd-header__title--bold">Your Duel Galaxy Heroes:</p>
+                  <p className="dd-header__title--bold">All Duel Galaxy Heroes:</p>
                 </div>
                 <div className="dd-header__action">
                   <p>{this.state.openDropMenu ? 'Hide ❌' : 'Show ⭕️ '}</p>
@@ -247,6 +261,7 @@ class Battle extends React.Component {
                         <p>Attack: {this.state.collection_tokenAttack[i]}</p>
                         <p>Class: {this.state.collection_tokenClass[i]}</p>
                         <p>Element: {this.state.collection_tokenElement[i]}</p>
+                        <p>Owner: {this.state.collection_owner[i].slice(0,6)} ... {this.state.collection_owner[i].slice(37,43)}</p>
                       </ul>
                     </li>
                   ))}
@@ -260,7 +275,7 @@ class Battle extends React.Component {
                 <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet"/>
                 <form onSubmit={this.selectEnemy}>
                   <div>
-                      <label id="enemy-form">Enemy ID to Duel   </label>
+                      <label id="enemy-form">Your Hero ID to Duel   </label>
                       <input
                         className='shadow sm:rounded-lg'
                         id='enemy-form_input'
@@ -274,6 +289,7 @@ class Battle extends React.Component {
               </div>
             </div>
           
+            <Nav/>
 
         
       </div>
