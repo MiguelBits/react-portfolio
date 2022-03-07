@@ -1,5 +1,6 @@
 import React from 'react'
 import './../css/PortfolioApp.css';
+import './../css/Overlay.css';
 import Overlay from './Overlay';
 import { Component } from 'react/cjs/react.production.min';
 
@@ -19,6 +20,12 @@ class PortfolioApp extends Component {
             "",
             "",
             ""
+        ],
+        projects_links:[
+            "/nftDuel",
+            "/Defi",
+            "/FullStack",
+            "/SocialMedia"
         ]
     }
 
@@ -38,14 +45,14 @@ class PortfolioApp extends Component {
                                 <img alt={i} className="image" src={item} ></img>
                             </div>
                             <div className="overlay">
-                                <div className='text'>
+                                <div className='overlay-text'>
                                     <div>   <Overlay stack_item={i} /></div>
                                     <div className='buttons_overlay'>
                                         <button id="viewcode">
                                             <a href={this.state.projects_github[i]} target="_blank">View Code</a>
                                         </button>
                                         <button id="gotoapp">
-                                            <a href={this.state.projects_github[i]} target="_blank">Go to App</a>
+                                            <a href={this.state.projects_links[i]} target="_blank">Go to App</a>
                                         </button>
                                     </div>
                                 </div> 
