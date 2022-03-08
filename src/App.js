@@ -1,7 +1,6 @@
 import React from 'react'
 import './css/App.css';
 import PortfolioApp from "./components/PortfolioApp"
-import NavBar from "./components/NavBar"
 import ConnectWallet from "./pages/nft_duel/components/ConnectWallet"
 import Home from "./pages/nft_duel/pages/Home"
 import Battle from "./pages/nft_duel/pages/Battle"
@@ -16,7 +15,6 @@ class App extends Component {
   render(){
     return (
       <div className='main-App'>
-        <NavBar></NavBar>
         <BrowserRouter>
           <Routes>
                 <Route path="/" element={<PortfolioApp/>}/>
@@ -27,22 +25,7 @@ class App extends Component {
                 <Route path="/nftDuel/collection" element={<Collection/>}/>
           </Routes>
         </BrowserRouter>
-        <div>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-        </div>
+        
       </div>
     )
   }
