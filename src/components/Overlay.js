@@ -50,6 +50,7 @@ class Overlay extends Component {
         return (
         <div className='stack'>Stack: 
             <div>
+                <br></br>
                 <div>
                     {this.decide_stack_used(this.props.stack_item).split(", ").map( item => {
                         return( 

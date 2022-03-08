@@ -38,7 +38,7 @@ class PortfolioApp extends Component {
                         <div className='container' key={i}>
                             <div>
                                 <div>
-                                    <p>{this.state.projects_name[i]}</p>
+                                    <p id="text">{this.state.projects_name[i]}</p>
                                 </div>
                             </div>
                             <div className="column">

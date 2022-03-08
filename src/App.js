@@ -1,6 +1,7 @@
 import React from 'react'
 import './css/App.css';
 import PortfolioApp from "./components/PortfolioApp"
+import NavBar from "./components/NavBar"
 import ConnectWallet from "./pages/nft_duel/components/ConnectWallet"
 import Home from "./pages/nft_duel/pages/Home"
 import Battle from "./pages/nft_duel/pages/Battle"
@@ -9,9 +10,13 @@ import { Component } from 'react/cjs/react.production.min';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 class App extends Component {
+  componentDidMount() {
+  }
+
   render(){
     return (
-      <div>
+      <div className='main-App'>
+        <NavBar></NavBar>
         <BrowserRouter>
           <Routes>
                 <Route path="/" element={<PortfolioApp/>}/>
@@ -22,6 +27,22 @@ class App extends Component {
                 <Route path="/nftDuel/collection" element={<Collection/>}/>
           </Routes>
         </BrowserRouter>
+        <div>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+        </div>
       </div>
     )
   }
