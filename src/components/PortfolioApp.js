@@ -17,7 +17,7 @@ class PortfolioApp extends Component {
         ],
 
         projects_github:[
-            "https://github.com/mcruzvas/nft_duel",
+            "https://github.com/mcruzvas/erc1155",
             "",
             "",
             ""
@@ -65,7 +65,21 @@ class PortfolioApp extends Component {
                 </div>
                 <div>
                     Hello my name is Miguel
-                    
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
                 </div>
         </div>
         )

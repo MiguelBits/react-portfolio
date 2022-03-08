@@ -12,6 +12,7 @@ class NavBar extends Component {
                 <li className="navBarMenu"><a href="/resume">Resume</a></li>
                 <li className="navBarMenu"><a href="/about" >About me</a></li>
                 <li className="navBarMenu"><a href="/learn">Learn</a></li>
+                <li className="navBarMenu"><a href="/">Home</a></li>
             </ul> 
         )
     }
