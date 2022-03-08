@@ -48,7 +48,7 @@ class Overlay extends Component {
     }
     render(){
         return (
-        <div className='stack'>Stack: 
+        <div className='stack'> 
             <div>
                 <br></br>
                 <div>
