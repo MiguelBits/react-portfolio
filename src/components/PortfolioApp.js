@@ -7,7 +7,7 @@ import NavBar from "./NavBar"
 
 class PortfolioApp extends Component {
     state = {
-        projects_collection: ["https://github.com/mcruzvas/react-portfolio/blob/master/public/image/NFT.jpg?raw=trueg",
+        projects_collection: ["https://user-images.githubusercontent.com/15989933/156068528-9c3d45a9-64ab-479f-9e2b-fbe97fe089b2.png",
         "https://github.com/mcruzvas/react-portfolio/blob/master/public/image/Defi.jpg?raw=true",
         "https://github.com/mcruzvas/react-portfolio/blob/master/public/image/Frontend.jpg?raw=true",
         "https://github.com/mcruzvas/react-portfolio/blob/master/public/image/SocialMedia.jpg?raw=true"],
@@ -32,7 +32,7 @@ class PortfolioApp extends Component {
 
     render(){
         return (
-            <div>
+            <div className='portfolio-App'>
                 <NavBar></NavBar>
                 <div className="row">
                     {this.state.projects_collection.map(
@@ -45,7 +45,7 @@ class PortfolioApp extends Component {
                                         </div>
                                     </div>
                                     <div className="column">
-                                        <img alt={i} className="image" src={item} ></img>
+                                        <img alt={i} className="imageProjects" src={item} ></img>
                                     </div>
                                     <div className="overlay">
                                         <div className='overlay-text'>
@@ -64,20 +64,8 @@ class PortfolioApp extends Component {
                         )})}         
                 </div>
                 <div>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
+                    Hello my name is Miguel
+                    
                 </div>
         </div>
         )

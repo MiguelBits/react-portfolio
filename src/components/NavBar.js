@@ -5,7 +5,8 @@ class NavBar extends Component {
 
     render(){
         return (
-            <ul>
+            <ul className='stickyNav'>
+                <button className='changeThemeButton'>Change theme</button>
                 <div className='just-line'><br></br></div>
                 <li><a href="/contact" >Contact</a></li>
                 <li><a href="/resume">Resume</a></li>

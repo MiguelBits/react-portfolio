@@ -29,3 +29,14 @@ ul {
      height: 7px;
      background-color: green;
  }
+
+ .stickyNav{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+ }
+ .changeThemeButton{
+   position: absolute;
+   top: 22px;
+   left: 190px;
+ }
