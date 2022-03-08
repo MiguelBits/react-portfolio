@@ -58,8 +58,14 @@ background-image: linear-gradient(
   top: 0;
 }
 
-.changeThemeButton{
+.likesButton{
  position: absolute;
  top: 22px;
  left: 190px;
+}
+.likesDisplay{
+  position: absolute;
+  left: 240px;
+  top: 22px;
+  color: white;
 }

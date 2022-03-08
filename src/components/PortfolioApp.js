@@ -45,7 +45,7 @@ class PortfolioApp extends Component {
                                         </div>
                                     </div>
                                     <div className="column">
-                                        <img alt={i} className="imageProjects" src={item} ></img>
+                                        <img alt={item} className="imageProjects" src={item} ></img>
                                     </div>
                                     <div className="overlay">
                                         <div className='overlay-text'>
@@ -64,22 +64,8 @@ class PortfolioApp extends Component {
                         )})}         
                 </div>
                 <div>
-                    Hello my name is Miguel
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
+                    Hello World
+                    
                 </div>
         </div>
         )
