@@ -1,5 +1,6 @@
 import React from 'react'
 import PortfolioApp from "./components/PortfolioApp"
+import "./css/App.css"
 
 import About from "./pages/navBar/pages/About"
 import Resume from "./pages/navBar/pages/Resume"

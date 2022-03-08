@@ -33,7 +33,7 @@ class PortfolioApp extends Component {
     render(){
         return (
             <div className='portfolio-App'>
-                <NavBar></NavBar>
+                
                 <div className="row">
                     {this.state.projects_collection.map(
                         (item,i) => {
@@ -61,12 +61,27 @@ class PortfolioApp extends Component {
                                         </div> 
                                     </div>
                                 </div>
-                        )})}         
+                        )})}       
                 </div>
-                <div>
-                    Hello World
-                    
-                </div>
+                
+                <div className="description">
+                    <h1 className="title-description"> Hello World </h1>
+                    <div className="text-description"> This is my Decentralized React Application, hosted with IPFS. </div>
+                    <br></br>
+                    <div className="footer-description"> And using Ethereum Name Service to show you my Portfolio</div>
+                    <br></br>
+                    <div> Thank you ❤️ </div>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+
+                </div>  
+                <NavBar></NavBar>
         </div>
         )
     }
