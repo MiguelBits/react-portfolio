@@ -1,42 +1,43 @@
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-  }
-  
-  li {
-    float: right;
-  }
-  
-  li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    margin-bottom: 10px;
-  }
-  
-  li a:hover {
-    background-color: rgb(46, 167, 16);
-    border-radius: 15px;
-  }
- .just-line{
-     position: relative;
-     top: 60px;
-     height: 7px;
-     background-color: green;
- }
 
- .stickyNav{
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
- }
- .changeThemeButton{
-   position: absolute;
-   top: 22px;
-   left: 190px;
- }
+.stickyNav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.navBarMenu {
+  float: right;
+}
+
+.navBarMenu a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.navBarMenu a:hover {
+  background-color: rgb(46, 167, 16);
+  border-radius: 15px;
+}
+.just-line{
+   position: relative;
+   top: 60px;
+   height: 7px;
+   background-color: green;
+}
+
+.stickyNav{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+.changeThemeButton{
+ position: absolute;
+ top: 22px;
+ left: 190px;
+}

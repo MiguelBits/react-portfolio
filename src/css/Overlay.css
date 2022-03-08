@@ -84,3 +84,13 @@
   #viewcode{
     display: inline-block;
   }
+
+  .imageProjects {
+    opacity: 1;
+    display: block;
+    width: 470px;
+    height: 420px;
+    transition: .5s ease;
+    backface-visibility: hidden;
+    border-radius: 30px;
+  }

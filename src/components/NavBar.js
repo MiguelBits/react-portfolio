@@ -8,10 +8,10 @@ class NavBar extends Component {
             <ul className='stickyNav'>
                 <button className='changeThemeButton'>Change theme</button>
                 <div className='just-line'><br></br></div>
-                <li><a href="/contact" >Contact</a></li>
-                <li><a href="/resume">Resume</a></li>
-                <li><a href="/about" >About me</a></li>
-                <li><a href="/learn">Learn</a></li>
+                <li className="navBarMenu"><a href="/contact" >Contact</a></li>
+                <li className="navBarMenu"><a href="/resume">Resume</a></li>
+                <li className="navBarMenu"><a href="/about" >About me</a></li>
+                <li className="navBarMenu"><a href="/learn">Learn</a></li>
             </ul> 
         )
     }
