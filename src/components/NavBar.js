@@ -2,10 +2,11 @@ import React from 'react'
 import { Component } from 'react/cjs/react.production.min';
 import "./../css/NavBar.css"
 class NavBar extends Component {
+    /*
     state = {
         likes: 0
     }
-    /*
+    
     addLikes = () => {
         let currentLikes = this.state.likes + 1
         this.setState({likes:currentLikes})
