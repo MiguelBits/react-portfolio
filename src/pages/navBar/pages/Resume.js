@@ -81,8 +81,8 @@ class Resume extends Component {
                                 <article className="experience" id="fourth_story">
                                     <div className="experience__number">03</div>
                                     <div className="experience__content">
-                                        <div class="experience__title">4th Experience</div>
-                                            <div class="experience__story">
+                                        <div className="experience__title">4th Experience</div>
+                                            <div className="experience__story">
                                                 <h2 id="freelance" className="company">Freelance Projects</h2>
                                                 <p>Satisfaction of the client has been my purpose.</p>
                                                 <p>Developing Decentralized Applications for customers.</p>
