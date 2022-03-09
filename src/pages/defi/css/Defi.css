@@ -210,11 +210,11 @@
 .button_arrow_circle{
   position: absolute;
   left: 49.6%;
-  bottom: 51.5%;
+  bottom: 52.7%;
 }
 .fa_arrow_circle{
   position: sticky;
-  left: 55.4%;
+  left: 55.7%;
   bottom: 74.9%;
   scale: 220%;
   z-index: 2;
@@ -225,4 +225,16 @@
 .text-defi{
   position: relative;
   left: 3%;
+}
+
+#swap_button{
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  z-index: 2;
+  margin-top: 10px;
+}
+#swap_button:hover{
+  color: #000000;
+  background-color: rgb(162, 255, 108);
+  border-color: rgb(0, 0, 0);
 }

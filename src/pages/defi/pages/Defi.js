@@ -51,7 +51,7 @@ class Defi extends React.Component {
                             </div>
                         </div>
                         <div>Estimated Gas: <span id="gas_estimate"></span></div>
-                        <button disabled className="btn btn-large btn-primary btn-block" id="swap_button">
+                        <button disabled className="btn btn-primary btn-block" id="swap_button">
                             Swap
                         </button>
             </div>
