@@ -218,6 +218,7 @@
   bottom: 74.9%;
   scale: 220%;
   z-index: 2;
+  color: rgb(214, 213, 213);
 }
 .fa_arrow_circle:hover{
   opacity: 50%;
@@ -232,6 +233,7 @@
   color: rgb(0, 0, 0);
   z-index: 2;
   margin-top: 10px;
+  color: white;
 }
 #swap_button:hover{
   color: #000000;

@@ -10,12 +10,23 @@ class Defi extends React.Component {
     switched: false,
     coinInput: "ETH",
     coinOutput: "Select Token",
-  }
 
+  }
+  
   switchAmounts = () => {
     this.setState({switched:!this.state.switched})
   }
+
+  switchToken_Input = () => {
+    document.getElementById("token_modal").style.display = "block";
+  }
+  switchToken_Output = () => {
+    document.getElementById("token_modal").style.display = "block";
+  }
     
+  closeModal = () => {
+    document.getElementById("token_modal").style.display = "none";
+  }
   componentDidMount = () => {
     toast.configure()
     document.body.style.backgroundColor = "#504d4d"
@@ -32,7 +43,7 @@ class Defi extends React.Component {
                 <h4 className='text-defi'>Defi</h4>
                 <div id="form">
                     <div className="swapbox">
-                                <div className="swapbox_select token_select" id="from_token_select">
+                                <div className="swapbox_select token_select" id="from_token_select" onClick={this.state.switched ? this.switchToken_Output : this.switchToken_Input}>
                                 {this.state.switched ? this.state.coinOutput:this.state.coinInput}
                                     <img className="token_image" id="from_token_img"/>
                                     <span id="from_token_text"></span>
@@ -44,7 +55,7 @@ class Defi extends React.Component {
                     </div>
                     <div className='swapbox_arrow'><BsFillArrowDownCircleFill className='swapbox_arrow_circle'/></div>
                     <div className="swapbox">
-                                <div className="swapbox_select token_select"  id="to_token_select">
+                                <div className="swapbox_select token_select"  id="to_token_select" onClick={this.state.switched ? this.switchToken_Input : this.switchToken_Output}>
                                   {this.state.switched ? this.state.coinInput:this.state.coinOutput}
                                     <img className="token_image" id="to_token_img"/>
                                     <span id="to_token_text"></span>
@@ -59,24 +70,25 @@ class Defi extends React.Component {
                         Swap
                     </button>
                 </div>
-                <div className="modal" id="token_modal" tabIndex="-1" role="dialog">
-                <div className="modal-dialog" role="document">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h5 className="modal-title">Select token</h5>
-                      <button id="modal_close" type="button" className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
+                
+              </div>
+            </div>
+            <div className="modal" id="token_modal" tabindex="-1" role="dialog">
+              <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title">Select token</h5>
+                    <button id="modal_close" type="button" className="close-modal-defi" data-dismiss="modal" aria-label="Close" onClick={this.closeModal}>
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
-                </div>
-                <div className="modal-body">
-                  <div id="token_list"></div>
+                  <div className="modal-body">
+                    <div id="token_list"></div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
     )
   }
 }
