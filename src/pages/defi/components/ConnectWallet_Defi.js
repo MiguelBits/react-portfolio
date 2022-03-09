@@ -1,12 +1,41 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 import { Component } from 'react/cjs/react.production.min';
 import "./../css/Defi.css"
 
 class ConnectWallet_Defi extends Component {
     state = {
-        currentAccount: null
+        currentAccount: null,
+        network: {
+            avalancheFuji: {
+                chainId: `0x${Number(43113).toString(16)}`,
+                chainName: "Avalanche Fuji Testnet",
+                nativeCurrency: {
+                    name: "AVAX",
+                    symbol: "AVAX",
+                    decimals: 18
+                },
+                rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
+                blockExplorerUrls: ["https://testnet.snowtrace.io/"]
+            }
+        }
     }
     
+    handleNetworkSwitch = async () => {
+        toast("❄ Changing to Avalanche Network")
+        try {
+            if (!window.ethereum) throw new Error("No crypto wallet found");
+            let txn = await window.ethereum.request({
+              method: "wallet_addEthereumChain",
+              params: [this.state.network["avalancheFuji"]]
+            });
+            await txn.wait();
+            toast("Welcome to Avalanche Fuji Testnet")
+          } catch (err) {
+              toast(err)
+          }
+      };
+
     checkWalletIsConnected = async () => {
         const { ethereum } = window;
 
@@ -33,50 +62,36 @@ class ConnectWallet_Defi extends Component {
         const { ethereum } = window;
 
         if (!ethereum) {
-            alert("Please install Metamask!");
+            toast.error("Please install Metamask!");
         }
+
 
         try {
             const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-            console.log("Found an account! Address: ", accounts[0]);
+            toast.success("Found an account! Address: "+ accounts[0].slice(0,6) + "..."+accounts[0].slice(37,43));
             this.setState({accounts:accounts[0]});
-            window.location.reload(false);
         } catch (err) {
             console.log(err)
         }
         
     }
-
-    connectWalletButton = () => {
-        return (
-            <div>
-            <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"></link>
-            <button onClick={this.connectWalletHandler} id="connect-wallet" className="mx-auto rounded-md p-2 bg-purple-700 text-white underline decoration-double">
-                    Connect Wallet  ➤➤➤ 
-                <a href="/Defi/home" >Enter App</a>
-            </button>
-            </div>
-        )
-    }
-    afterConnectWallet = () =>{
-        return(
-            <div>
-            <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"></link>
-            <button id="connect-wallet" className="mx-auto rounded-md p-2 bg-purple-700 text-white underline decoration-double">
-                <a href="/nftDuel/Home" >Enter App</a>
-            </button>
-            </div>
-        )
+    redirectToHome(){
+        window.location.href='/Defi/Home'
     }
     componentDidMount = () => {
+        toast.configure()
         this.checkWalletIsConnected();
-        document.body.style.backgroundImage = 'url("https://wallpaperaccess.com/full/130220.jpg")';
+        document.body.style.backgroundImage = 'url("https://www.teahub.io/photos/full/156-1568856_bull-vs-bear.jpg")';
+        document.body.style.backgroundRepeat = "no-repeat";
+        document.body.style.backgroundSize = "cover"
     };
     render() {
       return (
-        <div className='Duel'>
-            <div id="about-page">
-                {this.state.currentAccount ? this.afterConnectWallet() : this.connectWalletButton()}
+        <div id="home-page">
+            <div className='container-wallet_defi'>
+                <button onClick={this.connectWalletHandler} class='one-wallet_defi'>Trade some <b>shitcoins</b> connect your wallet</button>
+                <button onClick={this.redirectToHome} class='two-wallet_defi'> Use <b>Dapp</b> here</button>
+                <button onClick={this.handleNetworkSwitch} class='five-wallet_defi'>Switch to the <b>Avalanche</b> network</button>
             </div>
         </div>
 

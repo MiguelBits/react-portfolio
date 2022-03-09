@@ -1,0 +1,139 @@
+
+.container-wallet_defi {
+    width: 334px;
+    margin: 0 auto;
+    position: absolute;
+    top: 23.5%;
+    left: 0;
+    text-align: center;
+    right: 0;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+  }
+
+  
+.one-wallet_defi, .two-wallet_defi, .five-wallet_defi {
+    border: none;
+    border-radius: 4px;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.48);
+    overflow: hidden;
+    padding: 20px 50px 20px 70px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    position: relative;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    width: 100%;
+    -webkit-transition: background-position .7s,box-shadow .4s;
+    transition: background-position .7s,box-shadow .4s;
+    background-size: 110%;
+    font-family: 'Oswald', sans-serif;
+  }
+  .one-wallet_defi:hover, .two-wallet_defi:hover, .five-wallet_defi:hover {
+    background-position: 0% 30%;
+  }
+  .one-wallet_defi:hover:after, .two-wallet_defi:hover:after, .five-wallet_defi:hover:after {
+    right: -40px;
+    -webkit-transition: right .4s,-webkit-transform 30s .2s linear;
+    transition: right .4s,-webkit-transform 30s .2s linear;
+    transition: right .4s,transform 30s .2s linear;
+    transition: right .4s,transform 30s .2s linear,-webkit-transform 30s .2s linear;
+  }
+  .one-wallet_defi:before, .two-wallet_defi:before, .five-wallet_defi:before, .one-wallet_defi:after, .two-wallet_defi:after, .three:after, .four:after, .five-wallet_defi:after {
+    font-family: FontAwesome;
+    display: block;
+    position: absolute;
+  }
+  .one-wallet_defi:before, .two-wallet_defi:before, .five-wallet_defi:before {
+    -webkit-transition: all 1s;
+    transition: all 1s;
+    font-size: 30px;
+    left: 25px;
+    top: 19px;
+  }
+  .one-wallet_defi:after, .two-wallet_defi:after, .five-wallet_defi:after {
+    -webkit-transition: right .4s, -webkit-transform .2s;
+    transition: right .4s, -webkit-transform .2s;
+    transition: right .4s, transform .2s;
+    transition: right .4s, transform .2s, -webkit-transform .2s;
+    font-size: 100px;
+    opacity: .3;
+    right: -120px;
+    top: -17px;
+  }
+  
+  .one-wallet_defi {
+    box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.16) inset, 0px 0px 10px 0px #782CDA;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#782CDA), to(rgba(126, 94, 162, 0.51))), url("https://news.mit.edu/sites/default/files/styles/news_article__image_gallery/public/images/202107/artificial-intelligence-mit-mrl-ericsson-00_0.png?itok=tr9cVrYa");
+    background-image: linear-gradient(to bottom, #782CDA, rgba(126, 94, 162, 0.51)), url("https://news.mit.edu/sites/default/files/styles/news_article__image_gallery/public/images/202107/artificial-intelligence-mit-mrl-ericsson-00_0.png?itok=tr9cVrYa");
+  }
+  .one-wallet_defi:hover {
+    box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.16) inset, 0px 0px 30px 0px #782CDA;
+  }
+  .one-wallet_defi:hover:after {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  .one-wallet_defi:hover:before {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  .one-wallet_defi:after, .one-wallet_defi:before {
+    content: "🦊";
+  }
+  .one-wallet_defi b {
+    color: #DDA6FF;
+    font-weight: 700;
+  }
+  
+  .two-wallet_defi {
+    box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.16) inset, 0px 0px 10px 0px #E48A3C;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#E48A3C), to(rgba(222, 135, 61, 0.24))), url("https://media.istockphoto.com/vectors/giant-anthropomorphic-bitcoin-cryptocurrency-supporting-a-small-vector-id1309012520?k=20&m=1309012520&s=170667a&w=0&h=7CvavMPMK5yXf45ySCoDaL0nR2CE3bvbw4-B-npZ5cQ=");
+    background-image: linear-gradient(to bottom, #E48A3C, rgba(222, 135, 61, 0.24)), url("https://media.istockphoto.com/vectors/giant-anthropomorphic-bitcoin-cryptocurrency-supporting-a-small-vector-id1309012520?k=20&m=1309012520&s=170667a&w=0&h=7CvavMPMK5yXf45ySCoDaL0nR2CE3bvbw4-B-npZ5cQ=");
+  }
+  .two-wallet_defi:hover {
+    box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.16) inset, 0px 0px 30px 0px #E48A3C;
+  }
+  .two-wallet_defi:hover:after {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  .two-wallet_defi:hover:before {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  .two-wallet_defi:after, .two-wallet_defi:before {
+    /*content: "⛃⛂";*/
+    content: "💳";
+  }
+  .two-wallet_defi b {
+    color: #FFD9B4;
+    font-weight: 700;
+  }
+  
+  .five-wallet_defi {
+    box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.16) inset, 0px 0px 10px 0px #DE3964;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#DE3964), to(rgba(154, 40, 87, 0.24))), url("https://image.binance.vision/uploads-original/c5ee3a6ef69847dda30cdf3e0dfa123e.png");
+    background-image: linear-gradient(to bottom, #DE3964, rgba(154, 40, 87, 0.24)), url("https://image.binance.vision/uploads-original/c5ee3a6ef69847dda30cdf3e0dfa123e.png");
+  }
+  .five-wallet_defi:hover {
+    box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.16) inset, 0px 0px 30px 0px #DE3964;
+  }
+  .five-wallet_defi:hover:after {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  .five-wallet_defi:hover:before {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  .five-wallet_defi:after, .five-wallet_defi:before {
+    content: "⛰️ ";
+    color: white;
+  }
+  .five-wallet_defi b {
+    color: #ff6868;
+    font-weight: 700;
+  }
+  
