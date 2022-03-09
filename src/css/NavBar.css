@@ -68,3 +68,7 @@ background-image: linear-gradient(
   color: white;
 }
 **/
+
+#contacts{
+  cursor: pointer;
+}

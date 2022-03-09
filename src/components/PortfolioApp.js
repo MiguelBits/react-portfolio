@@ -67,9 +67,11 @@ class PortfolioApp extends Component {
                 <br></br>
                 <div className="description">
                     <h1 className="title-description"> Hello World </h1>
-                    <div className="text-description"> This is my Decentralized React Application, hosted with IPFS. </div>
+                    <div className="text-description"> This is my Decentralized React Application, hosted using IPFS. </div>
                     <br></br>
                     <div className="footer-description"> With Ethereum Name Service, I am able to provide you a unique experience navigating through of my Portfolio</div>
+                    <br></br>
+                    <div> Hover your mouse on the images to see more about each project. </div>
                     <br></br>
                     <div> Thank you ❤️ </div>
                 </div>  

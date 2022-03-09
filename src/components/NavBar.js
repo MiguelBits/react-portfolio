@@ -20,7 +20,7 @@ class NavBar extends Component {
                 <div className='likesDisplay'>{this.state.likes}</div>
                 */}
                 <div className='just-line'><br></br></div>
-                <li className="navBarMenu"><a href="/contact" >Contact</a></li>
+                <li id="contacts" className="navBarMenu"><a href="/contact" >Contact</a></li>
                 <li className="navBarMenu"><a href="/resume">Resume</a></li>
                 <li className="navBarMenu"><a href="/about" >About me</a></li>
                 <li className="navBarMenu"><a href="/learn">Learn</a></li>
