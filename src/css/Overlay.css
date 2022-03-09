@@ -70,14 +70,7 @@
   .container:hover .overlay {
     opacity: 1;
   }
-  
-  .buttons_overlay {
-    font-size: 16px;
-    border-radius: 30px;
-    position: relative;
-    top: 150px;
-  }
-
+ 
 
   .imageProjects {
     opacity: 1;
