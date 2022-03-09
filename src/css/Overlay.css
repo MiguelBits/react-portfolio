@@ -42,19 +42,11 @@
     color:black
 }
 .stack{
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    position: relative;
+    left: 17%;
 }
 
-
-.image {
-    opacity: 1;
-    display: block;
-    width: 100%;
-    height: auto;
-    transition: .5s ease;
-    backface-visibility: hidden;
-    border-radius: 30px;
-  }
   .container {
     position: relative;
     width: 50%;
@@ -78,19 +70,15 @@
   .container:hover .overlay {
     opacity: 1;
   }
-  
-  .buttons_overlay {
-    font-size: 16px;
+ 
+
+  .imageProjects {
+    opacity: 1;
+    display: block;
+    width: 95%;
+    height: 420px;
+    transition: .5s ease;
+    backface-visibility: hidden;
     border-radius: 30px;
-    position: relative;
-    top: 150px;
-  }
-  
-  #gotoapp{
-    display: inline-block; 
-    position: relative;
-    left: 40%;
-  }
-  #viewcode{
-    display: inline-block;
+    margin-left: 7px;
   }

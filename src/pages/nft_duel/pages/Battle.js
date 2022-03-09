@@ -209,7 +209,7 @@ class Battle extends React.Component {
       })
 
       nftContract.Duel(player,enemy).then(returned => {
-        toast.success(returned)
+        toast(returned)
       })
       
 
