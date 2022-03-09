@@ -8,7 +8,7 @@ class Overlay extends Component {
             case 0:
                 return ("ERC1155, Solidity, Ethers.js, Web3")
             case 1:
-                return ("Defi, Solidity, Ethers.js")
+                return ("Solidity, Defi, Ethers.js")
             case 2:
                 return ("Next.js, Tailwind.css, Typescript")
             case 3:
