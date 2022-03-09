@@ -17,7 +17,7 @@ class PortfolioApp extends Component {
         ],
 
         projects_github:[
-            "https://github.com/mcruzvas/nft_duel",
+            "https://github.com/mcruzvas/erc1155",
             "",
             "",
             ""
@@ -33,7 +33,7 @@ class PortfolioApp extends Component {
     render(){
         return (
             <div className='portfolio-App'>
-                <NavBar></NavBar>
+                
                 <div className="row">
                     {this.state.projects_collection.map(
                         (item,i) => {
@@ -45,28 +45,37 @@ class PortfolioApp extends Component {
                                         </div>
                                     </div>
                                     <div className="column">
-                                        <img alt={i} className="imageProjects" src={item} ></img>
+                                        <img alt={item} className="imageProjects" src={item} ></img>
                                     </div>
                                     <div className="overlay">
                                         <div className='overlay-text'>
                                             <div>   <Overlay stack_item={i} /></div>
                                             <div className='buttons_overlay'>
-                                                <button id="viewcode">
+                                                <button className="buttonStyled" id="viewcode">
                                                     <a href={this.state.projects_github[i]} target="_blank">View Code</a>
                                                 </button>
-                                                <button id="gotoapp">
+                                                <button className="buttonStyled" id="gotoapp">
                                                     <a href={this.state.projects_links[i]} target="_blank">Go to App</a>
                                                 </button>
                                             </div>
                                         </div> 
                                     </div>
                                 </div>
-                        )})}         
+                        )})}       
                 </div>
-                <div>
-                    Hello my name is Miguel
-                    
-                </div>
+                <br></br>
+                <br></br>
+                <div className="description">
+                    <h1 className="title-description"> Hello World </h1>
+                    <div className="text-description"> This is my Decentralized React Application, hosted using IPFS. </div>
+                    <br></br>
+                    <div className="footer-description"> With Ethereum Name Service, I am able to provide you a unique experience navigating through of my Portfolio</div>
+                    <br></br>
+                    <div> Hover your mouse on the images to see more about each project. </div>
+                    <br></br>
+                    <div> Thank you ❤️ </div>
+                </div>  
+                <NavBar></NavBar>
         </div>
         )
     }

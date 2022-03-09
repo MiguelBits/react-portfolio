@@ -43,6 +43,8 @@
 }
 .stack{
     color: rgb(255, 255, 255);
+    position: relative;
+    left: 17%;
 }
 
   .container {
@@ -68,29 +70,15 @@
   .container:hover .overlay {
     opacity: 1;
   }
-  
-  .buttons_overlay {
-    font-size: 16px;
-    border-radius: 30px;
-    position: relative;
-    top: 150px;
-  }
-  
-  #gotoapp{
-    display: inline-block; 
-    position: relative;
-    left: 40%;
-  }
-  #viewcode{
-    display: inline-block;
-  }
+ 
 
   .imageProjects {
     opacity: 1;
     display: block;
-    width: 470px;
+    width: 95%;
     height: 420px;
     transition: .5s ease;
     backface-visibility: hidden;
     border-radius: 30px;
+    margin-left: 7px;
   }
