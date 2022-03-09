@@ -18,7 +18,7 @@ class PortfolioApp extends Component {
 
         projects_github:[
             "https://github.com/mcruzvas/erc1155",
-            "",
+            "https://github.com/mcruzvas/defi-in-solidity/tree/main",
             "",
             ""
         ],
