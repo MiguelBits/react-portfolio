@@ -77,10 +77,14 @@ class Defi extends React.Component {
               <div className="modal-dialog" role="document">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h5 className="modal-title">Select token</h5>
-                    <button id="modal_close" type="button" className="close-modal-defi" data-dismiss="modal" aria-label="Close" onClick={this.closeModal}>
-                      <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 className="modal-title">Select a token</h5>
+                    <div type="button" className=" close-modal-defi" data-dismiss="modal" aria-label="Close" onClick={this.closeModal}>
+                      <div id="modal_close">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                    </div>
                   </div>
                   <div className="modal-body">
                     <div id="token_list"></div>

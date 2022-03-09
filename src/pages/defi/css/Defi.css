@@ -175,10 +175,80 @@
   width: 40px;
   z-index: 6;
 }
+
+.modal-header{
+  background-color: #363535;
+}
+.modal-title{
+  color: white;
+}
 .modal-body{
   height: 600px;
   overflow: scroll;
   z-index: 7;
+  background-color: #1a1919;
+}
+
+#modal_close {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  transform: rotate(0deg);
+  transition: .5s ease-in-out;
+  cursor: pointer;
+  scale: 40%;
+}
+
+#modal_close span {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 23px;
+  height: 8px;
+  width: 100%;
+  background: #fff;
+  border-radius: 4px;
+  transform: rotate(0deg);
+  transition: .2s ease-in-out;
+}
+
+#modal_close span:nth-child(1),
+#modal_close span:nth-child(3) {
+  width: 50%;
+  transform: rotate(45deg);
+}
+
+#modal_close span:nth-child(1) {
+  left: 3px;
+  top: 15px;
+}
+
+#modal_close span:nth-child(2) {
+  transform: rotate(-45deg);
+}
+
+#modal_close span:nth-child(3) {
+  left: 20px;
+  top: 31px;
+}
+
+#modal_close.open span:nth-child(1),
+#modal_close.open span:nth-child(3) {
+    left: -1px;
+}
+
+#modal_close.open span:nth-child(1) {
+  top: 15px;
+  transform: rotate(135deg);
+}
+
+#modal_close.open span:nth-child(2) {
+  transform: rotate(0deg);
+}
+
+#modal_close.open span:nth-child(3) {
+  top: 31px;
+  transform: rotate(45deg);
 }
 .token_row{
   padding: 5px 10px;
