@@ -91,7 +91,7 @@ class ConnectWallet_Defi extends Component {
             <div className='container-wallet_defi'>
                 <button onClick={this.connectWalletHandler} class='one-wallet_defi'>Trade some <b>shitcoins</b> connect your wallet</button>
                 <button onClick={this.redirectToHome} class='two-wallet_defi'> Use <b>Dapp</b> here</button>
-                <button onClick={this.handleNetworkSwitch} class='five-wallet_defi'>Switch the <b>Avalanche</b> network here</button>
+                <button onClick={this.handleNetworkSwitch} class='five-wallet_defi'>Switch to the <b>Avalanche</b> network</button>
             </div>
         </div>
 
