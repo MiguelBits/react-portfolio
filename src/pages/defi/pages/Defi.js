@@ -8,6 +8,8 @@ class Defi extends React.Component {
     amountInput: 0,
     amountOutput: 1,
     switched: false,
+    coinInput: "ETH",
+    coinOutput: "Select Token",
   }
 
   switchAmounts = () => {
@@ -28,41 +30,43 @@ class Defi extends React.Component {
             <div className='col col-md-6 offset-md-3' id="window-defi">
                 <h4 className='text-defi'>Defi</h4>
                 <div id="form">
-                <div className="swapbox">
-                            <div className="swapbox_select token_select" id="from_token_select">
-                                <img className="token_image" id="from_token_img"/>
-                                <span id="from_token_text"></span>
-                            </div>
-                            <div className="swapbox_select">
-                                <input className="number form-control" value={this.state.switched ? this.state.amountOutput : this.state.amountInput}
-                onChange={(e) => this.setState({amountInput: e.target.value})} id="from_amount"/>
-                            </div>
-                        </div>
+                    <div className="swapbox">
+                                <div className="swapbox_select token_select" id="from_token_select">
+                                {this.state.switched ? this.state.coinOutput:this.state.coinInput}
+                                    <img className="token_image" id="from_token_img"/>
+                                    <span id="from_token_text"></span>
+                                </div>
+                                <div className="swapbox_select">
+                                    <input className="number form-control" value={this.state.switched ? this.state.amountOutput : this.state.amountInput}
+                    onChange={(e) => this.setState({amountInput: e.target.value})} id="from_amount"/>
+                                </div>
+                    </div>
+                    <div className='swapbox_arrow'><BsFillArrowDownCircleFill className='swapbox_arrow_circle'/></div>
+                    <div className="swapbox">
+                                <div className="swapbox_select token_select"  id="to_token_select">
+                                  {this.state.switched ? this.state.coinInput:this.state.coinOutput}
+                                    <img className="token_image" id="to_token_img"/>
+                                    <span id="to_token_text"></span>
+                                </div>
+                                <div className="swapbox_select">
+                                    <input className="number form-control" value={this.state.switched ? this.state.amountInput : this.state.amountOutput}
+                    onChange={(e) => this.setState({amountOutput: e.target.value})} id="to_amount"/>
+                                </div>
+                    </div>
+                    <div>Estimated Gas: <span id="gas_estimate"></span></div>
+                    <button disabled className="btn btn-primary btn-block" id="swap_button">
+                        Swap
+                    </button>
                 </div>
-                <div className='swapbox_arrow'><BsFillArrowDownCircleFill className='swapbox_arrow_circle'/></div>
-                <div className="swapbox">
-                            <div className="swapbox_select token_select"  id="to_token_select">
-                                <img className="token_image" id="to_token_img"/>
-                                <span id="to_token_text"></span>
-                            </div>
-                            <div className="swapbox_select">
-                                <input className="number form-control" value={this.state.switched ? this.state.amountInput : this.state.amountOutput}
-                onChange={(e) => this.setState({amountOutput: e.target.value})} id="to_amount"/>
-                            </div>
-                        </div>
-                        <div>Estimated Gas: <span id="gas_estimate"></span></div>
-                        <button disabled className="btn btn-primary btn-block" id="swap_button">
-                            Swap
-                        </button>
-            </div>
-            <div className="modal" id="token_modal" tabIndex="-1" role="dialog">
-            <div className="modal-dialog" role="document">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title">Select token</h5>
-                  <button id="modal_close" type="button" className="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                <div className="modal" id="token_modal" tabIndex="-1" role="dialog">
+                <div className="modal-dialog" role="document">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title">Select token</h5>
+                      <button id="modal_close" type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
                 </div>
                 <div className="modal-body">
                   <div id="token_list"></div>
