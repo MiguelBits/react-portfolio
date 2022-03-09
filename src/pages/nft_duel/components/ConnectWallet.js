@@ -43,7 +43,7 @@ class ConnectWallet extends Component {
             this.setState({accounts:accounts[0]});
             window.location.reload(false);
         } catch (err) {
-            console.log(err)
+            toast.error("Error connecting wallet")
         }
 
         this.changeToHome()

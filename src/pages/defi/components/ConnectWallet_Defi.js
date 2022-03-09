@@ -22,16 +22,17 @@ class ConnectWallet_Defi extends Component {
     }
     
     handleNetworkSwitch = async () => {
-        toast("Allow to change network")
+        toast("Need to allow to change network")
         try {
             if (!window.ethereum) throw new Error("No crypto wallet found");
-            await window.ethereum.request({
+            let txn = await window.ethereum.request({
               method: "wallet_addEthereumChain",
               params: [this.state.network["avalancheFuji"]]
             });
+            await txn.wait();
             toast("Welcome to Avalanche Fuji Testnet")
           } catch (err) {
-              toast("Wrong RPC URL")
+              toast("Error connecting to the RPC URL")
           }
       };
 
@@ -75,27 +76,8 @@ class ConnectWallet_Defi extends Component {
         }
         
     }
-
-    connectWalletButton = () => {
-        return (
-            <div>
-            <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"></link>
-            <button onClick={this.connectWalletHandler} id="connect-wallet" className="mx-auto rounded-md p-2 bg-purple-700 text-white underline decoration-double">
-                    Connect Wallet  ➤➤➤ 
-                <a href="/nftDuel/Home" >Enter App</a>
-            </button>
-            </div>
-        )
-    }
-    afterConnectWallet = () =>{
-        return(
-            <div>
-            <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"></link>
-            <button >
-                <a href="/nftDuel/Home" >Enter App</a>
-            </button>
-            </div>
-        )
+    redirectToHome(){
+        window.location.href='/Defi/Home'
     }
     componentDidMount = () => {
         toast.configure()
@@ -104,11 +86,12 @@ class ConnectWallet_Defi extends Component {
     };
     render() {
       return (
-        <div className='connectwallet-page' id="home-page">
-            <div>
-                {this.state.currentAccount ? this.afterConnectWallet() : this.connectWalletButton()}
+        <div id="home-page">
+            <div className='container-wallet_defi'>
+                <button onClick={this.connectWalletHandler} class='one-wallet_defi'>Trade some <b>shitcoins</b> connect your wallet</button>
+                <button onClick={this.redirectToHome} class='two-wallet_defi'> Use <b>Dapp</b> here</button>
+                <button onClick={this.handleNetworkSwitch} class='five-wallet_defi'>Switch the <b>Avalanche</b> network here</button>
             </div>
-            <button className="change-network" onClick={this.handleNetworkSwitch}> Change Network to Rinkeby Testnet</button>
         </div>
 
       );
