@@ -16,9 +16,9 @@ class Resume extends Component {
                                 <article className="experience" id="first_story">
                                     <div className="experience__number">00</div>
                                     <div className="experience__content">
-                                    <div className="experience__title">1st Experience </div>
+                                    <div className="experience__title">NTT Data </div>
                                     <div className="experience__story" >
-                                        <h2 id="everis" className="company">NTT Data</h2>
+                                        <h2 className="company">Story</h2>
                                         <p>First experience working as Developer</p>
                                         <p>This has been the most fascinating experience in my career, I realized that I could always be working better, continuously inovating and creating scripts to help my fellow team mates by automating their work, so they could perform to higher standarts and with better tools.</p>
                                         <p>We as a team had to develop in a testing lab to attract new customers in the Banking area, we provided IoT systems with Voice/Facial Recognition to work in their stores.</p>
@@ -37,9 +37,9 @@ class Resume extends Component {
                                 <article className="experience" id="second_story">
                                     <div className="experience__number">01</div>
                                     <div className="experience__content">
-                                    <div className="experience__title">2nd Experience</div>
+                                    <div className="experience__title">Altice</div>
                                     <div className="experience__story" >
-                                    <h2 id="altice" className="company">Altice</h2>
+                                    <h2 className="company">Story</h2>
                                         <p>A Learning experience as production Software Developer </p>
                                         <p>Challenged my work methodologies, had to adhere to strict deployment of software strategies.</p>
                                         <p>As the youngest member of the crew, I learnt a lot with my older coworkers, namely producing excelent and secure software.</p>
@@ -58,9 +58,9 @@ class Resume extends Component {
                                 <article className="experience" id="third_story">
                                     <div className="experience__number">02</div>
                                     <div className="experience__content">
-                                    <div className="experience__title">3rd Experience</div>
+                                    <div className="experience__title">Nokia</div>
                                     <div className="experience__story">
-                                    <h2 id="nokia" className="company">Nokia</h2>
+                                    <h2 className="company">Story</h2>
                                         <p>Progressive Researching and Developing has always been my motivation.</p>
                                         <p>As I got more proficient in multiple programming languages, I got confortable working as a Fullstack Developer.</p>
                                         <p>Produced network monitoring tools, for the products REST API's, which awarded me and my team, the project of the year award.</p>
@@ -81,10 +81,10 @@ class Resume extends Component {
                                 <article className="experience" id="fourth_story">
                                     <div className="experience__number">03</div>
                                     <div className="experience__content">
-                                        <div className="experience__title">4th Experience</div>
+                                        <div className="experience__title">Working for myself</div>
                                             <div className="experience__story">
-                                                <h2 id="freelance" className="company">Freelance Projects</h2>
-                                                <p>Satisfaction of the client has been my purpose.</p>
+                                                <h2 className="company">Story</h2>
+                                                <p>Projects that I did for fun and also for extra income.</p>
                                                 <p>Developing Decentralized Applications for customers.</p>
                                                 <p>As my interest for Blockchain grew, I started investing my developing skills in the Blockchain area.</p>
                                                 <p>From Non-Fungible Tokens for Gaming to Collectibles, I develop Decentralized Application containing: minting functions, utilization of said NFTs, and deployment in main network.</p>
