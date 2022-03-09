@@ -36,7 +36,7 @@
     margin-bottom: 10px;
     border-radius: 25px;
     width: 100px;
-    background: linear-gradient(58deg, rgba(122,12,192,0.9), rgba(229,154,14,0.8));
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(29,33,253,1) 53%, rgba(69,205,252,1) 100%);
     color: white;
 }
 .css{
