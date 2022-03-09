@@ -22,7 +22,7 @@ class ConnectWallet_Defi extends Component {
     }
     
     handleNetworkSwitch = async () => {
-        toast("Need to allow to change network")
+        toast("❄ Changing to Avalanche Network")
         try {
             if (!window.ethereum) throw new Error("No crypto wallet found");
             let txn = await window.ethereum.request({
@@ -32,7 +32,7 @@ class ConnectWallet_Defi extends Component {
             await txn.wait();
             toast("Welcome to Avalanche Fuji Testnet")
           } catch (err) {
-              toast("Error connecting to the RPC URL")
+              toast(err)
           }
       };
 
@@ -62,7 +62,7 @@ class ConnectWallet_Defi extends Component {
         const { ethereum } = window;
 
         if (!ethereum) {
-            alert("Please install Metamask!");
+            toast.error("Please install Metamask!");
         }
 
 
@@ -82,7 +82,9 @@ class ConnectWallet_Defi extends Component {
     componentDidMount = () => {
         toast.configure()
         this.checkWalletIsConnected();
-        document.body.style.backgroundImage = 'url("https://wallpaperaccess.com/full/130220.jpg")';
+        document.body.style.backgroundImage = 'url("https://www.teahub.io/photos/full/156-1568856_bull-vs-bear.jpg")';
+        document.body.style.backgroundRepeat = "no-repeat";
+        document.body.style.backgroundSize = "cover"
     };
     render() {
       return (
