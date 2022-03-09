@@ -207,10 +207,22 @@
   z-index: 2;
   color: white;
 }
-.fa_arrow_circle{
+.button_arrow_circle{
   position: absolute;
-  left: 55.7%;
-  bottom: 52.3%;
+  left: 49.6%;
+  bottom: 51.5%;
+}
+.fa_arrow_circle{
+  position: sticky;
+  left: 55.4%;
+  bottom: 74.9%;
   scale: 220%;
   z-index: 2;
+}
+.fa_arrow_circle:hover{
+  opacity: 50%;
+}
+.text-defi{
+  position: relative;
+  left: 3%;
 }
