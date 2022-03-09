@@ -1,12 +1,40 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 import { Component } from 'react/cjs/react.production.min';
 import "./../css/Defi.css"
 
 class ConnectWallet_Defi extends Component {
     state = {
-        currentAccount: null
+        currentAccount: null,
+        network: {
+            avalancheFuji: {
+                chainId: `0x${Number(43113).toString(16)}`,
+                chainName: "Avalanche Fuji Testnet",
+                nativeCurrency: {
+                    name: "AVAX",
+                    symbol: "AVAX",
+                    decimals: 18
+                },
+                rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
+                blockExplorerUrls: ["https://testnet.snowtrace.io/"]
+            }
+        }
     }
     
+    handleNetworkSwitch = async () => {
+        toast("Allow to change network")
+        try {
+            if (!window.ethereum) throw new Error("No crypto wallet found");
+            await window.ethereum.request({
+              method: "wallet_addEthereumChain",
+              params: [this.state.network["avalancheFuji"]]
+            });
+            toast("Welcome to Avalanche Fuji Testnet")
+          } catch (err) {
+              toast("Wrong RPC URL")
+          }
+      };
+
     checkWalletIsConnected = async () => {
         const { ethereum } = window;
 
@@ -36,6 +64,7 @@ class ConnectWallet_Defi extends Component {
             alert("Please install Metamask!");
         }
 
+
         try {
             const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
             console.log("Found an account! Address: ", accounts[0]);
@@ -53,7 +82,7 @@ class ConnectWallet_Defi extends Component {
             <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"></link>
             <button onClick={this.connectWalletHandler} id="connect-wallet" className="mx-auto rounded-md p-2 bg-purple-700 text-white underline decoration-double">
                     Connect Wallet  ➤➤➤ 
-                <a href="/Defi/home" >Enter App</a>
+                <a href="/nftDuel/Home" >Enter App</a>
             </button>
             </div>
         )
@@ -62,22 +91,24 @@ class ConnectWallet_Defi extends Component {
         return(
             <div>
             <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"></link>
-            <button id="connect-wallet" className="mx-auto rounded-md p-2 bg-purple-700 text-white underline decoration-double">
+            <button >
                 <a href="/nftDuel/Home" >Enter App</a>
             </button>
             </div>
         )
     }
     componentDidMount = () => {
+        toast.configure()
         this.checkWalletIsConnected();
         document.body.style.backgroundImage = 'url("https://wallpaperaccess.com/full/130220.jpg")';
     };
     render() {
       return (
-        <div className='Duel'>
-            <div id="about-page">
+        <div className='connectwallet-page' id="home-page">
+            <div>
                 {this.state.currentAccount ? this.afterConnectWallet() : this.connectWalletButton()}
             </div>
+            <button className="change-network" onClick={this.handleNetworkSwitch}> Change Network to Rinkeby Testnet</button>
         </div>
 
       );

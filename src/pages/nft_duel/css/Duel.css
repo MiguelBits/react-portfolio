@@ -195,7 +195,7 @@ input[type="checkbox"]{
 }
 #active:checked ~ .wrapper ul li a{
 	transform: none;
-	transition-timing-function: ease, cubic-bezier(.1,1.3,.3,1); /* easeOutBackを緩めた感じ */
+	transition-timing-function: ease, cubic-bezier(.1,1.3,.3,1);
    transition-delay: .6s;
   transform: translateX(-100px);
 }
@@ -205,4 +205,93 @@ svg{
   margin-top: 30px;
   margin-left: -80px;
   scale: 300%;
+}
+.moon-light{
+  color: white;
+}
+/* Thank you https://codepen.io/phat-xluong */
+.container-wallet {
+  width: 334px;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  text-align: center;
+  right: 0;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+.one-wallet {
+  border: none;
+  border-radius: 4px;
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.48);
+  overflow: hidden;
+  padding: 20px 50px 20px 70px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  position: relative;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  width: 100%;
+  -webkit-transition: background-position .7s,box-shadow .4s;
+  transition: background-position .7s,box-shadow .4s;
+  background-size: 110%;
+  font-family: 'Oswald', sans-serif;
+}
+.one-wallet:hover{
+  background-position: 0% 30%;
+}
+.one-wallet:hover:after {
+  right: -40px;
+  -webkit-transition: right .4s,-webkit-transform 30s .2s linear;
+  transition: right .4s,-webkit-transform 30s .2s linear;
+  transition: right .4s,transform 30s .2s linear;
+  transition: right .4s,transform 30s .2s linear,-webkit-transform 30s .2s linear;
+}
+.one-wallet:before, .one-wallet:after{
+  font-family: FontAwesome;
+  display: block;
+  position: absolute;
+}
+.one-wallet:before{
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  font-size: 30px;
+  left: 25px;
+  top: 19px;
+}
+.one-wallet:after{
+  -webkit-transition: right .4s, -webkit-transform .2s;
+  transition: right .4s, -webkit-transform .2s;
+  transition: right .4s, transform .2s;
+  transition: right .4s, transform .2s, -webkit-transform .2s;
+  font-size: 100px;
+  opacity: .3;
+  right: -120px;
+  top: -17px;
+}
+
+.one-wallet {
+  box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.16) inset, 0px 0px 10px 0px #782CDA;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#782CDA), to(rgba(126, 94, 162, 0.51))), url("https://wallpaperaccess.com/full/1582299.jpg");
+  background-image: linear-gradient(to bottom, #782CDA, rgba(126, 94, 162, 0.51)), url("https://wallpaperaccess.com/full/1582299.jpg");
+}
+.one-wallet:hover {
+  box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.16) inset, 0px 0px 30px 0px #782CDA;
+}
+.one-wallet:hover:after {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.one-wallet:hover:before {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+.one-wallet:after, .one-wallet:before {
+  content: "🚀";
+}
+.one-wallet b {
+  color: #DDA6FF;
+  font-weight: 700;
 }

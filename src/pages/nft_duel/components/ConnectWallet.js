@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 import { Component } from 'react/cjs/react.production.min';
 import "./../css/Duel.css"
 
@@ -44,37 +45,39 @@ class ConnectWallet extends Component {
         } catch (err) {
             console.log(err)
         }
+
+        this.changeToHome()
         
     }
 
     connectWalletButton = () => {
         return (
-            <div>
-            <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"></link>
-            <button onClick={this.connectWalletHandler} id="connect-wallet" className="mx-auto rounded-md p-2 bg-purple-700 text-white underline decoration-double">
-                    Connect Wallet  ➤➤➤ 
-                <a href="/nftDuel/Home" >Enter App</a>
-            </button>
+            <div className='container-wallet'>
+                <button onClick={this.connectWalletHandler} class='one-wallet'>Connect your wallet to play <b>NFT</b> games.</button>
             </div>
         )
     }
     afterConnectWallet = () =>{
+        
         return(
-            <div>
-            <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"></link>
-            <button id="connect-wallet" className="mx-auto rounded-md p-2 bg-purple-700 text-white underline decoration-double">
-                <a href="/nftDuel/Home" >Enter App</a>
-            </button>
+            <div className='container-wallet'>
+                <button onClick={this.changeToHome} class='one-wallet'>Click to enter the Galaxy <b>NFT</b> games.</button>
             </div>
         )
     }
+    changeToHome(){
+        window.location.href='/nftDuel/Home'
+    }
     componentDidMount = () => {
+        toast.configure()
         this.checkWalletIsConnected();
         document.body.style.backgroundImage = 'url("https://wallpaperaccess.com/full/130220.jpg")';
+        toast.warning("Change your wallet network chain to Rinkeby Testnet !")
+
     };
     render() {
       return (
-        <div className='Duel'>
+        <div className='connect-wallet-page'>
             <div id="about-page">
                 {this.state.currentAccount ? this.afterConnectWallet() : this.connectWalletButton()}
             </div>
