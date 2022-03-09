@@ -80,7 +80,7 @@
             transform: scale(1.2);
   }
   .one-wallet_defi:after, .one-wallet_defi:before {
-    content: "⛓";
+    content: "🦊";
   }
   .one-wallet_defi b {
     color: #DDA6FF;
@@ -104,7 +104,8 @@
             transform: scale(1.2);
   }
   .two-wallet_defi:after, .two-wallet_defi:before {
-    content: "⛃⛂";
+    /*content: "⛃⛂";*/
+    content: "💳";
   }
   .two-wallet_defi b {
     color: #FFD9B4;
@@ -128,7 +129,7 @@
             transform: scale(1.2);
   }
   .five-wallet_defi:after, .five-wallet_defi:before {
-    content: "❄";
+    content: "⛰️ ";
     color: white;
   }
   .five-wallet_defi b {
