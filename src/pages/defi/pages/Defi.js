@@ -18,6 +18,7 @@ class Defi extends React.Component {
     
   componentDidMount = () => {
     toast.configure()
+    document.body.style.backgroundColor = "#504d4d"
   }
   render() {
     return (
