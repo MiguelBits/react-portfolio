@@ -5,7 +5,6 @@ import "./css/App.css"
 import About from "./pages/navBar/pages/About"
 import Resume from "./pages/navBar/pages/Resume"
 import Learn from "./pages/navBar/pages/Learn"
-import Contact from "./pages/navBar/pages/Contact"
 
 import ConnectWallet from "./pages/nft_duel/components/ConnectWallet"
 import Home from "./pages/nft_duel/pages/Home"
@@ -26,7 +25,6 @@ class App extends Component {
           <Routes>
                 <Route path="/" element={<PortfolioApp/>}/>
                 <Route path="/about" element={<About/>}/>
-                <Route path="/contact" element={<Contact/>}/>
                 <Route path="/learn" element={<Learn/>}/>
                 <Route path="/resume" element={<Resume/>}/>
                 {/* NFT Duel   */}

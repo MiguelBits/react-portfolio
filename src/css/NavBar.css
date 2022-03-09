@@ -72,3 +72,26 @@ background-image: linear-gradient(
 #contacts{
   cursor: pointer;
 }
+/*social links css*/
+.socialLinks{
+  display: inline-block;
+  margin-left: 100px;
+  margin-top: 15px;
+  color: white;
+}
+ /* Style all font awesome icons */
+ .fa {
+  text-align: center;
+  text-decoration: none;
+  scale: 160%;
+}
+
+/* Add a hover effect if you want */
+.fa:hover {
+  opacity: 0.7;
+}
+
+/* Set a specific color for each brand */
+.fa-github, .fa-twitter ,.fa-envelope {
+  color: white;
+} 
