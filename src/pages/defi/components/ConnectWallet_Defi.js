@@ -68,7 +68,7 @@ class ConnectWallet_Defi extends Component {
 
         try {
             const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-            toast.success("Found an account! Address: "+ accounts[0].slice(0,6) + "..."+accounts[0].slice(37,43));
+            toast.success("Found an account! Address: "+ accounts[0].slice(0,6) + "..."+accounts[0].slice(38,43));
             this.setState({accounts:accounts[0]});
         } catch (err) {
             console.log(err)
