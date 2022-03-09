@@ -10,7 +10,7 @@ class Resume extends Component {
             <div className='resume-page'>
                 <div className='resume-main'>
                     <br></br>
-                        <h1 className="cv-title">My Curriculum Vitae <br></br> 3 years of career,  and still counting</h1>
+                        <h1 className="cv-title">My Curriculum Vitae <br></br><br></br> 3 years of career,  and still counting</h1>
                         <div className="cv-body">
                             <ul className="cv-list">
                                 <article className="experience" id="first_story">
