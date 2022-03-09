@@ -13,11 +13,11 @@ class Resume extends Component {
                         <h1 className="cv-title">My Curriculum Vitae <br></br> 3 years of career,  and still counting</h1>
                         <div className="cv-body">
                             <ul className="cv-list">
-                                <article class="experience" id="first_story">
-                                    <div class="experience__number">00</div>
-                                    <div class="experience__content">
-                                    <div class="experience__title">1st Experience </div>
-                                    <div class="experience__story" >
+                                <article className="experience" id="first_story">
+                                    <div className="experience__number">00</div>
+                                    <div className="experience__content">
+                                    <div className="experience__title">1st Experience </div>
+                                    <div className="experience__story" >
                                         <h2 id="everis" className="company">NTT Data</h2>
                                         <p>First experience working as Developer</p>
                                         <p>This has been the most fascinating experience in my career, I realized that I could always be working better, continuously inovating and creating scripts to help my fellow team mates by automating their work, so they could perform to higher standarts and with better tools.</p>
@@ -34,11 +34,11 @@ class Resume extends Component {
                                         <p><h4>Software:</h4> AWS, ElasticSearch, Windows Server, MongoDB</p>                                    </div>
                                     </div>
                                 </article>
-                                <article class="experience" id="second_story">
-                                    <div class="experience__number">01</div>
-                                    <div class="experience__content">
-                                    <div class="experience__title">2nd Experience</div>
-                                    <div class="experience__story" >
+                                <article className="experience" id="second_story">
+                                    <div className="experience__number">01</div>
+                                    <div className="experience__content">
+                                    <div className="experience__title">2nd Experience</div>
+                                    <div className="experience__story" >
                                     <h2 id="altice" className="company">Altice</h2>
                                         <p>A Learning experience as production Software Developer </p>
                                         <p>Challenged my work methodologies, had to adhere to strict deployment of software strategies.</p>
@@ -55,11 +55,11 @@ class Resume extends Component {
                                     </div>
                                 </article>
                                 
-                                <article class="experience" id="third_story">
-                                    <div class="experience__number">02</div>
-                                    <div class="experience__content">
-                                    <div class="experience__title">3rd Experience</div>
-                                    <div class="experience__story">
+                                <article className="experience" id="third_story">
+                                    <div className="experience__number">02</div>
+                                    <div className="experience__content">
+                                    <div className="experience__title">3rd Experience</div>
+                                    <div className="experience__story">
                                     <h2 id="nokia" className="company">Nokia</h2>
                                         <p>Progressive Researching and Developing has always been my motivation.</p>
                                         <p>As I got more proficient in multiple programming languages, I got confortable working as a Fullstack Developer.</p>
@@ -78,9 +78,9 @@ class Resume extends Component {
                                         </div>
                                     </div>
                                 </article>
-                                <article class="experience" id="fourth_story">
-                                    <div class="experience__number">03</div>
-                                    <div class="experience__content">
+                                <article className="experience" id="fourth_story">
+                                    <div className="experience__number">03</div>
+                                    <div className="experience__content">
                                         <div class="experience__title">4th Experience</div>
                                             <div class="experience__story">
                                                 <h2 id="freelance" className="company">Freelance Projects</h2>

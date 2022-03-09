@@ -8,9 +8,9 @@ class About extends Component {
         return (
             <div className='about-page'>
                 <div className='main-gallery'>
-                        <div class="d1"></div>
-                        <div class="d2"></div>
-                        <div class="d3">
+                        <div className="d1"></div>
+                        <div className="d2"></div>
+                        <div className="d3">
                             <div className="about-text"> 
                             The place is Lisbon, where I was born, raised, and where I studied Computer Science.
                             <br></br>
@@ -27,7 +27,7 @@ class About extends Component {
                             I live a positive and mindful life, having very ambitious goals, and thus needing to perform to very high standarts everyday to accomplish them.
                             </div>
                         </div>
-                        <div class="d4"></div>
+                        <div className="d4"></div>
                 </div>
                 <NavBar></NavBar>
             </div>
