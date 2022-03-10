@@ -2,6 +2,7 @@ import React from 'react'
 import "./../css/Defi.css"
 import NavTab from "./../components/NavTab"
 import { BsFillArrowDownCircleFill, BsFillArrowUpCircleFill } from 'react-icons/bs'
+import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify'
 
 class Defi extends React.Component {
@@ -98,9 +99,15 @@ class Defi extends React.Component {
           {/* SWAP BOX */}
                     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossOrigin="anonymous"/>
           <div className='row-defi'>
+              {this.props.useFunction == "Pool" ? 
+              <button className='button_arrow_circle' onClick={this.switchAmounts}>
+                <AiOutlinePlusCircle className='fa_arrow_circle'></AiOutlinePlusCircle>
+              </button> 
+              :
               <button className='button_arrow_circle' onClick={this.switchAmounts}>
                 {this.state.switched ? <BsFillArrowUpCircleFill className='fa_arrow_circle'></BsFillArrowUpCircleFill>:<BsFillArrowDownCircleFill className='fa_arrow_circle'></BsFillArrowDownCircleFill>}
-              </button>
+              </button>}
+              
               <div className='col col-md-6 offset-md-3' id="window-defi">
                   <h4 className='text-defi'>Defi</h4>
                   <div id="form">
