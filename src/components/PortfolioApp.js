@@ -52,10 +52,10 @@ class PortfolioApp extends Component {
                                             <div>   <Overlay stack_item={i} /></div>
                                             <div className='buttons_overlay'>
                                                 <button className="buttonStyled" id="viewcode">
-                                                    <a href={this.state.projects_github[i]} target="_blank">View Code</a>
+                                                    <a className="button-link" href={this.state.projects_github[i]} target="_blank">View Code</a>
                                                 </button>
-                                                <button className="buttonStyled" id="gotoapp">
-                                                    <a href={this.state.projects_links[i]} target="_blank">Go to App</a>
+                                                <button className="buttonStyled" id="gotoapp" >
+                                                    <a className="button-link" href={this.state.projects_links[i]} target="_blank">Go to App</a>
                                                 </button>
                                             </div>
                                         </div> 
