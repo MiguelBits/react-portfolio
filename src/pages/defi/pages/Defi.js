@@ -15,7 +15,7 @@ class Defi extends React.Component {
     coinOutput: "Select Token",
     coinOutput_img: "https://cdn.pixabay.com/photo/2012/04/10/23/44/question-27106_1280.png",
 
-    tokens: [" weth"," avax"," usdc"],
+    tokens: [" WETH"," AVAX"," USDC"],
     tokens_img: [
     "https://assets.coingecko.com/coins/images/17238/large/aWETH_2x.png?1626940782",
     "https://cryptologos.cc/logos/avalanche-avax-logo.svg?v=022",
@@ -139,9 +139,9 @@ class Defi extends React.Component {
 
                       {this.state.tokens.map( (item,i) => {
                           return(
-                            <div key={i} id="token_selection" className='token_row'>
+                            <div key={i} id="token_selection" className='token_row' onClick={() => this.selectTokenOutput(item,i) }>
                               <img alt={item} className='token_list_img' src={this.state.tokens_img[i]}/>
-                              <span className='token_list_text' onClick={() => this.selectTokenOutput(item,i) }>{item}</span>
+                              <span className='token_list_text' >{item}</span>
                             </div>
                           )
                       } )}
