@@ -65,8 +65,8 @@ class Defi extends React.Component {
                 <div id="form">
                     <div className="swapbox">
                                 <div className="swapbox_select token_select" id="from_token_select" onClick={this.state.switched ? this.switchToken_Output : this.switchToken_Input}>
-                                  {this.state.switched ? this.state.coinOutput:this.state.coinInput}
                                   {this.state.switched ? <img className='token_select_img' alt="output-coin" src={this.state.coinOutput_img}></img>:<img className='token_select_img' alt="input-coin" src={this.state.coinInput_img}></img>}
+                                  {this.state.switched ? this.state.coinOutput:this.state.coinInput}
                                 </div>
                                 <div className="swapbox_select">
                                     <input className="number form-control" value={this.state.switched ? this.state.amountOutput : this.state.amountInput}
@@ -76,8 +76,8 @@ class Defi extends React.Component {
                     <div className='swapbox_arrow'><BsFillArrowDownCircleFill className='swapbox_arrow_circle'/></div>
                     <div className="swapbox">
                                 <div className="swapbox_select token_select"  id="to_token_select" onClick={this.state.switched ? this.switchToken_Input : this.switchToken_Output}>
-                                  {this.state.switched ? this.state.coinInput:this.state.coinOutput}
                                   {this.state.switched ? <img alt="input-coin" className='token_select_img' src={this.state.coinInput_img}></img>:<img className='token_select_img' alt="output-coin" src={this.state.coinOutput_img}></img>}
+                                  {this.state.switched ? this.state.coinInput:this.state.coinOutput}
                                 </div>
                                 <div className="swapbox_select">
                                     <input className="number form-control" value={this.state.switched ? this.state.amountInput : this.state.amountOutput}

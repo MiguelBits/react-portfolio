@@ -151,6 +151,7 @@
   width: 50%;
   float: left;
   z-index: 3;
+  padding-top: 5px;
 }
 .swapbox{
   overflow: auto;
@@ -161,7 +162,46 @@
   border: 1px solid #565656;
   z-index: 1;
 }
+.swapbox_arrow{
+  overflow: auto;
+  margin: 20px 0;
+  padding: 10px;
+  background-color: #504d4d;
+  border-radius: 20px;
+  border: 1px solid #565656;
 
+}
+.swapbox_arrow_circle{
+  overflow: auto;
+  margin: -2% 45%;
+  padding: 10px;
+  background-color: #504d4d;
+  border-radius: 20px;
+  scale: 200%;
+  border: 1px solid #919090;
+  z-index: 2;
+  color: white;
+}
+.button_arrow_circle{
+  position: absolute;
+  left: 49.6%;
+  bottom: 52.7%;
+}
+.fa_arrow_circle{
+  position: sticky;
+  left: 55.7%;
+  bottom: 74.9%;
+  scale: 220%;
+  z-index: 2;
+  color: rgb(214, 213, 213);
+}
+.fa_arrow_circle:hover{
+  opacity: 50%;
+}
+.text-defi{
+  position: relative;
+  left: 3%;
+}
 .modal-header{
   background-color: #363535;
 }
@@ -250,7 +290,7 @@
 .token_list_img, .token_image, .token_select_img{
   width: 40px;
   z-index: 5;
-  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .token_select{
@@ -258,47 +298,8 @@
 }
 .token_select:hover{
   background-color: #464646;
+  width: 50%;
   cursor: pointer;
-}
-.swapbox_arrow{
-  overflow: auto;
-  margin: 20px 0;
-  padding: 10px;
-  background-color: #504d4d;
-  border-radius: 20px;
-  border: 1px solid #565656;
-
-}
-.swapbox_arrow_circle{
-  overflow: auto;
-  margin: -2% 45%;
-  padding: 10px;
-  background-color: #504d4d;
-  border-radius: 20px;
-  scale: 200%;
-  border: 1px solid #919090;
-  z-index: 2;
-  color: white;
-}
-.button_arrow_circle{
-  position: absolute;
-  left: 49.6%;
-  bottom: 52.7%;
-}
-.fa_arrow_circle{
-  position: sticky;
-  left: 55.7%;
-  bottom: 74.9%;
-  scale: 220%;
-  z-index: 2;
-  color: rgb(214, 213, 213);
-}
-.fa_arrow_circle:hover{
-  opacity: 50%;
-}
-.text-defi{
-  position: relative;
-  left: 3%;
 }
 
 #swap_button{
