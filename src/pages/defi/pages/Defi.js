@@ -10,14 +10,14 @@ class Defi extends React.Component {
     switched: false,
     
     coinInput: "WETH",
-    coinInput_img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwbk5ebkGLZP-jhT83J2EOBTtL5U_4NIwL262gXWJNnNHCry7C1_A_URj_R7UxpltYqJ0&usqp=CAU",
+    coinInput_img: "https://assets.coingecko.com/coins/images/17238/large/aWETH_2x.png?1626940782",
 
     coinOutput: "Select Token",
     coinOutput_img: "https://cdn.pixabay.com/photo/2012/04/10/23/44/question-27106_1280.png",
 
     tokens: [" weth"," avax"," usdc"],
     tokens_img: [
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwbk5ebkGLZP-jhT83J2EOBTtL5U_4NIwL262gXWJNnNHCry7C1_A_URj_R7UxpltYqJ0&usqp=CAU",
+    "https://assets.coingecko.com/coins/images/17238/large/aWETH_2x.png?1626940782",
     "https://cryptologos.cc/logos/avalanche-avax-logo.svg?v=022",
     "https://cryptologos.cc/logos/usd-coin-usdc-logo.png"],
     tokens_address: ["0x1111","0x2222","0x3333"]
