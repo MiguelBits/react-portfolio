@@ -8,13 +8,14 @@ class Defi extends React.Component {
     amountInput: 0,
     amountOutput: 1,
     switched: false,
-    coinInput: "ETH",
+    coinInput: "WETH",
     coinOutput: "Select Token",
     tokens: ["weth","avax","usdc"],
     tokens_img: [
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwbk5ebkGLZP-jhT83J2EOBTtL5U_4NIwL262gXWJNnNHCry7C1_A_URj_R7UxpltYqJ0&usqp=CAU",
     "https://cryptologos.cc/logos/avalanche-avax-logo.svg?v=022",
     "https://cryptologos.cc/logos/usd-coin-usdc-logo.png"],
+
   }
   
   switchAmounts = () => {
@@ -22,14 +23,23 @@ class Defi extends React.Component {
   }
 
   switchToken_Input = () => {
-    document.getElementById("token_modal").style.display = "block";
+    document.getElementById("token_modal_input").style.display = "block";
   }
   switchToken_Output = () => {
-    document.getElementById("token_modal").style.display = "block";
+    document.getElementById("token_modal_output").style.display = "block";
   }
-    
+  selectToken = (token) => {
+    this.setState({selectToken:token})
+  }
   closeModal = () => {
-    document.getElementById("token_modal").style.display = "none";
+    document.getElementById("token_modal_input").style.display = "none";
+    document.getElementById("token_modal_output").style.display = "none";
+  }
+  selectTokenInput(item){
+    this.setState({coinInput:item})
+  }
+  selectTokenOutput(item){
+    this.setState({coinOutput:item})
   }
   componentDidMount = () => {
     toast.configure()
@@ -77,7 +87,7 @@ class Defi extends React.Component {
                 
               </div>
             </div>
-            <div className="modal" id="token_modal" tabIndex="-1" role="dialog">
+            <div className="modal" id="token_modal_input" tabIndex="-1" role="dialog">
               <div className="modal-dialog" role="document">
                 <div className="modal-content">
                   <div className="modal-header">
@@ -95,9 +105,38 @@ class Defi extends React.Component {
 
                       {this.state.tokens.map( (item,i) => {
                           return(
-                            <div key={i} className='token_row'>
+                            <div key={i} id="token_selection" className='token_row' onClick={() => this.selectTokenInput(item) }>
                               <image alt={item} className='token_list_img' src={this.state.tokens_img[i]}/>
-                              <span className='token_list_text'>{item}</span>
+                              <span className='token_list_text' >{item}</span>
+                            </div>
+                          )
+                      } )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="modal" id="token_modal_output" tabIndex="-1" role="dialog">
+              <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title">Select a token</h5>
+                    <div type="button" className=" close-modal-defi" data-dismiss="modal" aria-label="Close" onClick={this.closeModal}>
+                      <div id="modal_close">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="modal-body">
+                    <div id="token_list">
+
+                      {this.state.tokens.map( (item,i) => {
+                          return(
+                            <div key={i} id="token_selection" className='token_row'>
+                              <image alt={item} className='token_list_img' src={this.state.tokens_img[i]}/>
+                              <span className='token_list_text' onClick={() => this.selectTokenOutput(item) }>{item}</span>
                             </div>
                           )
                       } )}
