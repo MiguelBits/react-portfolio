@@ -240,15 +240,19 @@
 .token_row{
   padding: 5px 10px;
   color: white;
+  border-radius: 25px;
 }
 .token_row:hover{
   background-color: #e4e4e4;
   cursor: pointer;
   color: black;
 }
-.token_list_img, .token_image{
+.token_list_img, .token_image, .token_select_img{
   width: 40px;
+  z-index: 5;
+  margin-left: 10px;
 }
+
 .token_select{
   padding:5px 0;
 }

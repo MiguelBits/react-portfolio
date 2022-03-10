@@ -15,12 +15,12 @@ class Defi extends React.Component {
     coinOutput: "Select Token",
     coinOutput_img: "https://cdn.pixabay.com/photo/2012/04/10/23/44/question-27106_1280.png",
 
-    tokens: ["weth","avax","usdc"],
+    tokens: [" weth"," avax"," usdc"],
     tokens_img: [
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwbk5ebkGLZP-jhT83J2EOBTtL5U_4NIwL262gXWJNnNHCry7C1_A_URj_R7UxpltYqJ0&usqp=CAU",
     "https://cryptologos.cc/logos/avalanche-avax-logo.svg?v=022",
     "https://cryptologos.cc/logos/usd-coin-usdc-logo.png"],
-
+    tokens_address: ["0x1111","0x2222","0x3333"]
   }
   
   switchAmounts = () => {
@@ -65,10 +65,8 @@ class Defi extends React.Component {
                 <div id="form">
                     <div className="swapbox">
                                 <div className="swapbox_select token_select" id="from_token_select" onClick={this.state.switched ? this.switchToken_Output : this.switchToken_Input}>
-                                {this.state.switched ? this.state.coinOutput:this.state.coinInput}
-                                {this.state.switched ? <image alt="output-coin" src={this.state.coinOutput_img}></image>:<image alt="input-coin" src={this.state.coinInput_img}></image>}
-                                    <img className="token_image" id="from_token_img"/>
-                                    <span id="from_token_text"></span>
+                                  {this.state.switched ? this.state.coinOutput:this.state.coinInput}
+                                  {this.state.switched ? <img className='token_select_img' alt="output-coin" src={this.state.coinOutput_img}></img>:<img className='token_select_img' alt="input-coin" src={this.state.coinInput_img}></img>}
                                 </div>
                                 <div className="swapbox_select">
                                     <input className="number form-control" value={this.state.switched ? this.state.amountOutput : this.state.amountInput}
@@ -79,9 +77,7 @@ class Defi extends React.Component {
                     <div className="swapbox">
                                 <div className="swapbox_select token_select"  id="to_token_select" onClick={this.state.switched ? this.switchToken_Input : this.switchToken_Output}>
                                   {this.state.switched ? this.state.coinInput:this.state.coinOutput}
-                                  {this.state.switched ? <image alt="input-coin" src={this.state.coinInput_img}></image>:<image alt="output-coin" src={this.state.coinOutput_img}></image>}
-                                    <img className="token_image" id="to_token_img"/>
-                                    <span id="to_token_text"></span>
+                                  {this.state.switched ? <img alt="input-coin" className='token_select_img' src={this.state.coinInput_img}></img>:<img className='token_select_img' alt="output-coin" src={this.state.coinOutput_img}></img>}
                                 </div>
                                 <div className="swapbox_select">
                                     <input className="number form-control" value={this.state.switched ? this.state.amountInput : this.state.amountOutput}
@@ -115,7 +111,7 @@ class Defi extends React.Component {
                       {this.state.tokens.map( (item,i) => {
                           return(
                             <div key={i} id="token_selection" className='token_row' onClick={() => this.selectTokenInput(item,i) }>
-                              <image alt={item} className='token_list_img' src={this.state.tokens_img[i]}/>
+                              <img alt={item} className='token_list_img' src={this.state.tokens_img[i]}/>
                               <span className='token_list_text' >{item}</span>
                             </div>
                           )
@@ -144,7 +140,7 @@ class Defi extends React.Component {
                       {this.state.tokens.map( (item,i) => {
                           return(
                             <div key={i} id="token_selection" className='token_row'>
-                              <image alt={item} className='token_list_img' src={this.state.tokens_img[i]}/>
+                              <img alt={item} className='token_list_img' src={this.state.tokens_img[i]}/>
                               <span className='token_list_text' onClick={() => this.selectTokenOutput(item,i) }>{item}</span>
                             </div>
                           )
