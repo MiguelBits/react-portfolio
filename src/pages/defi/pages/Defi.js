@@ -10,7 +10,11 @@ class Defi extends React.Component {
     switched: false,
     coinInput: "ETH",
     coinOutput: "Select Token",
-
+    tokens: ["weth","avax","usdc"],
+    tokens_img: [
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwbk5ebkGLZP-jhT83J2EOBTtL5U_4NIwL262gXWJNnNHCry7C1_A_URj_R7UxpltYqJ0&usqp=CAU",
+    "https://cryptologos.cc/logos/avalanche-avax-logo.svg?v=022",
+    "https://cryptologos.cc/logos/usd-coin-usdc-logo.png"],
   }
   
   switchAmounts = () => {
@@ -73,7 +77,7 @@ class Defi extends React.Component {
                 
               </div>
             </div>
-            <div className="modal" id="token_modal" tabindex="-1" role="dialog">
+            <div className="modal" id="token_modal" tabIndex="-1" role="dialog">
               <div className="modal-dialog" role="document">
                 <div className="modal-content">
                   <div className="modal-header">
@@ -87,7 +91,17 @@ class Defi extends React.Component {
                     </div>
                   </div>
                   <div className="modal-body">
-                    <div id="token_list"></div>
+                    <div id="token_list">
+
+                      {this.state.tokens.map( (item,i) => {
+                          return(
+                            <div key={i} className='token_row'>
+                              <image alt={item} className='token_list_img' src={this.state.tokens_img[i]}/>
+                              <span className='token_list_text'>{item}</span>
+                            </div>
+                          )
+                      } )}
+                    </div>
                   </div>
                 </div>
               </div>
