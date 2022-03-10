@@ -84,7 +84,6 @@ class Defi extends React.Component {
       document.getElementById("vote").style.backgroundColor = "#504d4d"
       document.getElementById("vote").style.opacity = "100%"
     }
-
   }
 
   Swapper = () => {
