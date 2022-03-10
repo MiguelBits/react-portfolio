@@ -20,7 +20,8 @@ class Defi extends React.Component {
     "https://assets.coingecko.com/coins/images/17238/large/aWETH_2x.png?1626940782",
     "https://cryptologos.cc/logos/avalanche-avax-logo.svg?v=022",
     "https://cryptologos.cc/logos/usd-coin-usdc-logo.png"],
-    tokens_address: ["0x1111","0x2222","0x3333"]
+    tokens_address: ["0x1111","0x2222","0x3333"],
+    swapEnable: false,
   }
   
   switchAmounts = () => {
@@ -48,9 +49,21 @@ class Defi extends React.Component {
     this.setState({coinOutput:item})
     this.setState({coinOutput_img:this.state.tokens_img[i]})
   }
+  allConditionsForSwap(){
+    if(this.state.amountInput != 0 && this.state.amountOutput != 0 && this.coinInput != "" && this.state.coinInput != "Select Token" && this.state.coinOutput != "" && this.state.coinOutput != "Select Token"){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
   componentDidMount = () => {
     toast.configure()
     document.body.style.backgroundColor = "#504d4d"
+  }
+  Swapper = () => {
+    toast(this.state.coinInput)
+    toast(this.state.coinOutput)
   }
   render() {
     return (
@@ -86,10 +99,14 @@ class Defi extends React.Component {
                                 </div>
                     </div>
                     {/* SWAP BUTTON AND GAS */}
+                    
                     <div>Estimated Gas: <span id="gas_estimate"></span></div>
-                    <button disabled className="btn btn-primary btn-block" id="swap_button">
+                    {this.allConditionsForSwap() ? <button className="btn btn-primary btn-block" onClick={this.Swapper} id="swap_button">
                         Swap
-                    </button>
+                    </button> :
+                    <button disabled className="btn btn-primary btn-block" onClick={this.Swapper} id="swap_button">
+                      Swap
+                    </button>}
                 </div>
                 
               </div>
