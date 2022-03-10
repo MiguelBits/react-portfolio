@@ -55,6 +55,7 @@ class Defi extends React.Component {
   render() {
     return (
       <div className='container'>
+        {/* SWAP BOX */}
                   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossOrigin="anonymous"/>
         <div className='row-defi'>
             <button className='button_arrow_circle' onClick={this.switchAmounts}>
@@ -84,6 +85,7 @@ class Defi extends React.Component {
                     onChange={(e) => this.setState({amountOutput: e.target.value})} id="to_amount"/>
                                 </div>
                     </div>
+                    {/* SWAP BUTTON AND GAS */}
                     <div>Estimated Gas: <span id="gas_estimate"></span></div>
                     <button disabled className="btn btn-primary btn-block" id="swap_button">
                         Swap
@@ -92,6 +94,7 @@ class Defi extends React.Component {
                 
               </div>
             </div>
+            {/* MODAL */}
             <div className="modal" id="token_modal_input" tabIndex="-1" role="dialog">
               <div className="modal-dialog" role="document">
                 <div className="modal-content">
