@@ -88,8 +88,23 @@ class Defi extends React.Component {
   }
 
   Swapper = () => {
-    toast("Swap "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
-    toast("For " + Number(this.state.amountOutput * 10**18) + " of " + this.state.coinOutput)
+    if(this.props.useFunction == "Swap"){
+      toast("Swap "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
+      toast("For " + Number(this.state.amountOutput * 10**18) + " of " + this.state.coinOutput)
+    }
+    else if(this.props.useFunction == "Pool"){
+      toast("Add "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
+      toast("Liquidity " + Number(this.state.amountOutput * 10**18) + " of " + this.state.coinOutput)
+    }
+    else if(this.props.useFunction == "Loan"){
+      toast("Collaterize "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
+      toast("Borrow " + Number(this.state.amountOutput * 10**18) + " of " + this.state.coinOutput)
+    }
+    else if(this.props.useFunction == "Vote"){
+      toast("Vote "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
+      toast("In " + Number(this.state.amountOutput * 10**18) + " of " + this.state.coinOutput)
+    }
+    
   }
   render() {
     return (
