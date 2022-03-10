@@ -44,10 +44,12 @@ class Defi extends React.Component {
   selectTokenInput(item,i){
     this.setState({coinInput:item})
     this.setState({coinInput_img:this.state.tokens_img[i]})
+    this.closeModal()
   }
   selectTokenOutput(item,i){
     this.setState({coinOutput:item})
     this.setState({coinOutput_img:this.state.tokens_img[i]})
+    this.closeModal()
   }
   allConditionsForSwap(){
     if(this.state.amountInput != 0 && this.state.amountOutput != 0 && this.coinInput != "" && this.state.coinInput != "Select Token" && this.state.coinOutput != "" && this.state.coinOutput != "Select Token"){
