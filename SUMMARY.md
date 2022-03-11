@@ -8,5 +8,6 @@
   * [4. User Facing tools](blockchain-technologies/4.-user-facing-tools.md)
 * [Scaling Blockchain](scaling-blockchain/README.md)
   * [(1) Scaling Bitcoin using Payment Channels](scaling-blockchain/1-scaling-bitcoin-using-payment-channels.md)
-  * [(2) Scaling Ethereum using Rollup](scaling-blockchain/2-scaling-ethereum-using-rollup.md)
-  * [(3) Transferring assets to and from L2](scaling-blockchain/page-1.md)
+  * [(2) Scaling Ethereum using Rollup](scaling-blockchain/2-scaling-ethereum-using-rollup/README.md)
+    * [Transferring assets to and from L2](scaling-blockchain/2-scaling-ethereum-using-rollup/page-1.md)
+    * [Optimistic Rollup](scaling-blockchain/2-scaling-ethereum-using-rollup/optimistic-rollup.md)
