@@ -11,3 +11,4 @@
   * [(2) Scaling Ethereum using Rollup](scaling-blockchain/2-scaling-ethereum-using-rollup/README.md)
     * [Transferring assets to and from L2](scaling-blockchain/2-scaling-ethereum-using-rollup/page-1.md)
     * [Optimistic Rollup](scaling-blockchain/2-scaling-ethereum-using-rollup/optimistic-rollup.md)
+* [Interchain Interoperability](interchain-interoperability.md)
