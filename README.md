@@ -14,7 +14,7 @@ A **hash function** is any [function](https://en.wikipedia.org/wiki/Function\_\(
 
 These hash values are irreversible to their previous data.
 
-A good hash function must be collision resistant, meaning there cannot be two equal hash values for two different input data.               _Example: **SHA256**_
+A good hash function must be collision resistant, meaning there cannot be two equal hash values for two different input data. _Example: **SHA256**_
 
 ### Merkle Tree
 
@@ -34,7 +34,7 @@ The public key is open to everyone. Anyone can access it and encrypt data with i
 
 #### What Does Asymmetric Encryption Do?
 
-Asymmetric encryption is a way for you to verify third parties that you’ve never met via public channels that are insecure. Unlike traditional (symmetric) encryption methods, which rely on one key to encrypt and decrypt data, asymmetric key encryption uses two separate keys to perform these functions. &#x20;
+Asymmetric encryption is a way for you to verify third parties that you’ve never met via public channels that are insecure. Unlike traditional (symmetric) encryption methods, which rely on one key to encrypt and decrypt data, asymmetric key encryption uses two separate keys to perform these functions.
 
 ## P2P network
 
@@ -57,3 +57,5 @@ _"A ‘mempool’, or Memory Pool, is a pool of transactions that haven’t been
 _When you make a transaction on Ethereum, before it’s formally included in the chain by_ [_miners_](https://dyor-crypto.fandom.com/wiki/Miners) _(validators, in_ [_PoS_](https://dyor-crypto.fandom.com/wiki/PoS)_), you broadcast it to an Ethereum_ [_node_](https://dyor-crypto.fandom.com/wiki/Node)_. This Ethereum node broadcasts it to its peers, and through this process, all Ethereum nodes are aware of your signed transaction._
 
 _Rational miners prioritize the transactions with the highest fee paid, as this is how they maximize their profits. Obviously, it makes sense to include those who are willing to pay more first."_
+
+###

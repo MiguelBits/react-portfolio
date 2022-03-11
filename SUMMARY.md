@@ -9,4 +9,4 @@
 * [Scaling Blockchain](scaling-blockchain/README.md)
   * [(1) Scaling Bitcoin using Payment Channels](scaling-blockchain/1-scaling-bitcoin-using-payment-channels.md)
   * [(2) Scaling Ethereum using Rollup](scaling-blockchain/2-scaling-ethereum-using-rollup.md)
-  * [Page 1](scaling-blockchain/page-1.md)
+  * [(3) Transferring assets to and from L2](scaling-blockchain/page-1.md)
