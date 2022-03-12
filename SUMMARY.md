@@ -12,3 +12,5 @@
     * [Transferring assets to and from L2](scaling-blockchain/2-scaling-ethereum-using-rollup/page-1.md)
     * [Optimistic Rollup](scaling-blockchain/2-scaling-ethereum-using-rollup/optimistic-rollup.md)
 * [Interchain Interoperability](interchain-interoperability.md)
+* [Smart Contracts](smart-contracts/README.md)
+  * [Solidity and Ethereum Bytecode](smart-contracts/solidity-and-ethereum-bytecode.md)
