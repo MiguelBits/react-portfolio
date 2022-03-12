@@ -87,4 +87,4 @@ So the maximum values of `uint` and `int` are not the same. They have the same a
 
 ### Address
 
-address holds the 20 byte value representing the size of an Ethereum address. An address can be used to get the balance using .balance method and can be used to transfer balance to another address using .transfer method.
+An address holds the 20 byte value representing the size of an Ethereum address. An address can be used to get the balance using .balance method and can be used to transfer balance to another address using .transfer method.
