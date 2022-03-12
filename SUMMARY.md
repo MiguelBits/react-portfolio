@@ -17,5 +17,6 @@
     * [Integer types](smart-contracts/solidity-and-ethereum-bytecode/integer-types.md)
     * [Case Study: Dutch auction as Smart Contract](smart-contracts/solidity-and-ethereum-bytecode/case-study-dutch-auction-as-smart-contract.md)
     * [Gas in Ethereum](smart-contracts/solidity-and-ethereum-bytecode/gas-in-ethereum.md)
-  * [Fungible Tokens](smart-contracts/fungible-tokens.md)
-  * [Non Fungible Tokens](smart-contracts/non-fungible-tokens.md)
+  * [Tokens](smart-contracts/tokens/README.md)
+    * [Fungible Tokens](smart-contracts/tokens/fungible-tokens.md)
+    * [Non Fungible Tokens](smart-contracts/tokens/non-fungible-tokens.md)
