@@ -12,6 +12,16 @@ is statically typed like Java, C, Rust... unlike Python or Javascript. Meaning y
 
 Specially for integers, you need to specify if it's signed or unsigned integer, and the bytes of said integer.
 
+
+
+### Data Locations - Storage, Memory and Calldata
+
+Variables are declared as either `storage`, `memory` or `calldata` to explicitly specify the location of the data.
+
+* `storage` - variable is a state variable (store on blockchain)
+* `memory` - variable is in memory and it exists while a function is being called
+* `calldata` - special data location that contains function arguments, only available for `external` functions
+
 ### Mapping data types
 
 \-> Mapping: a key value storage / hash table;
@@ -40,6 +50,12 @@ Specially for integers, you need to specify if it's signed or unsigned integer, 
 
 ![](<../../.gitbook/assets/imagem (8).png>)
 
+### Working with the native currency
+
+The **payable** modifier, any send method to a function without this modifier will reject the sent Ether, if they are marked as payable then they can accept Ether.
+
+![](<../../.gitbook/assets/imagem (3).png>)
+
 ### Events
 
 \-> A way to subscribe to an event of a contract, and a good way to print/debug your code.
@@ -48,57 +64,47 @@ Specially for integers, you need to specify if it's signed or unsigned integer, 
 
 ![](../../.gitbook/assets/imagem.png)
 
+### Abstract Contracts <a href="#6c90" id="6c90"></a>
+
+Contracts need to be marked as `abstract` when at least one of their functions isn’t implemented. Contracts may be marked as `abstract` even though all functions are implemented.
+
 ### Calling methods of other contracts
 
 \-> First define the interface for an external contract: ![](<../../.gitbook/assets/imagem (7) (1).png>)
 
 \-> Next you need to have the address of said external contract, only then you can invoke the functions of the external contract: ![](<../../.gitbook/assets/imagem (3) (1).png>)
 
-### Working with the native currency
+This can be done using the `abstract` keyword for the contract, and functions that aren’t implemented should have the `virtual` keyword to allow polymorphism.
 
-The payable modifier, any send method to a function without this modifier will reject the sent Ether, if they are marked as payable then they can accept Ether.
+### Interfaces <a href="#8039" id="8039"></a>
 
-![](<../../.gitbook/assets/imagem (3).png>)
+Interfaces are similar to **abstract** contracts, but they can’t have any functions implemented. There are further restrictions:
 
-### Reading the current time
+* They can’t inherit from other contracts, but they can inherit from other interfaces
+* All declared functions must be **external**
+* They can’t declare a **constructor**
+* They can’t declare state variables
 
-block.timestamp returns the timestamp of the current block in seconds since the epoch
-
-![](<../../.gitbook/assets/imagem (6).png>)
-
-[https://ethereum.stackexchange.com/questions/6795/is-block-timestamp-safe-for-longer-time-periods](https://ethereum.stackexchange.com/questions/6795/is-block-timestamp-safe-for-longer-time-periods)
-
-### Data Locations - Storage, Memory and Calldata
-
-Variables are declared as either `storage`, `memory` or `calldata` to explicitly specify the location of the data.
-
-* `storage` - variable is a state variable (store on blockchain)
-* `memory` - variable is in memory and it exists while a function is being called
-* `calldata` - special data location that contains function arguments, only available for `external` functions
+Interfaces are declared using the `interface` keyword.
 
 ### Inheritance
 
 Inheritance is a way to extend functionality of a contract. Solidity supports both single as well as multiple inheritance. Following are the key highlights.
 
-* A derived contract can access all non-private members including internal methods and state variables. But using this is not allowed.
-* Function overriding is allowed provided function signature remains same. In case of difference of output parameters, compilation will fail.
-* We can call a super contract's function using super keyword or using super contract name.
+* A derived contract can access all **non-private** members including internal methods and state variables. But using this is not allowed.
+* Function **overriding** is allowed provided function signature remains same. In case of difference of output parameters, compilation will fail.
+* We can call a **super** contract's function using **super** keyword or using super contract name.
 * In case of multiple inheritance, function call using super gives preference to most derived contract.
 
-### Abstract Contracts <a href="#6c90" id="6c90"></a>
+### Reading the current time
 
-Contracts need to be marked as `abstract` when at least one of their functions isn’t implemented. Contracts may be marked as `abstract` even though all functions are implemented.
+**block.timestamp** returns the timestamp of the current block in seconds since the epoch
 
-This can be done using the `abstract` keyword for the contract, and functions that aren’t implemented should have the `virtual` keyword to allow polymorphism.
+![](<../../.gitbook/assets/imagem (6).png>)
 
-### Interfaces <a href="#8039" id="8039"></a>
+[https://ethereum.stackexchange.com/questions/6795/is-block-timestamp-safe-for-longer-time-periods](https://ethereum.stackexchange.com/questions/6795/is-block-timestamp-safe-for-longer-time-periods)
 
-Interfaces are similar to abstract contracts, but they can’t have any functions implemented. There are further restrictions:
+###
 
-* They can’t inherit from other contracts, but they can inherit from other interfaces
-* All declared functions must be external
-* They can’t declare a constructor
-* They can’t declare state variables
-
-Interfaces are declared using the `interface` keyword.
+### &#x20;<a href="#8039" id="8039"></a>
 
