@@ -64,8 +64,6 @@ The payable modifier, any send method to a function without this modifier will r
 
 ![](<../.gitbook/assets/imagem (6).png>)
 
-###
-
 ### Data Locations - Storage, Memory and Calldata
 
 Variables are declared as either `storage`, `memory` or `calldata` to explicitly specify the location of the data.
@@ -73,3 +71,30 @@ Variables are declared as either `storage`, `memory` or `calldata` to explicitly
 * `storage` - variable is a state variable (store on blockchain)
 * `memory` - variable is in memory and it exists while a function is being called
 * `calldata` - special data location that contains function arguments, only available for `external` functions
+
+### Inheritance
+
+Inheritance is a way to extend functionality of a contract. Solidity supports both single as well as multiple inheritance. Following are the key highlights.
+
+* A derived contract can access all non-private members including internal methods and state variables. But using this is not allowed.
+* Function overriding is allowed provided function signature remains same. In case of difference of output parameters, compilation will fail.
+* We can call a super contract's function using super keyword or using super contract name.
+* In case of multiple inheritance, function call using super gives preference to most derived contract.
+
+### Abstract Contracts <a href="#6c90" id="6c90"></a>
+
+Contracts need to be marked as `abstract` when at least one of their functions isn’t implemented. Contracts may be marked as `abstract` even though all functions are implemented.
+
+This can be done using the `abstract` keyword for the contract, and functions that aren’t implemented should have the `virtual` keyword to allow polymorphism.
+
+### Interfaces <a href="#8039" id="8039"></a>
+
+Interfaces are similar to abstract contracts, but they can’t have any functions implemented. There are further restrictions:
+
+* They can’t inherit from other contracts, but they can inherit from other interfaces
+* All declared functions must be external
+* They can’t declare a constructor
+* They can’t declare state variables
+
+Interfaces are declared using the `interface` keyword.
+
