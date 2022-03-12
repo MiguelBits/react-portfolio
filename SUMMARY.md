@@ -20,3 +20,4 @@
   * [Tokens](smart-contracts/tokens/README.md)
     * [Fungible Tokens](smart-contracts/tokens/fungible-tokens.md)
     * [Non Fungible Tokens](smart-contracts/tokens/non-fungible-tokens.md)
+* [DeFi](defi.md)
