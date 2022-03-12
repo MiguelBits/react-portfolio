@@ -13,4 +13,5 @@
     * [Optimistic Rollup](scaling-blockchain/2-scaling-ethereum-using-rollup/optimistic-rollup.md)
 * [Interchain Interoperability](interchain-interoperability.md)
 * [Smart Contracts](smart-contracts/README.md)
-  * [Solidity and Ethereum Bytecode](smart-contracts/solidity-and-ethereum-bytecode.md)
+  * [Solidity and Ethereum Bytecode](smart-contracts/solidity-and-ethereum-bytecode/README.md)
+    * [Integer types](smart-contracts/solidity-and-ethereum-bytecode/integer-types.md)

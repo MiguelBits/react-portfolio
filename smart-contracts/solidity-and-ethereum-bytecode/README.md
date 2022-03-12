@@ -22,7 +22,7 @@ Specially for integers, you need to specify if it's signed or unsigned integer, 
 
 ### Function signatures
 
-![](<../.gitbook/assets/imagem (6) (1).png>)
+![](<../../.gitbook/assets/imagem (6) (1).png>)
 
 ### Constructors
 
@@ -30,15 +30,15 @@ Specially for integers, you need to specify if it's signed or unsigned integer, 
 
 \-> Used to customized settings or give an initial state
 
-![](<../.gitbook/assets/imagem (2).png>)
+![](<../../.gitbook/assets/imagem (2).png>)
 
 ### Visibility Modifiers
 
-![](<../.gitbook/assets/imagem (5).png>)
+![](<../../.gitbook/assets/imagem (5).png>)
 
 ### Mutability Modifiers
 
-![](<../.gitbook/assets/imagem (8).png>)
+![](<../../.gitbook/assets/imagem (8).png>)
 
 ### Events
 
@@ -46,23 +46,23 @@ Specially for integers, you need to specify if it's signed or unsigned integer, 
 
 \-> Any node that is subscribed to this event is going to get notified the parameters of the events.
 
-![](../.gitbook/assets/imagem.png)
+![](../../.gitbook/assets/imagem.png)
 
 ### Calling methods of other contracts
 
-\-> First define the interface for an external contract: ![](<../.gitbook/assets/imagem (7).png>)
+\-> First define the interface for an external contract: ![](<../../.gitbook/assets/imagem (7).png>)
 
-\-> Next you need to have the address of said external contract, only then you can invoke the functions of the external contract: ![](<../.gitbook/assets/imagem (3) (1).png>)
+\-> Next you need to have the address of said external contract, only then you can invoke the functions of the external contract: ![](<../../.gitbook/assets/imagem (3) (1).png>)
 
 ### Working with the native currency
 
 The payable modifier, any send method to a function without this modifier will reject the sent Ether, if they are marked as payable then they can accept Ether.
 
-![](<../.gitbook/assets/imagem (3).png>)
+![](<../../.gitbook/assets/imagem (3).png>)
 
 ### Reading the current time
 
-![](<../.gitbook/assets/imagem (6).png>)
+![](<../../.gitbook/assets/imagem (6).png>)
 
 ### Data Locations - Storage, Memory and Calldata
 
