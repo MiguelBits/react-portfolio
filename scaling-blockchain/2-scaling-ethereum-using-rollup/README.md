@@ -1,7 +1,5 @@
 ---
-description: >-
-  Reference:
-  https://www.youtube.com/watch?v=jnd5EGx6i-Q&list=PLS01nW3Rtgor6y_5TyhTcsu5IWA25wW81&index=94
+description: zkRollup Simplified
 ---
 
 # (2) Scaling Ethereum using Rollup
@@ -20,4 +18,4 @@ Produces a short proof that it knows that a valid witness such as that the outpu
 
 This helps scaling the blockchain, as the miners will only have to verify this single proof to validate all those Tx's.
 
-![zkRollup Simplified](../../.gitbook/assets/rollup.png)
+![Reference: https://www.youtube.com/watch?v=jnd5EGx6i-Q\&list=PLS01nW3Rtgor6y\_5TyhTcsu5IWA25wW81\&index=94](../../.gitbook/assets/rollup.png)

@@ -10,4 +10,4 @@ description: How to move assets between different blockchains? Building a bridge
 
 ## Moving back the Bitcoin to its native blockchain:
 
-![The bridge validators sign a release transaction of that bitcoin after its Wrapped version is burned by the Ethereum Smart Contract](.gitbook/assets/bridge.png)
+![The bridge validators sign a release transaction of that bitcoin after its Wrapped version is burned by the Ethereum Smart Contract](<.gitbook/assets/bridge (1).png>)

@@ -50,7 +50,7 @@ Specially for integers, you need to specify if it's signed or unsigned integer, 
 
 ### Calling methods of other contracts
 
-\-> First define the interface for an external contract: ![](<../../.gitbook/assets/imagem (7).png>)
+\-> First define the interface for an external contract: ![](<../../.gitbook/assets/imagem (7) (1).png>)
 
 \-> Next you need to have the address of said external contract, only then you can invoke the functions of the external contract: ![](<../../.gitbook/assets/imagem (3) (1).png>)
 

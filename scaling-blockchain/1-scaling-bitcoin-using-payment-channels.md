@@ -1,7 +1,5 @@
 ---
-description: >-
-  Reference:
-  https://www.youtube.com/watch?v=jnd5EGx6i-Q&list=PLS01nW3Rtgor6y_5TyhTcsu5IWA25wW81&index=94
+description: Lighting Network Simplified
 ---
 
 # (1) Scaling Bitcoin using Payment Channels
@@ -18,7 +16,7 @@ description: >-
 
 \-> To close this channel, Bob needs to sign the latest Alice's Tx on the channel, which says Alice gets 95$ and Bob gets 5$ of the 100$ in the channel. However Alice can only close after the lock up time period.
 
-Alice while the channel is open, can make multiple Tx's to Bob without ever touching the blockchain, as the only thing that touched the blockchain was the creation of this channel and the closing of the channel.&#x20;
+Alice while the channel is open, can make multiple Tx's to Bob without ever touching the blockchain, as the only thing that touched the blockchain was the creation of this channel and the closing of the channel.
 
 This channel can be bi-directional and no more than the deposited funds can be transacted.
 
@@ -28,4 +26,4 @@ Lots of bi-directional payment channels are created as nodes, that enable the pa
 
 As long as all these routing channels are open, Alice creates a channel between her "bank" and then Bob with his "bank", and both can transact assets within the Lighting Network.
 
-![](../.gitbook/assets/lightningnetwork.png)
+![Reference: https://www.youtube.com/watch?v=jnd5EGx6i-Q\&list=PLS01nW3Rtgor6y\_5TyhTcsu5IWA25wW81\&index=94](../.gitbook/assets/lightningnetwork.png)
