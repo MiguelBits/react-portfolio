@@ -62,7 +62,11 @@ The payable modifier, any send method to a function without this modifier will r
 
 ### Reading the current time
 
+block.timestamp returns the timestamp of the current block in seconds since the epoch
+
 ![](<../../.gitbook/assets/imagem (6).png>)
+
+[https://ethereum.stackexchange.com/questions/6795/is-block-timestamp-safe-for-longer-time-periods](https://ethereum.stackexchange.com/questions/6795/is-block-timestamp-safe-for-longer-time-periods)
 
 ### Data Locations - Storage, Memory and Calldata
 
