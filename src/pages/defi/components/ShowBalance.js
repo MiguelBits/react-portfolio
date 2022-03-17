@@ -6,6 +6,7 @@ import "./../css/Defi.css"
 class ShowBalance extends Component {
     state={
       currentAccount: "",
+      currentAccountBalance: 0,
       provider: "https://avalanche--fuji--rpc.datahub.figment.io/apikey/840b5505faa01184d4a81482f2a73112/ext/bc/C/rpc",
     }
     getAvaxBalance = async () => {
@@ -29,7 +30,7 @@ class ShowBalance extends Component {
           //get balance
           var customHttpProvider = new ethers.providers.JsonRpcProvider(this.state.provider);
           const balance = await customHttpProvider.getBalance(accounts[0])
-          console.log(ethers.utils.formatEther(balance))
+          this.setState({currentAccountBalance:ethers.utils.formatEther(balance)})
 
           
           
@@ -47,7 +48,7 @@ class ShowBalance extends Component {
       return (
         <div >
             <div className="ShowBalance">
-                
+                {this.state.currentAccountBalance.toString().slice(0,5)}
             </div>
         </div>
 
