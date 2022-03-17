@@ -348,6 +348,17 @@
   color: white;
 }
 
+.defi-logo{
+  position: absolute;
+  top: 25px;
+  left: 50px;
+  width: 3%;
+  cursor: pointer;
+}
+.defi-logo:hover{
+  opacity: 50%;
+}
+
 .ShowBalance{
   position: absolute;
   top: 25px;

@@ -14,8 +14,10 @@ class Defi extends React.Component {
     amountInput: 0,
     amountOutput: 1,
     switched: false,
-    
-    coinInput: "WETH",
+
+    modalOpen: false,
+
+    coinInput: " WETH",
     coinInput_img: "https://assets.coingecko.com/coins/images/17238/large/aWETH_2x.png?1626940782",
 
     coinOutput: "Select Token",
@@ -27,19 +29,44 @@ class Defi extends React.Component {
     "https://cryptologos.cc/logos/avalanche-avax-logo.svg?v=022",
     "https://cryptologos.cc/logos/usd-coin-usdc-logo.png"],
     tokens_address: ["0x1111","0x2222","0x3333"],
+    token1_amount: 0,
+    token2_amount: 0,
+    LPholdings: 0,
     swapEnable: false,
 
   }
-  
+
+  checkHoldings = async () => {
+    document.getElementById("token_modal_holdings").style.display = "block";
+    this.setState({modalOpen:true})
+
+    const { ethereum } = window;
+    if (ethereum) {
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = provider.getSigner();
+      const defiContract = new ethers.Contract(contractAddress, contractABI, signer);
+
+      defiContract.getMyHoldings().then( result => {
+        this.setState({token1_amount:parseInt(result.amountToken1._hex.toString())})
+        this.setState({token2_amount:parseInt(result.amountToken2._hex.toString())})
+        this.setState({LPholdings:parseInt(result.myShare._hex.toString())})
+      })
+
+    }else{
+      console.log("Ethereum object does not exist");
+    }
+  }
   switchAmounts = () => {
     this.setState({switched:!this.state.switched})
   }
 
   switchToken_Input = () => {
     document.getElementById("token_modal_input").style.display = "block";
+    this.setState({modalOpen:true})
   }
   switchToken_Output = () => {
     document.getElementById("token_modal_output").style.display = "block";
+    this.setState({modalOpen:true})
   }
   selectToken = (token) => {
     this.setState({selectToken:token})
@@ -47,16 +74,30 @@ class Defi extends React.Component {
   closeModal = () => {
     document.getElementById("token_modal_input").style.display = "none";
     document.getElementById("token_modal_output").style.display = "none";
+    document.getElementById("token_modal_holdings").style.display = "none";
+    this.setState({modalOpen:false})
   }
   selectTokenInput(item,i){
-    this.setState({coinInput:item})
-    this.setState({coinInput_img:this.state.tokens_img[i]})
-    this.closeModal()
+    if(this.state.coinOutput === item){
+      toast.error("Cannot select the same token as output")
+    }
+    else{
+      this.setState({coinInput:item})
+      this.setState({coinInput_img:this.state.tokens_img[i]})
+      this.closeModal()
+    }
+    
   }
   selectTokenOutput(item,i){
-    this.setState({coinOutput:item})
-    this.setState({coinOutput_img:this.state.tokens_img[i]})
-    this.closeModal()
+    if(this.state.coinInput === item){
+      toast.error("Cannot select the same token as input")
+    }
+    else{
+      this.setState({coinOutput:item})
+      this.setState({coinOutput_img:this.state.tokens_img[i]})
+      this.closeModal()
+    }
+    
   }
   allConditionsForSwap(){
     if(this.state.amountInput !== 0 && this.state.amountOutput !== 0 && this.coinInput !== "" && this.state.coinInput !== "Select Token" && this.state.coinOutput !== "" && this.state.coinOutput !== "Select Token"){
@@ -66,6 +107,15 @@ class Defi extends React.Component {
       return false;
     }
   }
+  /**
+   * Close Modal if clicked on outside of element
+   */
+   handleClickOutside(event) {
+    if (this.wrapperRef && !this.wrapperRef.current.contains(event.target) && this.state.modalOpen) {
+      this.closeModal()
+    }
+  }
+
   componentDidMount = () => {
     toast.configure()
     document.body.style.backgroundColor = "#504d4d"
@@ -87,7 +137,18 @@ class Defi extends React.Component {
       document.getElementById("vote").style.backgroundColor = "#504d4d"
       document.getElementById("vote").style.opacity = "100%"
     }
+
+    //click anywhere outside of ...
+    this.wrapperRef = React.createRef();
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+
+    document.addEventListener("mousedown", this.handleClickOutside);
+
   }
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+
   AddLiquity = async (token1_amount,token2_amount) => {
     const { ethereum } = window;
       if (ethereum) {
@@ -110,79 +171,119 @@ class Defi extends React.Component {
       }
   }
   Swapper = () => {
-    if(this.props.useFunction === "Swap"){
-      toast("Swap "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
-      toast("For " + Number(this.state.amountOutput * 10**18) + " of " + this.state.coinOutput)
+    if(this.state.coinInput === this.state.coinOutput){
+      toast.error("Cannot use the same tokens for transactions")
     }
-    else if(this.props.useFunction === "Pool"){
-      this.AddLiquity(Number(this.state.amountInput),Number(this.state.amountOutput ))
+    else{
+      if(this.props.useFunction === "Swap"){
+        toast("Swap "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
+        toast("For " + Number(this.state.amountOutput * 10**18) + " of " + this.state.coinOutput)
+      }
+      else if(this.props.useFunction === "Pool"){
+        this.AddLiquity(Number(this.state.amountInput),Number(this.state.amountOutput ))
+      }
+      else if(this.props.useFunction === "Loan"){
+        toast("Collaterize "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
+        toast("Borrow " + Number(this.state.amountOutput * 10**18) + " of " + this.state.coinOutput)
+      }
+      else if(this.props.useFunction === "Vote"){
+        toast("Vote "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
+        toast("In " + Number(this.state.amountOutput * 10**18) + " of " + this.state.coinOutput)
+      }
     }
-    else if(this.props.useFunction === "Loan"){
-      toast("Collaterize "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
-      toast("Borrow " + Number(this.state.amountOutput * 10**18) + " of " + this.state.coinOutput)
-    }
-    else if(this.props.useFunction === "Vote"){
-      toast("Vote "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
-      toast("In " + Number(this.state.amountOutput * 10**18) + " of " + this.state.coinOutput)
-    }
+    
     
   }
   render() {
     return (
-      <div>
-        <NavTab></NavTab>
-        <ShowBalance></ShowBalance>
-        <div className='container'>
-          {/* SWAP BOX */}
-                    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossOrigin="anonymous"/>
-          <div className='row-defi'>
-              {this.props.useFunction === "Pool" ? 
-              <button className='button_arrow_circle' onClick={this.switchAmounts}>
-                <AiOutlinePlusCircle className='fa_arrow_circle'></AiOutlinePlusCircle>
-              </button> 
-              :
-              <button className='button_arrow_circle' onClick={this.switchAmounts}>
-                {this.state.switched ? <BsFillArrowUpCircleFill className='fa_arrow_circle'></BsFillArrowUpCircleFill>:<BsFillArrowDownCircleFill className='fa_arrow_circle'></BsFillArrowDownCircleFill>}
-              </button>}
-              
-              <div className='col col-md-6 offset-md-3' id="window-defi">
-                  <h4 className='text-defi'>Defi</h4>
-                  <div id="form">
-                      <div className="swapbox">
-                                  <div className="swapbox_select token_select" id="from_token_select" onClick={this.state.switched ? this.switchToken_Output : this.switchToken_Input}>
-                                    {this.state.switched ? <img className='token_select_img' alt="output-coin" src={this.state.coinOutput_img}></img>:<img className='token_select_img' alt="input-coin" src={this.state.coinInput_img}></img>}
-                                    {this.state.switched ? this.state.coinOutput:this.state.coinInput}
-                                  </div>
-                                  <div className="swapbox_select">
-                                      <input className="number form-control" value={this.state.switched ? this.state.amountOutput : this.state.amountInput}
-                      onChange={(e) => this.setState({amountInput: e.target.value})} id="from_amount"/>
-                                  </div>
+    <div >
+      <NavTab></NavTab>
+      <ShowBalance></ShowBalance>
+      <div onClick={this.checkHoldings}>
+        <img className="defi-logo" alt="logo" src="https://github.com/mcruzvas/react-portfolio/blob/master/public/image/bullfarm.png?raw=true"></img>
+      </div>
+      <div className='container'>
+        {/* SWAP BOX */}
+                  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossOrigin="anonymous"/>
+        <div className='row-defi'>
+            {this.props.useFunction === "Pool" ? 
+            <button className='button_arrow_circle' onClick={this.switchAmounts}>
+              <AiOutlinePlusCircle className='fa_arrow_circle'></AiOutlinePlusCircle>
+            </button> 
+            :
+            <button className='button_arrow_circle' onClick={this.switchAmounts}>
+              {this.state.switched ? <BsFillArrowUpCircleFill className='fa_arrow_circle'></BsFillArrowUpCircleFill>:<BsFillArrowDownCircleFill className='fa_arrow_circle'></BsFillArrowDownCircleFill>}
+            </button>}
+            
+            <div className='col col-md-6 offset-md-3' id="window-defi">
+                <h4 className='text-defi'>Defi</h4>
+                <div id="form">
+                    <div className="swapbox">
+                                <div className="swapbox_select token_select" id="from_token_select" onClick={this.state.switched ? this.switchToken_Output : this.switchToken_Input}>
+                                  {this.state.switched ? <img className='token_select_img' alt="output-coin" src={this.state.coinOutput_img}></img>:<img className='token_select_img' alt="input-coin" src={this.state.coinInput_img}></img>}
+                                  {this.state.switched ? this.state.coinOutput:this.state.coinInput}
+                                </div>
+                                <div className="swapbox_select">
+                                    <input className="number form-control" value={this.state.switched ? this.state.amountOutput : this.state.amountInput}
+                    onChange={(e) => this.setState({amountInput: e.target.value})} id="from_amount"/>
+                                </div>
+                    </div>
+                    <div className='swapbox_arrow'><BsFillArrowDownCircleFill className='swapbox_arrow_circle'/></div>
+                    <div className="swapbox">
+                                <div className="swapbox_select token_select"  id="to_token_select" onClick={this.state.switched ? this.switchToken_Input : this.switchToken_Output}>
+                                  {this.state.switched ? <img alt="input-coin" className='token_select_img' src={this.state.coinInput_img}></img>:<img className='token_select_img' alt="output-coin" src={this.state.coinOutput_img}></img>}
+                                  {this.state.switched ? this.state.coinInput:this.state.coinOutput}
+                                </div>
+                                <div className="swapbox_select">
+                                    <input className="number form-control" value={this.state.switched ? this.state.amountInput : this.state.amountOutput}
+                    onChange={(e) => this.setState({amountOutput: e.target.value})} id="to_amount"/>
+                                </div>
+                    </div>
+                    {/* SWAP BUTTON AND GAS */}
+                    
+                    <div>Estimated Gas: <span id="gas_estimate"></span></div>
+                    {this.allConditionsForSwap() ? <button className="btn btn-primary btn-block" onClick={this.Swapper} id="swap_button">
+                        {this.state.useFunction}
+                    </button> :
+                    <button disabled className="btn btn-primary btn-block" onClick={this.Swapper} id="swap_button">
+                        {this.state.useFunction}
+                    </button>}
+                </div>
+                
+              </div>
+            </div>
+          </div>
+            {/* MODAL */}
+            <div id="all-modals" ref={this.wrapperRef}>
+              <div className="modal" id="token_modal_holdings" tabIndex="-1" role="dialog" >
+                <div className="modal-dialog" role="document">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title">Your token Holdings</h5>
+                      <div type="button" className=" close-modal-defi" data-dismiss="modal" aria-label="Close" onClick={this.closeModal}>
+                        <div id="modal_close">
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                        </div>
                       </div>
-                      <div className='swapbox_arrow'><BsFillArrowDownCircleFill className='swapbox_arrow_circle'/></div>
-                      <div className="swapbox">
-                                  <div className="swapbox_select token_select"  id="to_token_select" onClick={this.state.switched ? this.switchToken_Input : this.switchToken_Output}>
-                                    {this.state.switched ? <img alt="input-coin" className='token_select_img' src={this.state.coinInput_img}></img>:<img className='token_select_img' alt="output-coin" src={this.state.coinOutput_img}></img>}
-                                    {this.state.switched ? this.state.coinInput:this.state.coinOutput}
-                                  </div>
-                                  <div className="swapbox_select">
-                                      <input className="number form-control" value={this.state.switched ? this.state.amountInput : this.state.amountOutput}
-                      onChange={(e) => this.setState({amountOutput: e.target.value})} id="to_amount"/>
-                                  </div>
+                    </div>
+                    <div className="modal-body">
+                      <div id="token_selection" className='token_row' >
+                        LP Token: {this.state.LPholdings}
                       </div>
-                      {/* SWAP BUTTON AND GAS */}
-                      
-                      <div>Estimated Gas: <span id="gas_estimate"></span></div>
-                      {this.allConditionsForSwap() ? <button className="btn btn-primary btn-block" onClick={this.Swapper} id="swap_button">
-                          {this.state.useFunction}
-                      </button> :
-                      <button disabled className="btn btn-primary btn-block" onClick={this.Swapper} id="swap_button">
-                          {this.state.useFunction}
-                      </button>}
+                      <br></br>
+                      <div id="token_selection" className='token_row' >
+                        Token1 Amount: {this.state.token1_amount}
+                      </div>
+                      <br></br>
+                      <div id="token_selection" className='token_row' >
+                        Token2 Amount: {this.state.token2_amount}
+                      </div>
+                    </div>
                   </div>
-                  
                 </div>
               </div>
-              {/* MODAL */}
               <div className="modal" id="token_modal_input" tabIndex="-1" role="dialog">
                 <div className="modal-dialog" role="document">
                   <div className="modal-content">
@@ -197,7 +298,7 @@ class Defi extends React.Component {
                       </div>
                     </div>
                     <div className="modal-body">
-                      <div id="token_list">
+                      <div id="token_list" >
 
                         {this.state.tokens.map( (item,i) => {
                             return(
@@ -242,7 +343,7 @@ class Defi extends React.Component {
                 </div>
               </div>
             </div>
-        </div>
+    </div>
     )
   }
 }
