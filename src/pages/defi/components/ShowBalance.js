@@ -46,9 +46,10 @@ class ShowBalance extends Component {
 
     render() {
       return (
-        <div >
+        <div className=''>
             <div className="ShowBalance">
-                {this.state.currentAccountBalance.toString().slice(0,5)}
+              <img className='token_select_img' src="https://cryptologos.cc/logos/avalanche-avax-logo.svg?v=022"></img>
+                {this.state.currentAccountBalance.toString().slice(0,5)} AVAX
             </div>
         </div>
 

@@ -347,3 +347,16 @@
   text-decoration: none;
   color: white;
 }
+
+.ShowBalance{
+  position: absolute;
+  top: 25px;
+  right: 100px;
+  background-color: #DE3964;
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: white;
+}
