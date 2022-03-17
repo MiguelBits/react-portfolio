@@ -196,7 +196,7 @@ class Defi extends React.Component {
   }
   render() {
     return (
-    <div >
+    <div className='DefiPage'>
       <NavTab></NavTab>
       <ShowBalance></ShowBalance>
       <div onClick={this.checkHoldings}>
