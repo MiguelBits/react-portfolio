@@ -5,6 +5,8 @@ import ShowBalance from '../components/ShowBalance'
 import { BsFillArrowDownCircleFill, BsFillArrowUpCircleFill } from 'react-icons/bs'
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify'
+import { ethers } from 'ethers';
+import {contractAddress, contractABI} from '../contracts/contract_abi';
 
 class Defi extends React.Component {
   state = {
@@ -86,15 +88,34 @@ class Defi extends React.Component {
       document.getElementById("vote").style.opacity = "100%"
     }
   }
+  AddLiquity = async (token1_amount,token2_amount) => {
+    const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const defiContract = new ethers.Contract(contractAddress, contractABI, signer);
 
+        let txnwait = await defiContract.provide(token1_amount,token2_amount)
+
+        await txnwait.wait()
+
+        defiContract.getMyHoldings().then( result => {
+          toast(parseInt(result.amountToken1._hex.toString()))
+          toast(parseInt(result.amountToken2._hex.toString()))
+          toast(parseInt(result.myShare._hex.toString()))
+        })
+
+      }else{
+        console.log("Ethereum object does not exist");
+      }
+  }
   Swapper = () => {
     if(this.props.useFunction === "Swap"){
       toast("Swap "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
       toast("For " + Number(this.state.amountOutput * 10**18) + " of " + this.state.coinOutput)
     }
     else if(this.props.useFunction === "Pool"){
-      toast("Add "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
-      toast("Liquidity " + Number(this.state.amountOutput * 10**18) + " of " + this.state.coinOutput)
+      this.AddLiquity(Number(this.state.amountInput),Number(this.state.amountOutput ))
     }
     else if(this.props.useFunction === "Loan"){
       toast("Collaterize "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
