@@ -40,11 +40,11 @@ Variables are declared as either `storage`, `memory` or `calldata` to explicitly
 
 \-> Used to customized settings or give an initial state
 
-![](<../../.gitbook/assets/imagem (2).png>)
+![](<../../.gitbook/assets/imagem (2) (1).png>)
 
 ### Visibility Modifiers
 
-![](<../../.gitbook/assets/imagem (5).png>)
+![](<../../.gitbook/assets/imagem (5) (1).png>)
 
 ### Mutability Modifiers
 
