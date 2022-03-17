@@ -1,6 +1,7 @@
 import React from 'react'
 import "./../css/Defi.css"
 import NavTab from "./../components/NavTab"
+import ShowBalance from '../components/ShowBalance'
 import { BsFillArrowDownCircleFill, BsFillArrowUpCircleFill } from 'react-icons/bs'
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify'
@@ -56,7 +57,7 @@ class Defi extends React.Component {
     this.closeModal()
   }
   allConditionsForSwap(){
-    if(this.state.amountInput != 0 && this.state.amountOutput != 0 && this.coinInput != "" && this.state.coinInput != "Select Token" && this.state.coinOutput != "" && this.state.coinOutput != "Select Token"){
+    if(this.state.amountInput !== 0 && this.state.amountOutput !== 0 && this.coinInput !== "" && this.state.coinInput !== "Select Token" && this.state.coinOutput !== "" && this.state.coinOutput !== "Select Token"){
       return true;
     }
     else{
@@ -67,39 +68,39 @@ class Defi extends React.Component {
     toast.configure()
     document.body.style.backgroundColor = "#504d4d"
     this.setState({useFunction:this.props.useFunction})
-    if(this.props.useFunction == "Swap"){
+    if(this.props.useFunction === "Swap"){
       document.getElementById("swap").style.backgroundColor = "#504d4d"
       document.getElementById("swap").style.opacity = "100%"
 
     }
-    else if(this.props.useFunction == "Pool"){
+    else if(this.props.useFunction === "Pool"){
       document.getElementById("pool").style.backgroundColor = "#504d4d"
       document.getElementById("pool").style.opacity = "100%"
     }
-    else if(this.props.useFunction == "Loan"){
+    else if(this.props.useFunction === "Loan"){
       document.getElementById("loan").style.backgroundColor = "#504d4d"
       document.getElementById("loan").style.opacity = "100%"
     }
-    else if(this.props.useFunction == "Vote"){
+    else if(this.props.useFunction === "Vote"){
       document.getElementById("vote").style.backgroundColor = "#504d4d"
       document.getElementById("vote").style.opacity = "100%"
     }
   }
 
   Swapper = () => {
-    if(this.props.useFunction == "Swap"){
+    if(this.props.useFunction === "Swap"){
       toast("Swap "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
       toast("For " + Number(this.state.amountOutput * 10**18) + " of " + this.state.coinOutput)
     }
-    else if(this.props.useFunction == "Pool"){
+    else if(this.props.useFunction === "Pool"){
       toast("Add "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
       toast("Liquidity " + Number(this.state.amountOutput * 10**18) + " of " + this.state.coinOutput)
     }
-    else if(this.props.useFunction == "Loan"){
+    else if(this.props.useFunction === "Loan"){
       toast("Collaterize "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
       toast("Borrow " + Number(this.state.amountOutput * 10**18) + " of " + this.state.coinOutput)
     }
-    else if(this.props.useFunction == "Vote"){
+    else if(this.props.useFunction === "Vote"){
       toast("Vote "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
       toast("In " + Number(this.state.amountOutput * 10**18) + " of " + this.state.coinOutput)
     }
@@ -109,11 +110,12 @@ class Defi extends React.Component {
     return (
       <div>
         <NavTab></NavTab>
+        <ShowBalance></ShowBalance>
         <div className='container'>
           {/* SWAP BOX */}
                     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossOrigin="anonymous"/>
           <div className='row-defi'>
-              {this.props.useFunction == "Pool" ? 
+              {this.props.useFunction === "Pool" ? 
               <button className='button_arrow_circle' onClick={this.switchAmounts}>
                 <AiOutlinePlusCircle className='fa_arrow_circle'></AiOutlinePlusCircle>
               </button> 
