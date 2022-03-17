@@ -32,7 +32,7 @@ Variables are declared as either `storage`, `memory` or `calldata` to explicitly
 
 ### Function signatures
 
-![](<../../.gitbook/assets/imagem (6) (1).png>)
+![](<../../.gitbook/assets/imagem (6) (1) (1).png>)
 
 ### Constructors
 
@@ -40,7 +40,7 @@ Variables are declared as either `storage`, `memory` or `calldata` to explicitly
 
 \-> Used to customized settings or give an initial state
 
-![](<../../.gitbook/assets/imagem (2) (1).png>)
+![](<../../.gitbook/assets/imagem (2) (1) (1).png>)
 
 ### Visibility Modifiers
 
@@ -100,7 +100,7 @@ Inheritance is a way to extend functionality of a contract. Solidity supports bo
 
 **block.timestamp** returns the timestamp of the current block in seconds since the epoch
 
-![](<../../.gitbook/assets/imagem (6).png>)
+![](<../../.gitbook/assets/imagem (6) (1).png>)
 
 [https://ethereum.stackexchange.com/questions/6795/is-block-timestamp-safe-for-longer-time-periods](https://ethereum.stackexchange.com/questions/6795/is-block-timestamp-safe-for-longer-time-periods)
 

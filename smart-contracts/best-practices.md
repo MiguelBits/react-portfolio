@@ -16,7 +16,7 @@ _Overflow_ and _Underflow_ example:
 
 ![](<../.gitbook/assets/imagem (4).png>)What you see in the figure is what the sentence “operations in Solidity wrap on overflow” means. Now, just imagine if the `uint8` we fiddled with represents an amount of some precious assets. This just means that your system will work gloriously in the majority of cases (increments and decrements far from the limits of the representation) and will fail dramatically, producing an inconsistent state.
 
-![](<../.gitbook/assets/imagem (2).png>)![](<../.gitbook/assets/imagem (5).png>)
+![](<../.gitbook/assets/imagem (2) (1).png>)![](<../.gitbook/assets/imagem (5).png>)
 
 At this point, it is clear that _we do need a safer math —_ even in the simplest smart contract.
 
