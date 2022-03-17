@@ -21,5 +21,6 @@
     * [Fungible Tokens](smart-contracts/tokens/fungible-tokens.md)
     * [Non Fungible Tokens](smart-contracts/tokens/non-fungible-tokens.md)
   * [Best Practices](smart-contracts/best-practices.md)
-* [DeFi](defi/README.md)
+* [DeFi](defi.md)
+  * [ERC20 Standard](defi/erc20-standard.md)
   * [AMM](defi/amm.md)
