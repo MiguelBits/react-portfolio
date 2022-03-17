@@ -22,7 +22,7 @@ class NavBar extends Component {
                 <div className='just-line'><br></br></div>
                 <li className="navBarMenu"><a href="/resume">Resume</a></li>
                 <li className="navBarMenu"><a href="/about" >About me</a></li>
-                <li className="navBarMenu"><a href="/learn">Learn</a></li>
+                <li className="navBarMenu"><a href='https://miguel-de-vasconcelos.gitbook.io/blockchain-technologies/' target="_blank" >Learn</a></li>
                 <li className="navBarMenu"><a href="/">Home</a></li>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
                 <li className="socialLinks"><a href="mailto:mcruzvas@gmail.com" target="_blank" className="fa fa-envelope"></a></li>
