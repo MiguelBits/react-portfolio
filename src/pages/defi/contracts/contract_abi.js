@@ -1,4 +1,4 @@
-export const contractAddress = "0x726055059D1c94979Ac3f2cd6a4f641ad184C229"
+export const contractAddress_AVAX_WETH = "0x726055059D1c94979Ac3f2cd6a4f641ad184C229"
 export const contractABI = [
 	{
 		"inputs": [

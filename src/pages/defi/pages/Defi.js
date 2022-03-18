@@ -6,12 +6,12 @@ import { BsFillArrowDownCircleFill, BsFillArrowUpCircleFill } from 'react-icons/
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify'
 import { ethers } from 'ethers';
-import {contractAddress, contractABI} from '../contracts/contract_abi';
+import {contractAddress_AVAX_WETH, contractABI} from '../contracts/contract_abi';
 
 class Defi extends React.Component {
   state = {
     useFunction: "",
-    amountInput: 0,
+    amountInput: 1,
     amountOutput: 1,
     switched: false,
 
@@ -44,7 +44,7 @@ class Defi extends React.Component {
     if (ethereum) {
       const provider = new ethers.providers.Web3Provider(ethereum);
       const signer = provider.getSigner();
-      const defiContract = new ethers.Contract(contractAddress, contractABI, signer);
+      const defiContract = new ethers.Contract(contractAddress_AVAX_WETH, contractABI, signer);
 
       defiContract.getMyHoldings().then( result => {
         this.setState({token1_amount:parseInt(result.amountToken1._hex.toString())})
@@ -58,6 +58,17 @@ class Defi extends React.Component {
   }
   switchAmounts = () => {
     this.setState({switched:!this.state.switched})
+    let inAmount = this.state.amountInput
+    let inCoin = this.state.coinInput
+    let inCoinImg = this.state.coinInput_img
+
+    this.setState({amountInput:this.state.amountOutput})
+    this.setState({coinInput:this.state.coinOutput})
+    this.setState({coinInput_img:this.state.coinOutput_img})
+
+    this.setState({amountOutput:inAmount})
+    this.setState({coinOutput:inCoin})
+    this.setState({coinOutput_img:inCoinImg})
   }
 
   switchToken_Input = () => {
@@ -107,6 +118,41 @@ class Defi extends React.Component {
       return false;
     }
   }
+  showEstimatedInput = async (e) => {
+    
+    this.setState({amountInput: e.target.value})
+
+    if(this.state.coinOutput === " AVAX" && this.state.coinInput === " WETH"){
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const defiContract = new ethers.Contract(contractAddress_AVAX_WETH, contractABI, signer);
+
+        defiContract.getEquivalentToken2Estimate(e.target.value).then(result => {
+          this.setState({amountOutput: parseInt(result._hex.toString())})
+        })
+      }else{
+        console.log("Ethereum object does not exist");
+      }
+    }    
+    else if(this.state.coinInput === " AVAX" && this.state.coinOutput === " WETH"){
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const defiContract = new ethers.Contract(contractAddress_AVAX_WETH, contractABI, signer);
+
+        defiContract.getEquivalentToken1Estimate(e.target.value).then(result => {
+          this.setState({amountOutput: parseInt(result._hex.toString())})
+        })
+      }else{
+        console.log("Ethereum object does not exist");
+      }
+    }
+  }
+
+
   /**
    * Close Modal if clicked on outside of element
    */
@@ -154,7 +200,7 @@ class Defi extends React.Component {
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
-        const defiContract = new ethers.Contract(contractAddress, contractABI, signer);
+        const defiContract = new ethers.Contract(contractAddress_AVAX_WETH, contractABI, signer);
 
         let txnwait = await defiContract.provide(token1_amount,token2_amount)
 
@@ -170,14 +216,40 @@ class Defi extends React.Component {
         console.log("Ethereum object does not exist");
       }
   }
+  SwapTokens = async (token_amount) => {
+    const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+
+        let txnwait;
+
+        //AVAX - WETH
+        if(this.state.coinInput === " AVAX" && this.state.coinOutput === " WETH"){
+          const defiContract = new ethers.Contract(contractAddress_AVAX_WETH, contractABI, signer);
+
+          txnwait = await defiContract.swapToken1(token_amount)
+        }
+        else if(this.state.coinOutput === " AVAX" && this.state.coinInput === " WETH"){
+          const defiContract = new ethers.Contract(contractAddress_AVAX_WETH, contractABI, signer);
+
+          txnwait = await defiContract.swapToken2(token_amount)
+        }
+        // OTHER TOKENS TODO
+
+        //await txnwait.wait()
+
+      }else{
+        console.log("Ethereum object does not exist");
+      }
+  }
   Swapper = () => {
     if(this.state.coinInput === this.state.coinOutput){
       toast.error("Cannot use the same tokens for transactions")
     }
     else{
       if(this.props.useFunction === "Swap"){
-        toast("Swap "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
-        toast("For " + Number(this.state.amountOutput * 10**18) + " of " + this.state.coinOutput)
+        this.SwapTokens(Number(this.state.amountInput))
       }
       else if(this.props.useFunction === "Pool"){
         this.AddLiquity(Number(this.state.amountInput),Number(this.state.amountOutput ))
@@ -220,23 +292,23 @@ class Defi extends React.Component {
                 <div id="form">
                     <div className="swapbox">
                                 <div className="swapbox_select token_select" id="from_token_select" onClick={this.state.switched ? this.switchToken_Output : this.switchToken_Input}>
-                                  {this.state.switched ? <img className='token_select_img' alt="output-coin" src={this.state.coinOutput_img}></img>:<img className='token_select_img' alt="input-coin" src={this.state.coinInput_img}></img>}
-                                  {this.state.switched ? this.state.coinOutput:this.state.coinInput}
+                                  <img className='token_select_img' alt="input-coin" src={this.state.coinInput_img}></img>
+                                  {this.state.coinInput}
                                 </div>
                                 <div className="swapbox_select">
-                                    <input className="number form-control" value={this.state.switched ? this.state.amountOutput : this.state.amountInput}
-                    onChange={(e) => this.setState({amountInput: e.target.value})} id="from_amount"/>
+                                    <input className="number form-control" value={this.state.amountInput}
+                    onChange={(e) => this.showEstimatedInput(e)} id="from_amount"/>
                                 </div>
                     </div>
                     <div className='swapbox_arrow'><BsFillArrowDownCircleFill className='swapbox_arrow_circle'/></div>
                     <div className="swapbox">
                                 <div className="swapbox_select token_select"  id="to_token_select" onClick={this.state.switched ? this.switchToken_Input : this.switchToken_Output}>
-                                  {this.state.switched ? <img alt="input-coin" className='token_select_img' src={this.state.coinInput_img}></img>:<img className='token_select_img' alt="output-coin" src={this.state.coinOutput_img}></img>}
-                                  {this.state.switched ? this.state.coinInput:this.state.coinOutput}
+                                  {<img className='token_select_img' alt="output-coin" src={this.state.coinOutput_img}></img>}
+                                  {this.state.coinOutput}
                                 </div>
                                 <div className="swapbox_select">
-                                    <input className="number form-control" value={this.state.switched ? this.state.amountInput : this.state.amountOutput}
-                    onChange={(e) => this.setState({amountOutput: e.target.value})} id="to_amount"/>
+                                    <input className="number form-control" value={this.state.amountOutput}
+                     id="to_amount"/>
                                 </div>
                     </div>
                     {/* SWAP BUTTON AND GAS */}
