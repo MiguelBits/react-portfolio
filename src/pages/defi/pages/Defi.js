@@ -269,7 +269,7 @@ class Defi extends React.Component {
   render() {
     return (
     <div className='DefiPage'>
-      
+
       <NavTab></NavTab>
 
       <ShowBalance></ShowBalance>
@@ -278,7 +278,7 @@ class Defi extends React.Component {
         <img className="defi-logo" alt="logo" src="https://github.com/mcruzvas/react-portfolio/blob/master/public/image/bullfarm.png?raw=true"></img>
       </div>
 
-      <div className='defi-name'> Bull Farmer </div>
+      <div className='defi-name' > Bull Farmer </div>
 
       <div className='container'>
         {/* SWAP BOX */}
