@@ -367,11 +367,12 @@ body{
   opacity: 50%;
 }
 .defi-name{
+  opacity: 10%;
   color: #DE3964;
   font-family: 'Poppins', sans-serif;
   position: absolute;
   left: 20vh;
-  top: 15%;
+  top: 13%;
   transform: translate(-50%, -50%);
   display: block;
   color: #cf1b1b;
@@ -381,7 +382,8 @@ body{
   text-shadow: 1.5px 1.5px 0px white;
 }
 .defi-name:hover{
-  opacity: 50%;
+  opacity: 100%;
+  
 }
 .ShowBalance{
   position: absolute;
