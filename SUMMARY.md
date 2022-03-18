@@ -24,4 +24,6 @@
 * [DeFi](defi.md)
   * [ERC20 Standard](defi/erc20-standard.md)
   * [DEX](defi/dex.md)
-  * [AMM](defi/amm.md)
+  * [AMM](defi/amm/README.md)
+    * [Uniswap Smart Contract Breakdown](defi/amm/uniswap-smart-contract-breakdown/README.md)
+      * [Pair Contract](defi/amm/uniswap-smart-contract-breakdown/pair-contract.md)

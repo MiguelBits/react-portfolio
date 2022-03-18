@@ -32,7 +32,7 @@ Orders are executed automatically via a [smart contract](https://www.investopedi
 
 [AMM](https://medium.com/balancer-protocol/what-is-an-automated-market-maker-amm-588954fc5ff7) is a mathematical function to price assets algorithmically based on [liquidity pools](https://www.gemini.com/cryptopedia/what-is-a-liquidity-pool-crypto-market-liquidity). There are several [AMM](https://medium.com/balancer-protocol/what-is-an-automated-market-maker-amm-588954fc5ff7) formulas, but we will focus on Constant Product Market Maker, as it is the most widely used.
 
-![](<.gitbook/assets/imagem (6).png>)Image from [Crypto Robin](https://cryptorobin.com)
+![](<.gitbook/assets/imagem (6) (1).png>)Image from [Crypto Robin](https://cryptorobin.com)
 
 ### Constant Product Market Maker <a href="#744f" id="744f"></a>
 
@@ -66,5 +66,5 @@ Impermanent loss is the loss of profit compared to holding the token versus prov
 
 Orders made on an [AMM](https://medium.com/balancer-protocol/what-is-an-automated-market-maker-amm-588954fc5ff7) are broadcasted to the blockchain for everyone. **** [**Front-runner bots**](https://www.paradigm.xyz/2020/08/ethereum-is-a-dark-forest) **** make a profit by picking orders and [front-running](https://www.youtube.com/watch?v=UZ-NNd6yjFM) them by placing a higher transaction fee to have their order mined faster than yours, raising the price you have to pay for the asset and then selling it after you bought for a higher price. This is known as a **** [**Sandwich Attack**](https://coinmarketcap.com/alexandria/article/what-are-sandwich-attacks-in-defi-and-how-can-you-avoid-them). There are some [DEX](https://www.coinbase.com/learn/crypto-basics/what-is-a-dex)s now that offer protection against this attack like [CowSwap](https://cowswap.exchange/#/swap).
 
-![](<.gitbook/assets/imagem (2).png>)Front running from [blog.enigma.co](https://blog.enigma.co/preventing-dex-front-running-with-enigma-df3f0b5b9e78)
+![](<.gitbook/assets/imagem (2) (1).png>)Front running from [blog.enigma.co](https://blog.enigma.co/preventing-dex-front-running-with-enigma-df3f0b5b9e78)
 
