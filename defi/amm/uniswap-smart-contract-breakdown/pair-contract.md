@@ -6,11 +6,11 @@ description: >-
 
 # Pair Contract
 
-## Pair Contract (LP token)
+## Pair Contract (LP exchange)
 
 The Pair contract implements the exchange between a pair of tokens such as Dogecoin and Shiba. The full code of the Pair smart contract can be found on Github under [v2-core/contracts/UniswapV2Pair.sol](https://github.com/Uniswap/v2-core/blob/master/contracts/UniswapV2Pair.sol)
 
-![](<../../../.gitbook/assets/imagem (6) (1).png>)![](<../../../.gitbook/assets/imagem (5) (1).png>)****
+![](<../../../.gitbook/assets/imagem (6) (1) (1).png>)![](<../../../.gitbook/assets/imagem (5) (1).png>)****
 
 **Note:**`UQ112x112` is a library for supporting floating numbers. Solidity does not support floats by default. This library represents floats using 224 bits. The First 112 bits are for the whole number, and the last 112 bits are for the fractional part.
 
@@ -22,7 +22,7 @@ A _Uniswap_ Pair is an exchange between a pair of tokens such as Dogecoin and Sh
 
 `reserve` variables store how much of the token we have in this Pair.
 
-![](<../../../.gitbook/assets/imagem (7) (1).png>)
+![](<../../../.gitbook/assets/imagem (7) (1) (1).png>)
 
 The actual token is stored in the ERC20 contract of the    token itself.
 
@@ -32,7 +32,7 @@ The Pair contract just keeps track of the reserves. From the ERC20’s perspecti
 
 The Pair contract calls ERC20’s functions such as `balanceOf` (with `owner=Pair contract’s address`) and `transfer` to manage the tokens (see the OP's [ERC20 Smart Contract Breakdown](https://ilamanov.medium.com/erc20-smart-contract-breakdown-9dab65cec671) if you’re confused). Here is an example of how ERC20's `transfer` function is used in the Pair contract.
 
-![Here is an example of how ERC20's transfer function is used in the Pair contract.](<../../../.gitbook/assets/imagem (8) (1).png>)
+![Here is an example of how ERC20's transfer function is used in the Pair contract.](<../../../.gitbook/assets/imagem (8) (1) (1).png>)
 
 **Note:** See [https://solidity-by-example.org/function-selector/](https://solidity-by-example.org/function-selector/) if you are confused with **Function Selector.**
 
@@ -79,7 +79,7 @@ The **`burn` ** function is just the mirror image of the `mint` function:
 
 The`swap` function is used by traders to swap tokens:
 
-![](<../../../.gitbook/assets/imagem (10).png>)
+![](<../../../.gitbook/assets/imagem (10) (1).png>)
 
 * On lines 170 and 171, **we transfer tokens out (to the trader) optimistically** (without making sure that the trader has already transferred corresponding tokens into our balance. We can optimistically transfer tokens out because we have **assertions** later in the function to check if we received corresponding tokens (the **Periphery contract** should send us the tokens before calling us for the swap). If we have not, assertions will fail and Solidity will revert the entire function.
 * Line 172 will inform the receiver about the swap if requested.
@@ -101,7 +101,7 @@ The pool ownership tokens are implemented as a standard ERC20 token. It’s impl
 
 The **Pair contract gets access to the ERC20 implementation** by extending it:
 
-![That way the Pair contract gets access to ERC20’s \_mint and \_burnfunctions](<../../../.gitbook/assets/imagem (7).png>)
+![That way the Pair contract gets access to ERC20’s \_mint and \_burnfunctions](<../../../.gitbook/assets/imagem (7) (1).png>)
 
 ### Protocol fee <a href="#dd87" id="dd87"></a>
 
@@ -109,7 +109,7 @@ _Uniswap_ v2 introduced a switchable protocol fee — a fee that can be turned o
 
 The main function of the protocol fee is `_mintFee`:
 
-![](<../../../.gitbook/assets/imagem (12).png>)
+![](<../../../.gitbook/assets/imagem (12) (1).png>)
 
 * We first get the `feeTo` address from the `factory`. `factory` is the contract that created this Pair contract.
 * If it’s set to something other than address zero, that means the protocol fee is on. `feeTo` address indicated the address where the protocol fee should be sent to.
@@ -120,7 +120,7 @@ Protocol fee is accumulated during trades into the pool so the pool becomes a mi
 
 The protocol fee, in particular, is calculated using a complicated formula which you can find in the [Uniswap V2 whitepaper](https://uniswap.org/whitepaper.pdf):
 
-![](<../../../.gitbook/assets/imagem (8).png>)
+![](<../../../.gitbook/assets/imagem (8) (1).png>)
 
 The **k** value here is the product of the reserves **(k=x\*y)**. This is why we keep track of the `kLast` value throughout the code: `kLast` value allows us to calculate the total accumulated protocol fee (from every trade) so far and collect all this fee in one go either in mint or burn functions.
 
@@ -136,7 +136,7 @@ The relative price can be calculated by subtracting cumulative prices at 2 point
 
 The variables are updated only once per block here:
 
-![](<../../../.gitbook/assets/imagem (6).png>)
+![](<../../../.gitbook/assets/imagem (6) (1).png>)
 
 * Lines 75–77 calculate whether this is the first time the code is executed in a particular block.
 * Why do we update values only once per block? Because it’s harder that way for someone to manipulate prices in order to gain something. See the “Price oracle” section of the [Uniswap whitepaper](https://uniswap.org/whitepaper.pdf) for more details on these price manipulators.

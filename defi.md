@@ -32,7 +32,7 @@ Orders are executed automatically via a [smart contract](https://www.investopedi
 
 [AMM](https://medium.com/balancer-protocol/what-is-an-automated-market-maker-amm-588954fc5ff7) is a mathematical function to price assets algorithmically based on [liquidity pools](https://www.gemini.com/cryptopedia/what-is-a-liquidity-pool-crypto-market-liquidity). There are several [AMM](https://medium.com/balancer-protocol/what-is-an-automated-market-maker-amm-588954fc5ff7) formulas, but we will focus on Constant Product Market Maker, as it is the most widely used.
 
-![](<.gitbook/assets/imagem (6) (1) (1).png>)Image from [Crypto Robin](https://cryptorobin.com)
+![](<.gitbook/assets/imagem (6) (1) (1) (1).png>)Image from [Crypto Robin](https://cryptorobin.com)
 
 ### Constant Product Market Maker <a href="#744f" id="744f"></a>
 

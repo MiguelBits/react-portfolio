@@ -1,7 +1,8 @@
 ---
 description: >-
   Reference:
-  https://betterprogramming.pub/uniswap-smart-contract-breakdown-ea20edf1a0ff
+  https://betterprogramming.pub/uniswap-smart-contract-breakdown-ea20edf1a0ff &
+  https://ilamanov.medium.com/uniswap-smart-contract-breakdown-part-2-b9ea2fca65d1
 ---
 
 # Uniswap Smart Contract Breakdown
@@ -15,7 +16,7 @@ _Uniswap_ has 4 smart contracts in total. They are divided into **core** and **p
 1. **Core** is for storing the funds (the tokens) and exposing functions for swapping tokens, adding funds, getting rewards, etc.
 2. **Periphery** is for interacting with the **core**.
 
-![](<../../../.gitbook/assets/imagem (3).png>)
+![](<../../../.gitbook/assets/imagem (3) (1).png>)
 
 **Core** consists of the following smart contracts:
 
@@ -43,3 +44,7 @@ This will continue until the _Uniswap_ rate matches the market rate. Thus _Unisw
 
 * As [Uniswap v2 whitepaper](https://uniswap.org/whitepaper.pdf) put it: The first liquidity provider to join a pool sets the initial exchange rate by depositing what they believe to be an equivalent value of _ETH_ and ERC20 tokens. If this ratio is off, arbitrage traders will bring the prices to equilibrium at the expense of the initial liquidity provider.
 * And [Uniswap v1 whitepaper](https://hackmd.io/@HaydenAdams/HJ9jLsfTz?type=view) put it: Large trades cause price slippage as well, but **arbitrage** will ensure that the price will not shift too far from that of other exchanges.
+
+## Full Code Notes by OP:
+
+![Pair Contract](<../../../.gitbook/assets/imagem (7).png>)

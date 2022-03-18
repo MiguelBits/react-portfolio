@@ -27,3 +27,5 @@
   * [AMM](defi/amm/README.md)
     * [Uniswap Smart Contract Breakdown](defi/amm/uniswap-smart-contract-breakdown/README.md)
       * [Pair Contract](defi/amm/uniswap-smart-contract-breakdown/pair-contract.md)
+      * [Factory Contract](defi/amm/uniswap-smart-contract-breakdown/factory-contract.md)
+      * [Router Contract](defi/amm/uniswap-smart-contract-breakdown/router-contract.md)

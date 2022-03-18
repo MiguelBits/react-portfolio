@@ -32,7 +32,7 @@ Variables are declared as either `storage`, `memory` or `calldata` to explicitly
 
 ### Function signatures
 
-![](<../../.gitbook/assets/imagem (6) (1) (1) (1) (1).png>)
+![](<../../.gitbook/assets/imagem (6) (1) (1) (1) (1) (1).png>)
 
 ### Constructors
 
@@ -48,13 +48,13 @@ Variables are declared as either `storage`, `memory` or `calldata` to explicitly
 
 ### Mutability Modifiers
 
-![](<../../.gitbook/assets/imagem (8) (1) (1).png>)
+![](<../../.gitbook/assets/imagem (8) (1) (1) (1).png>)
 
 ### Working with the native currency
 
 The **payable** modifier, any send method to a function without this modifier will reject the sent Ether, if they are marked as payable then they can accept Ether.
 
-![](<../../.gitbook/assets/imagem (3) (1).png>)
+![](<../../.gitbook/assets/imagem (3) (1) (1).png>)
 
 ### Events
 
@@ -70,9 +70,9 @@ Contracts need to be marked as `abstract` when at least one of their functions i
 
 ### Calling methods of other contracts
 
-\-> First define the interface for an external contract: ![](<../../.gitbook/assets/imagem (7) (1) (1) (1).png>)
+\-> First define the interface for an external contract: ![](<../../.gitbook/assets/imagem (7) (1) (1) (1) (1).png>)
 
-\-> Next you need to have the address of said external contract, only then you can invoke the functions of the external contract: ![](<../../.gitbook/assets/imagem (3) (1) (1).png>)
+\-> Next you need to have the address of said external contract, only then you can invoke the functions of the external contract: ![](<../../.gitbook/assets/imagem (3) (1) (1) (1).png>)
 
 This can be done using the `abstract` keyword for the contract, and functions that aren’t implemented should have the `virtual` keyword to allow polymorphism.
 
@@ -100,7 +100,7 @@ Inheritance is a way to extend functionality of a contract. Solidity supports bo
 
 **block.timestamp** returns the timestamp of the current block in seconds since the epoch
 
-![](<../../.gitbook/assets/imagem (6) (1) (1) (1).png>)
+![](<../../.gitbook/assets/imagem (6) (1) (1) (1) (1).png>)
 
 [https://ethereum.stackexchange.com/questions/6795/is-block-timestamp-safe-for-longer-time-periods](https://ethereum.stackexchange.com/questions/6795/is-block-timestamp-safe-for-longer-time-periods)
 
