@@ -32,7 +32,7 @@ Variables are declared as either `storage`, `memory` or `calldata` to explicitly
 
 ### Function signatures
 
-![](<../../.gitbook/assets/imagem (6) (1) (1) (1).png>)
+![](<../../.gitbook/assets/imagem (6) (1) (1) (1) (1).png>)
 
 ### Constructors
 
@@ -44,11 +44,11 @@ Variables are declared as either `storage`, `memory` or `calldata` to explicitly
 
 ### Visibility Modifiers
 
-![](<../../.gitbook/assets/imagem (5) (1) (1).png>)
+![](<../../.gitbook/assets/imagem (5) (1) (1) (1).png>)
 
 ### Mutability Modifiers
 
-![](<../../.gitbook/assets/imagem (8) (1).png>)
+![](<../../.gitbook/assets/imagem (8) (1) (1).png>)
 
 ### Working with the native currency
 
@@ -62,7 +62,7 @@ The **payable** modifier, any send method to a function without this modifier wi
 
 \-> Any node that is subscribed to this event is going to get notified the parameters of the events.
 
-![](<../../.gitbook/assets/imagem (1).png>)
+![](<../../.gitbook/assets/imagem (1) (1).png>)
 
 ### Abstract Contracts <a href="#6c90" id="6c90"></a>
 
@@ -70,7 +70,7 @@ Contracts need to be marked as `abstract` when at least one of their functions i
 
 ### Calling methods of other contracts
 
-\-> First define the interface for an external contract: ![](<../../.gitbook/assets/imagem (7) (1) (1).png>)
+\-> First define the interface for an external contract: ![](<../../.gitbook/assets/imagem (7) (1) (1) (1).png>)
 
 \-> Next you need to have the address of said external contract, only then you can invoke the functions of the external contract: ![](<../../.gitbook/assets/imagem (3) (1) (1).png>)
 
@@ -100,7 +100,7 @@ Inheritance is a way to extend functionality of a contract. Solidity supports bo
 
 **block.timestamp** returns the timestamp of the current block in seconds since the epoch
 
-![](<../../.gitbook/assets/imagem (6) (1) (1).png>)
+![](<../../.gitbook/assets/imagem (6) (1) (1) (1).png>)
 
 [https://ethereum.stackexchange.com/questions/6795/is-block-timestamp-safe-for-longer-time-periods](https://ethereum.stackexchange.com/questions/6795/is-block-timestamp-safe-for-longer-time-periods)
 
