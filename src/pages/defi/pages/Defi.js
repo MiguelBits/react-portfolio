@@ -3,7 +3,7 @@ import "./../css/Defi.css"
 import NavTab from "./../components/NavTab"
 import ShowBalance from '../components/ShowBalance'
 import { BsFillArrowDownCircleFill, BsFillArrowUpCircleFill } from 'react-icons/bs'
-import { AiOutlinePlusCircle } from 'react-icons/ai';
+import { AiOutlinePlusCircle,AiOutlineMinusCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify'
 import { ethers } from 'ethers';
 import {routerAddress, routerABI, factoryAddress, factoryABI, WAVAX_Address, WETH_Address, USDC_Address, ERC20_ABI, PAIR_ABI} from '../contracts/contract_abi';
@@ -393,7 +393,7 @@ class Defi extends React.Component {
         <div className='row-defi'>
             {this.props.useFunction === "Pool" ? 
             <button className='button_arrow_circle' onClick={this.switchAmounts}>
-              <AiOutlinePlusCircle className='fa_arrow_circle'></AiOutlinePlusCircle>
+              {this.state.switched ? <AiOutlineMinusCircle className='fa_arrow_circle'></AiOutlineMinusCircle>:<AiOutlinePlusCircle className='fa_arrow_circle'></AiOutlinePlusCircle>}
             </button> 
             :
             <button className='button_arrow_circle' onClick={this.switchAmounts}>
