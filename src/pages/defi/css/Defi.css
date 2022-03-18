@@ -358,15 +358,31 @@ body{
 
 .defi-logo{
   position: absolute;
-  top: 25px;
-  left: 50px;
+  top: 5vh;
+  left: 15vh;
   width: 3%;
   cursor: pointer;
 }
 .defi-logo:hover{
   opacity: 50%;
 }
-
+.defi-name{
+  color: #DE3964;
+  font-family: 'Poppins', sans-serif;
+  position: absolute;
+  left: 20vh;
+  top: 15%;
+  transform: translate(-50%, -50%);
+  display: block;
+  color: #cf1b1b;
+  font-size: 26px;
+  letter-spacing: 8px;
+  cursor: pointer;
+  text-shadow: 0px 1.5px 0px white;
+}
+.defi-name:hover{
+  opacity: 50%;
+}
 .ShowBalance{
   position: absolute;
   top: 25px;
