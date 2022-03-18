@@ -239,8 +239,51 @@ class Defi extends React.Component {
         console.log("Ethereum object does not exist");
       }
   }
-  RemoveLiquity = async (token1_amount,token2_amount) => {
-    console.log("remove")
+  RemoveLiquity = async (percent) => {
+    const { ethereum } = window;
+    if (ethereum) {
+      
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = provider.getSigner();
+      const accounts = await provider.listAccounts();
+
+      const time = Math.floor(Date.now() / 1000) + 200000;
+      const deadline = ethers.BigNumber.from(time);
+
+      const routerContract = new ethers.Contract(routerAddress, routerABI, signer);
+      const factoryContract = new ethers.Contract(factoryAddress, factoryABI, signer);
+
+      //AVAX - WETH
+      if((this.state.coinInput === " AVAX" && this.state.coinOutput === " WETH") || (this.state.coinInput === " WETH" && this.state.coinOutput === " AVAX" )){
+        const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
+        await token1.approve(routerAddress,token1_amount);
+
+        const amountIn1 = ethers.utils.parseEther(token1_amount.toString());
+        const amountIn2 = ethers.utils.parseEther(token2_amount.toString());
+
+        let amount1min = token1_amount - (token1_amount/3)
+        let amount2min = token2_amount - (token2_amount/3)
+        const amount1Min = ethers.utils.parseEther(amount1min.toString());
+        const amount2Min = ethers.utils.parseEther(amount2min.toString());
+
+        await routerContract.removeLiquityETH(WAVAX_Address,amountIn1,amount1Min,amount2Min,accounts[0],deadline, {value: amountIn2})
+
+      }
+      //USDC - WETH
+      else if((this.state.coinInput === " USDC" && this.state.coinOutput === " WETH")||(this.state.coinInput === " WETH" && this.state.coinOutput === " USDC" )){
+        const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
+        await token1.approve(routerAddress,token1_amount);
+
+        const amountIn1 = ethers.utils.parseEther(token1_amount.toString());
+        const amountIn2 = ethers.utils.parseEther(token2_amount.toString());
+
+        let amount1min = token1_amount - (token1_amount/3)
+        let amount2min = token2_amount - (token2_amount/3)
+        const amount1Min = ethers.utils.parseEther(amount1min.toString());
+        const amount2Min = ethers.utils.parseEther(amount2min.toString());
+
+        await routerContract.removeLiquitidy(USDC_Address,WETH_Address,amountIn1,amountIn2,amount1Min,amount2Min.accounts[0],deadline);
+      }
   }
   SwapTokens = async (token_amount) => {
   
@@ -408,12 +451,7 @@ class Defi extends React.Component {
                 <h4 className='text-defi'>Defi</h4>
                 <div id="form">
                     <div className="swapbox">
-                                <div className="swapbox_select token_select" id="from_token_select" onClick={
-                                  this.props.useFunction === "Pool" ? 
-                                  this.state.switched ? this.switchToken_Output : this.switchToken_Input
-                                  :
-                                  ""
-                                  }>
+                                <div className="swapbox_select token_select" id="from_token_select" onClick={this.state.switched ? this.switchToken_Output : this.switchToken_Input}>
                                   <img className='token_select_img' alt="input-coin" src={this.state.coinInput_img}></img>
                                   {this.state.coinInput}
                                 </div>
@@ -424,12 +462,7 @@ class Defi extends React.Component {
                     </div>
                     <div className='swapbox_arrow'><BsFillArrowDownCircleFill className='swapbox_arrow_circle'/></div>
                     <div className="swapbox">
-                                <div className="swapbox_select token_select"  id="to_token_select" onClick={
-                                  this.props.useFunction === "Pool" ? 
-                                  this.state.switched ? this.switchToken_Input : this.switchToken_Output
-                                  :
-                                  ""
-                                  }>
+                                <div className="swapbox_select token_select"  id="to_token_select" onClick={this.state.switched ? this.switchToken_Input : this.switchToken_Output}>
                                   {<img className='token_select_img' alt="output-coin" src={this.state.coinOutput_img}></img>}
                                   {this.state.coinOutput}
                                 </div>
