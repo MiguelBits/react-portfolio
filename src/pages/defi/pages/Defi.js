@@ -239,6 +239,9 @@ class Defi extends React.Component {
         console.log("Ethereum object does not exist");
       }
   }
+  RemoveLiquity = async (token1_amount,token2_amount) => {
+    console.log("remove")
+  }
   SwapTokens = async (token_amount) => {
   
       const { ethereum } = window;
@@ -359,7 +362,8 @@ class Defi extends React.Component {
         this.SwapTokens(Number(this.state.amountInput))
       }
       else if(this.props.useFunction === "Pool"){
-        this.AddLiquity(Number(this.state.amountInput),Number(this.state.amountOutput ))
+        if(!this.state.switched)this.AddLiquity(Number(this.state.amountInput),Number(this.state.amountOutput ))
+        else this.RemoveLiquity(Number(this.state.amountInput),Number(this.state.amountOutput ))
       }
       else if(this.props.useFunction === "Loan"){
         toast("Collaterize "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
@@ -404,7 +408,12 @@ class Defi extends React.Component {
                 <h4 className='text-defi'>Defi</h4>
                 <div id="form">
                     <div className="swapbox">
-                                <div className="swapbox_select token_select" id="from_token_select" onClick={this.state.switched ? this.switchToken_Output : this.switchToken_Input}>
+                                <div className="swapbox_select token_select" id="from_token_select" onClick={
+                                  this.props.useFunction === "Pool" ? 
+                                  this.state.switched ? this.switchToken_Output : this.switchToken_Input
+                                  :
+                                  ""
+                                  }>
                                   <img className='token_select_img' alt="input-coin" src={this.state.coinInput_img}></img>
                                   {this.state.coinInput}
                                 </div>
@@ -415,7 +424,12 @@ class Defi extends React.Component {
                     </div>
                     <div className='swapbox_arrow'><BsFillArrowDownCircleFill className='swapbox_arrow_circle'/></div>
                     <div className="swapbox">
-                                <div className="swapbox_select token_select"  id="to_token_select" onClick={this.state.switched ? this.switchToken_Input : this.switchToken_Output}>
+                                <div className="swapbox_select token_select"  id="to_token_select" onClick={
+                                  this.props.useFunction === "Pool" ? 
+                                  this.state.switched ? this.switchToken_Input : this.switchToken_Output
+                                  :
+                                  ""
+                                  }>
                                   {<img className='token_select_img' alt="output-coin" src={this.state.coinOutput_img}></img>}
                                   {this.state.coinOutput}
                                 </div>
