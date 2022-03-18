@@ -20,8 +20,8 @@ class Defi extends React.Component {
     coinInput: " WETH",
     coinInput_img: "https://assets.coingecko.com/coins/images/17238/large/aWETH_2x.png?1626940782",
 
-    coinOutput: "Select Token",
-    coinOutput_img: "https://cdn.pixabay.com/photo/2012/04/10/23/44/question-27106_1280.png",
+    coinOutput: " AVAX",
+    coinOutput_img: "https://cryptologos.cc/logos/avalanche-avax-logo.svg?v=022",
 
     tokens: [" WETH"," AVAX"," USDC"],
     tokens_img: [
@@ -240,6 +240,7 @@ class Defi extends React.Component {
       }
   }
   RemoveLiquity = async (percent) => {
+    /*
     const { ethereum } = window;
     if (ethereum) {
       
@@ -284,6 +285,8 @@ class Defi extends React.Component {
 
         await routerContract.removeLiquitidy(USDC_Address,WETH_Address,amountIn1,amountIn2,amount1Min,amount2Min.accounts[0],deadline);
       }
+    }
+    */
   }
   SwapTokens = async (token_amount) => {
   
