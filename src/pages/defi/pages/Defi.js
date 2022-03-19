@@ -205,8 +205,8 @@ class Defi extends React.Component {
         if((this.state.coinInput === " AVAX" && this.state.coinOutput === " WETH") || (this.state.coinInput === " WETH" && this.state.coinOutput === " AVAX" )){
           const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
           token1.allowance(accounts[0],routerAddress).then(result => {
-            console.log("Result: "+result._hex.toString())
-            if(result._hex != "0x00"){
+            //console.log("Result: "+result._hex.toString())
+            if(result._hex === "0x00"){
               token1.approve(routerAddress,amountIn1)
             }
           })
@@ -231,11 +231,35 @@ class Defi extends React.Component {
         //USDC - WETH
         else if((this.state.coinInput === " USDC" && this.state.coinOutput === " WETH")||(this.state.coinInput === " WETH" && this.state.coinOutput === " USDC" )){
           const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
-          await token1.approve(routerAddress,token1_amount);
+          token1.allowance(accounts[0],routerAddress).then(result => {
+            console.log("Result: "+result._hex.toString())
+            if(result._hex === "0x00"){
+              token1.approve(routerAddress,amountIn1)
+            }
+          })
+          const token2 = new ethers.Contract(USDC_Address,ERC20_ABI,signer);
+          token2.allowance(accounts[0],routerAddress).then(result => {
+            console.log("Result: "+result._hex.toString())
+            if(result._hex === "0x00"){
+              token2.approve(routerAddress,amountIn1)
+            }
+          })
+          const amountIn1 = parseInt(ethers.utils.parseUnits(token1_amount.toString(),18)._hex.toString()).toString();
+          const amountIn2 = parseInt(ethers.utils.parseUnits(token2_amount.toString(),18)._hex.toString()).toString();
 
-          
+          const amount1Min = amountIn1.slice(0,-1)
+          const amount2Min = amountIn2.slice(0,-1)
+          /*
+          console.log(amountIn1)
+          console.log(amount1Min)
+          console.log(deadline)
+          console.log(accounts[0])
+          */
+          await routerContract.addLiquidity(WETH_Address,USDC_Address,
+          amountIn1,amountIn2,
+          amount1Min,amount2Min,
+          accounts[0],deadline)
 
-          //await routerContract.addLiquidity(USDC_Address,WETH_Address,amountIn1,amountIn2,amount1Min,amount2Min.accounts[0],deadline);
         }
         
 
