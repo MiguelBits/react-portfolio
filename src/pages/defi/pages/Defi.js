@@ -179,7 +179,6 @@ class Defi extends React.Component {
     //click anywhere outside of ...
     this.wrapperRef = React.createRef();
     this.handleClickOutside = this.handleClickOutside.bind(this);
-
     document.addEventListener("mousedown", this.handleClickOutside);
 
   }
@@ -197,7 +196,7 @@ class Defi extends React.Component {
         const accounts = await provider.listAccounts();
 
         const time = Math.floor(Date.now() / 1000) + 200000;
-        const deadline = ethers.BigNumber.from(time);
+        const deadline = parseInt(ethers.BigNumber.from(time)._hex.toString()).toString();
 
         const routerContract = new ethers.Contract(routerAddress, routerABI, signer);
         const factoryContract = new ethers.Contract(factoryAddress, factoryABI, signer);
@@ -205,17 +204,28 @@ class Defi extends React.Component {
         //AVAX - WETH
         if((this.state.coinInput === " AVAX" && this.state.coinOutput === " WETH") || (this.state.coinInput === " WETH" && this.state.coinOutput === " AVAX" )){
           const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
-          await token1.approve(routerAddress,token1_amount);
+          token1.allowance(accounts[0],routerAddress).then(result => {
+            console.log("Result: "+result._hex.toString())
+            if(result._hex != "0x00"){
+              token1.approve(routerAddress,amountIn1)
+            }
+          })
 
-          const amountIn1 = ethers.utils.parseEther(token1_amount.toString());
-          const amountIn2 = ethers.utils.parseEther(token2_amount.toString());
+          const amountIn1 = parseInt(ethers.utils.parseUnits(token1_amount.toString(),18)._hex.toString()).toString();
+          //const amountIn2 = parseInt(ethers.utils.parseUnits(token2_amount.toString(),18)._hex.toString()).toString();
 
-          let amount1min = token1_amount - (token1_amount/3)
-          let amount2min = token2_amount - (token2_amount/3)
-          const amount1Min = ethers.utils.parseEther(amount1min.toString());
-          const amount2Min = ethers.utils.parseEther(amount2min.toString());
-
-          await routerContract.addLiquityETH(WAVAX_Address,amountIn1,amount1Min,amount2Min,accounts[0],deadline, {value: amountIn2})
+          const amount1Min = amountIn1.slice(0,-1)
+          const amount2Min = amountIn1
+          /*
+          console.log(amountIn1)
+          console.log(amount1Min)
+          console.log(deadline)
+          console.log(accounts[0])
+          */
+          await routerContract.addLiquidityETH(WETH_Address,
+          amountIn1,amount1Min,amount2Min,
+          accounts[0],deadline, 
+          {value: amountIn1})
 
         }
         //USDC - WETH
@@ -223,15 +233,9 @@ class Defi extends React.Component {
           const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
           await token1.approve(routerAddress,token1_amount);
 
-          const amountIn1 = ethers.utils.parseEther(token1_amount.toString());
-          const amountIn2 = ethers.utils.parseEther(token2_amount.toString());
+          
 
-          let amount1min = token1_amount - (token1_amount/3)
-          let amount2min = token2_amount - (token2_amount/3)
-          const amount1Min = ethers.utils.parseEther(amount1min.toString());
-          const amount2Min = ethers.utils.parseEther(amount2min.toString());
-
-          await routerContract.addLiquitidy(USDC_Address,WETH_Address,amountIn1,amountIn2,amount1Min,amount2Min.accounts[0],deadline);
+          //await routerContract.addLiquidity(USDC_Address,WETH_Address,amountIn1,amountIn2,amount1Min,amount2Min.accounts[0],deadline);
         }
         
 
