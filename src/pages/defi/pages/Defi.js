@@ -314,7 +314,7 @@ class Defi extends React.Component {
         const amount1Min = ethers.utils.parseEther(amount1min.toString());
         const amount2Min = ethers.utils.parseEther(amount2min.toString());
 
-        await routerContract.removeLiquitidy(USDC_Address,WETH_Address,amountIn1,amountIn2,amount1Min,amount2Min.accounts[0],deadline);
+        await routerContract.removeLiquidity(USDC_Address,WETH_Address,amountIn1,amountIn2,amount1Min,amount2Min.accounts[0],deadline);
       }
     }
     */
@@ -347,9 +347,6 @@ class Defi extends React.Component {
             amountIn,
             tokens
           );
-          //approve erc20
-          const token1 = new ethers.Contract(WETH_Address, ERC20_ABI, signer);
-          await token1.approve(routerContract.address, amountIn);
           
           //swap native coin for erc20
           await routerContract.swapExactETHForTokens(
@@ -362,38 +359,50 @@ class Defi extends React.Component {
         }
         //WETH -> AVAX
         else if(this.state.coinOutput === " AVAX" && this.state.coinInput === " WETH"){
-          const tokens = [WETH_Address,WAVAX_Address]
+          const amountIn = parseInt(ethers.utils.parseUnits(token_amount.toString(),18)._hex.toString()).toString();
 
+          const tokens = [WETH_Address,WAVAX_Address]
+          
           //get amounts output
           const amountOut = await routerContract.callStatic.getAmountsOut(
             amountIn,
             tokens
           );
           //approve erc20
-          const token1 = new ethers.Contract(WETH_Address, ERC20_ABI, signer);
-          await token1.approve(routerContract.address, amountIn);
-          
+          const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
+          token1.allowance(accounts[0],routerAddress).then(result => {
+            //console.log("Result: "+result._hex.toString())
+            if(result._hex === "0x00"){
+              token1.approve(routerAddress,amountOut)
+            }
+          })
+
           //swap native coin for erc20
           await routerContract.swapExactTokensForETH(
+            amountIn,
             amountOut[1],
             tokens,
             accounts[0],
-            deadline,
-            { value: amountIn }
+            deadline
           );
         }
+
         // USDC -> WETH
-        else if(this.state.coinInput === " WETH" && this.state.coinOutput === " USDC"){
-          const tokens = [WETH_Address,USDC_Address]
+        else if(this.state.coinInput === " USDC" && this.state.coinOutput === " WETH"){
+          const tokens = [USDC_Address,WETH_Address]
           const amountOut = await routerContract.callStatic.getAmountsOut(
             amountIn,
             tokens
           );
 
-          const token1 = new ethers.Contract(WETH_Address, ERC20_ABI, signer);
-          await token1.approve(routerContract.address, amountIn);
-          const token2 = new ethers.Contract(USDC_Address, ERC20_ABI, signer);
-          await token2.approve(routerContract.address, amountIn);
+          //approve erc20
+          const token1 = new ethers.Contract(USDC_Address,ERC20_ABI,signer);
+          token1.allowance(accounts[0],routerAddress).then(result => {
+            //console.log("Result: "+result._hex.toString())
+            if(result._hex === "0x00"){
+              token1.approve(routerAddress,amountOut)
+            }
+          })
 
           await routerContract.swapExactTokensForTokens(
             amountIn,
@@ -404,17 +413,21 @@ class Defi extends React.Component {
           );
         }
         // WETH -> USDC
-        else if(this.state.coinInput === " USDC" && this.state.coinOutput === " WETH"){
-          const tokens = [USDC_Address,WETH_Address]
+        else if(this.state.coinInput === " WETH" && this.state.coinOutput === " USDC"){
+          const tokens = [WETH_Address,USDC_Address]
           const amountOut = await routerContract.callStatic.getAmountsOut(
             amountIn,
             tokens
           );
 
-          const token1 = new ethers.Contract(WETH_Address, ERC20_ABI, signer);
-          await token1.approve(routerContract.address, amountIn);
-          const token2 = new ethers.Contract(USDC_Address, ERC20_ABI, signer);
-          await token2.approve(routerContract.address, amountIn);
+          //approve erc20
+          const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
+          token1.allowance(accounts[0],routerAddress).then(result => {
+            //console.log("Result: "+result._hex.toString())
+            if(result._hex === "0x00"){
+              token1.approve(routerAddress,amountOut)
+            }
+          })
 
           await routerContract.swapExactTokensForTokens(
             amountIn,
