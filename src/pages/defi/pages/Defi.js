@@ -252,12 +252,12 @@ class Defi extends React.Component {
           
           const myAccount = accounts[0].toString()
           const deadlineStr = deadline.toString()
-          
+          /*
           console.log(amountIn1)
           console.log(amount1Min)
           console.log(deadline)
           console.log(accounts[0])
-          
+          */
           await routerContract.addLiquidity(WETH_Address,USDC_Address,
             amountIn1,amountIn2,
             amount1Min,amount2Min,
