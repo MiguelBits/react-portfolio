@@ -92,6 +92,6 @@ background-image: linear-gradient(
 }
 
 /* Set a specific color for each brand */
-.fa-github, .fa-twitter ,.fa-envelope {
+.fa-github, .fa-twitter ,.fa-envelope, .fa-linkedin {
   color: white;
 } 
