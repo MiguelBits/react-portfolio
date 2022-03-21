@@ -1,4 +1,12 @@
+/*
+body{
+  background-image: url('https://c.tenor.com/iA5aV0Mke_sAAAAM/hex-bitcoin.gif');
+  background-size: cover;
+  background-position: 10px 10px 10px;
+}
+*/
 
+/* CONNECT WALLET LANDING PAGE*/
 .container-wallet_defi {
     width: 334px;
     margin: 0 auto;
@@ -10,7 +18,6 @@
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
   }
-
   
 .one-wallet_defi, .two-wallet_defi, .five-wallet_defi {
     border: none;
@@ -137,3 +144,271 @@
     font-weight: 700;
   }
   
+/*  DEFI SWAP BOX  */
+#window-defi{
+  margin-top: 15%;
+  background-color: rgb(44, 43, 43);
+  color: #fff;
+  padding: 1%;
+  border-radius: 2%;
+  box-shadow: 0 0 5px black;
+  z-index: 0;
+}
+.swapbox_select {
+  width: 50%;
+  float: left;
+  z-index: 3;
+  padding-top: 1%;
+}
+.swapbox{
+  overflow: auto;
+  margin: 0%;
+  padding: 2%;
+  background-color: #504d4d;
+  border-radius: 20px;
+  border: 1px solid #565656;
+  z-index: 1;
+}
+.swapbox_arrow{
+  overflow: auto;
+  margin: 2% 0;
+  padding: 1% 1% 5% 5%;
+  background-color: #504d4d;
+  border-radius: 20px;
+  border: 1px solid #565656;
+
+}
+.swapbox_arrow_circle{
+  overflow: auto;
+  margin-left: 45.8%;
+  margin-top: 0.3%;
+  padding: 1% 1% 1% 1%;
+  background-color: #504d4d;
+  border-radius: 20px;
+  scale: 200%;
+  border: 1px solid #919090;
+  z-index: 2;
+  color: white;
+  display: none;
+}
+.button_arrow_circle{
+  position: absolute;
+  left: 49.6%;
+  bottom: 52%;
+}
+.fa_arrow_circle{
+  margin-bottom: 5%;
+  position: sticky;
+  left: 50%;
+  z-index: 2;
+  color: rgb(214, 213, 213);
+  scale: 100%;
+  -webkit-transform:scale(2.0);
+}
+.fa_arrow_circle:hover{
+  opacity: 50%;
+}
+.text-defi{
+  position: relative;
+  left: 3%;
+}
+.modal-header{
+  background-color: #363535;
+}
+.modal-title{
+  color: white;
+}
+.modal-body{
+  height: 600px;
+  overflow: scroll;
+  z-index: 7;
+  background-color: #1a1919;
+}
+
+#modal_close {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  transform: rotate(0deg);
+  transition: .5s ease-in-out;
+  cursor: pointer;
+  scale: 40%;
+}
+
+#modal_close span {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 23px;
+  height: 8px;
+  width: 100%;
+  background: #fff;
+  border-radius: 4px;
+  transform: rotate(0deg);
+  transition: .2s ease-in-out;
+}
+
+#modal_close span:nth-child(1),
+#modal_close span:nth-child(3) {
+  width: 50%;
+  transform: rotate(45deg);
+}
+
+#modal_close span:nth-child(1) {
+  left: 3px;
+  top: 15px;
+}
+
+#modal_close span:nth-child(2) {
+  transform: rotate(-45deg);
+}
+
+#modal_close span:nth-child(3) {
+  left: 20px;
+  top: 31px;
+}
+
+#modal_close.open span:nth-child(1),
+#modal_close.open span:nth-child(3) {
+    left: -1px;
+}
+
+#modal_close.open span:nth-child(1) {
+  top: 15px;
+  transform: rotate(135deg);
+}
+
+#modal_close.open span:nth-child(2) {
+  transform: rotate(0deg);
+}
+
+#modal_close.open span:nth-child(3) {
+  top: 31px;
+  transform: rotate(45deg);
+}
+
+.token_row{
+  padding: 5px 10px;
+  color: white;
+  border-radius: 25px;
+}
+.token_row:hover{
+  background-color: #e4e4e4;
+  cursor: pointer;
+  color: black;
+}
+.token_list_img, .token_image, .token_select_img{
+  width: 40px;
+  z-index: 5;
+  margin-right: 10px;
+}
+
+.token_select{
+  padding:5px 0;
+}
+.token_select:hover{
+  background-color: #464646;
+  width: 50%;
+  cursor: pointer;
+}
+
+#swap_button{
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  z-index: 2;
+  margin-top: 10px;
+  color: white;
+}
+#swap_button:hover{
+  color: #000000;
+  background-color: rgb(162, 255, 108);
+  border-color: rgb(0, 0, 0);
+}
+
+/* NAVTAB */
+.navtab{
+  position: absolute;
+  background-color: rgb(44, 43, 43);
+  margin-bottom: 1%;
+  width: 10%;
+  top: 10%;
+  left: 42.8%;
+  border-radius: 8px;
+  color: white;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  padding-right: 0.5%;
+  padding-left: 0.5%;
+  overflow: hidden;
+  inline-size: 15%; 
+
+}
+.navtab a{
+  margin-left: 5%;
+  padding-left: 0.5%;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+}
+.tablinks{
+  position: relative;
+  display: inline-block;
+  margin-left: 1%;
+  border-radius: 5px;
+  width: 20%;
+  text-align: center;
+  color: white;
+  opacity: 50%;
+  cursor: pointer;
+  font-size: small;
+  scale: 120%;
+}
+.tablinks:hover{
+  opacity: 100%;
+  text-decoration: none;
+  color: white;
+}
+
+.defi-logo{
+  position: absolute;
+  top: 5vh;
+  left: 15vh;
+  width: 3%;
+  cursor: pointer;
+}
+.defi-logo:hover{
+  opacity: 50%;
+}
+.defi-name{
+  opacity: 10%;
+  color: #DE3964;
+  font-family: 'Poppins', sans-serif;
+  position: absolute;
+  left: 20vh;
+  top: 13%;
+  transform: translate(-50%, -50%);
+  display: block;
+  color: #cf1b1b;
+  font-size: 26px;
+  letter-spacing: 8px;
+  cursor: pointer;
+  text-shadow: 1.5px 1.5px 0px white;
+}
+.defi-name:hover{
+  opacity: 100%;
+  
+}
+.ShowBalance{
+  position: absolute;
+  top: 5vh;
+  right: 100px;
+  background-color: rgb(44, 43, 43);
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: white;
+}
+#gas_estimate{
+  color: greenyellow;
+}

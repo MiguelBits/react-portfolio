@@ -37,7 +37,11 @@ class App extends Component {
                 <Route path="/nftDuel/collection" element={<Collection/>}/>
                 {/* Defi pages  */}
                 <Route path="/Defi" element={<ConnectWallet_Defi/>}/>
-                <Route path="/Defi/home" element={<Defi/>}/>
+                <Route path="/Defi/home" element={<Defi useFunction="Swap"/>}/>
+                <Route path="/Defi/swap" element={<Defi useFunction="Swap"/>}/>
+                <Route path="/Defi/pool" element={<Defi useFunction="Pool"/>}/>
+                <Route path="/Defi/loan" element={<Defi useFunction="Loan"/>}/>
+                <Route path="/Defi/vote" element={<Defi useFunction="Vote"/>}/>
           </Routes>
         </BrowserRouter>
         

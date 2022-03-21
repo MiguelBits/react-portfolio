@@ -178,7 +178,7 @@ class Collection extends Component {
     <div id="form_overlay" className='shadow sm:rounded-lg'>
         <form onSubmit={this.upgradeNftHandler}>
         <div>
-          <label id="unlock"> -> Hero ID to upgrade  -></label>
+          <label id="unlock">  Hero ID to upgrade </label>
           <input
             className='shadow sm:rounded-lg'
             id='form_input'

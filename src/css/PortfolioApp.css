@@ -21,6 +21,10 @@
   width: 100%;
 }
 
+.button-link{
+  text-decoration: none;
+}
+
 @keyframes gradient {
 	0% {
 		background-position: 0% 50%;
