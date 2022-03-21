@@ -160,7 +160,6 @@ class Defi extends React.Component {
     if(this.props.useFunction === "Swap"){
       document.getElementById("swap").style.backgroundColor = "#504d4d"
       document.getElementById("swap").style.opacity = "100%"
-
     }
     else if(this.props.useFunction === "Pool"){
       document.getElementById("pool").style.backgroundColor = "#504d4d"

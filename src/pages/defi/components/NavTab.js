@@ -17,6 +17,7 @@ class NavTab extends Component {
                 <a className="tablinks" id="pool"   href="/Defi/pool">Pool</a>
                 <a className="tablinks" id="loan"   href="/Defi/loan">Loan</a>
                 <a className="tablinks" id="vote"   href="/Defi/vote">Vote</a>
+                
             </div>
         </div>
 
