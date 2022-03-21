@@ -34,6 +34,7 @@ class Defi extends React.Component {
     LPholdings: [],
     LP_pairsAddress: [],
 
+    gasEstimate: 0,
   }
 
   componentDidMount = () => {
@@ -64,10 +65,22 @@ class Defi extends React.Component {
 
     this.getAmountsOutput(this.state.amountInput)
     this.getLPTokens()
-
+    this.getGas()
   }
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+  getGas = async () => {
+    const { ethereum } = window;
+      if (ethereum) {
+        
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const gasPrice = await provider.getGasPrice()
+        this.setState({gasEstimate:parseInt(parseFloat(parseInt(ethers.utils.parseEther(gasPrice.toString())._hex.toString()).toString()))})
+      }else{
+        console.log("Ethereum object does not exist");
+      }
+
   }
   getLPTokens = async () =>{
     const { ethereum } = window;
@@ -102,6 +115,7 @@ class Defi extends React.Component {
   checkHoldings = async () => {
     document.getElementById("token_modal_holdings").style.display = "block";
     this.setState({modalOpen:true})
+
   }
   getAmountsOutput = async (value_e) =>{
     const { ethereum } = window;
@@ -720,7 +734,7 @@ class Defi extends React.Component {
                     </div>
                     {/* SWAP BUTTON AND GAS */}
                     
-                    <div>Estimated Gas: <span id="gas_estimate"></span></div>
+                    <div>Estimated Gas:<span id="gas_estimate"> {this.state.gasEstimate}</span></div>
                     {this.allConditionsForSwap() ? <button className="btn btn-primary btn-block" onClick={this.Swapper} id="swap_button">
                         {this.state.useFunction}
                     </button> :

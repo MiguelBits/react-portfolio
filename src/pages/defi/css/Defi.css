@@ -409,3 +409,6 @@ body{
   padding-right: 20px;
   color: white;
 }
+#gas_estimate{
+  color: greenyellow;
+}
