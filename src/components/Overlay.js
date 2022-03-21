@@ -8,11 +8,11 @@ class Overlay extends Component {
             case 0:
                 return ("ERC1155, Solidity, Ethers.js, Web3")
             case 1:
-                return ("Solidity, Defi, Ethers.js")
+                return ("Solidity, Defi, Ethers.js, Web3")
             case 2:
                 return ("Next.js, Tailwind.css, Typescript")
             case 3:
-                return ("HTML, CSS, Javascript, Web3")
+                return ("NoSQL, Tailwind.css, Web3")
         }
 
     }
@@ -41,6 +41,8 @@ class Overlay extends Component {
             case "React":
                 return "js"
             case "NFT":
+                return "nft"
+            case "NoSQL":
                 return "nft"
             default:
                 return "js"

@@ -194,7 +194,7 @@ body{
 .button_arrow_circle{
   position: absolute;
   left: 49.6%;
-  bottom: 52%;
+  bottom: 49.6%;
 }
 .fa_arrow_circle{
   margin-bottom: 5%;
@@ -286,7 +286,12 @@ body{
   top: 31px;
   transform: rotate(45deg);
 }
-
+#modal_section{
+  color: black;
+  border-radius: 25px;
+  background-color: #e4e4e4;
+  text-align: center;
+}
 .token_row{
   padding: 5px 10px;
   color: white;
@@ -397,6 +402,8 @@ body{
   opacity: 100%;
   
 }
+
+/*others*/
 .ShowBalance{
   position: absolute;
   top: 5vh;
@@ -411,4 +418,14 @@ body{
 }
 #gas_estimate{
   color: greenyellow;
+}
+.max_holdings{
+  position: relative;
+  right: 5%;
+  cursor: pointer;
+  text-align: right;
+  opacity: 50%;
+}
+.max_holdings:hover{
+  opacity: 100%;
 }

@@ -8,12 +8,12 @@ import NavBar from "./NavBar"
 class PortfolioApp extends Component {
     state = {
         projects_collection: ["https://user-images.githubusercontent.com/15989933/156068528-9c3d45a9-64ab-479f-9e2b-fbe97fe089b2.png",
-        "https://github.com/mcruzvas/react-portfolio/blob/master/public/image/Defi.jpg?raw=true",
-        "https://github.com/mcruzvas/react-portfolio/blob/master/public/image/Frontend.jpg?raw=true",
-        "https://github.com/mcruzvas/react-portfolio/blob/master/public/image/SocialMedia.jpg?raw=true"],
+        "https://github.com/mcruzvas/react-portfolio/blob/master/public/image/Defi_new.jpg?raw=true",
+        "https://github.com/mcruzvas/react-portfolio/blob/master/public/image/todo.png?raw=true",
+        "https://github.com/mcruzvas/react-portfolio/blob/master/public/image/todo.png?raw=true"],
     
         projects_name: [
-            "NFT", "Defi", "Frontend", "Social Media"
+            "NFT", "Defi", "Music NFTs", "Decentralized Social Media"
         ],
 
         projects_github:[
