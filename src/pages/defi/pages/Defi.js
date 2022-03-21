@@ -6,7 +6,7 @@ import { BsFillArrowDownCircleFill, BsFillArrowUpCircleFill } from 'react-icons/
 import { AiOutlinePlusCircle,AiOutlineMinusCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify'
 import { ethers } from 'ethers';
-import {routerAddress, routerABI, factoryAddress, factoryABI, WAVAX_Address, WETH_Address, USDC_Address, ERC20_ABI, PAIR_ABI} from '../contracts/contract_abi';
+import {routerAddress, routerABI, factoryAddress, factoryABI, WAVAX_Address, WETH_Address, USDC_Address, ERC20_ABI} from '../contracts/contract_abi';
 
 class Defi extends React.Component {
   state = {
@@ -657,6 +657,9 @@ class Defi extends React.Component {
         console.log("Ethereum object does not exist");
       }
   }
+  Loan = async () => {
+
+  }
   Swapper = () => {
     if(this.state.coinInput === this.state.coinOutput){
       toast.error("Cannot use the same tokens for transactions")
@@ -670,8 +673,7 @@ class Defi extends React.Component {
         else this.RemoveLiquity(Number(this.state.amountInput),Number(this.state.amountOutput ))
       }
       else if(this.props.useFunction === "Loan"){
-        toast("Collaterize "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
-        toast("Borrow " + Number(this.state.amountOutput * 10**18) + " of " + this.state.coinOutput)
+        this.Loan()
       }
       else if(this.props.useFunction === "Vote"){
         toast("Vote "+ Number(this.state.amountInput * 10**18) + " of " + this.state.coinInput)
