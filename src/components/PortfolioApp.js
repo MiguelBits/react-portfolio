@@ -13,7 +13,7 @@ class PortfolioApp extends Component {
         "https://github.com/mcruzvas/react-portfolio/blob/master/public/image/todo.png?raw=true"],
     
         projects_name: [
-            "NFT", "Defi", "Frontend", "Social Media"
+            "NFT", "Defi", "Music NFTs", "Decentralized Social Media"
         ],
 
         projects_github:[
