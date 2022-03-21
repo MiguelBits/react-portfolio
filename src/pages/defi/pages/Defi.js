@@ -34,6 +34,39 @@ class Defi extends React.Component {
 
   }
 
+  componentDidMount = () => {
+    toast.configure()
+    document.body.style.backgroundColor = "#504d4d"
+    this.setState({useFunction:this.props.useFunction})
+    if(this.props.useFunction === "Swap"){
+      document.getElementById("swap").style.backgroundColor = "#504d4d"
+      document.getElementById("swap").style.opacity = "100%"
+    }
+    else if(this.props.useFunction === "Pool"){
+      document.getElementById("pool").style.backgroundColor = "#504d4d"
+      document.getElementById("pool").style.opacity = "100%"
+    }
+    else if(this.props.useFunction === "Loan"){
+      document.getElementById("loan").style.backgroundColor = "#504d4d"
+      document.getElementById("loan").style.opacity = "100%"
+    }
+    else if(this.props.useFunction === "Vote"){
+      document.getElementById("vote").style.backgroundColor = "#504d4d"
+      document.getElementById("vote").style.opacity = "100%"
+    }
+
+    //click anywhere outside of ...
+    this.wrapperRef = React.createRef();
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+    document.addEventListener("mousedown", this.handleClickOutside);
+
+    this.needApprove()
+    this.getAmountsOutput(this.state.amountInput)
+
+  }
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+  }
   checkHoldings = async () => {
     document.getElementById("token_modal_holdings").style.display = "block";
     this.setState({modalOpen:true})
@@ -55,7 +88,80 @@ class Defi extends React.Component {
       console.log("Ethereum object does not exist");
     }
   }
+  getAmountsOutput = async (value_e) =>{
+    const { ethereum } = window;
+    if (ethereum) {
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = provider.getSigner();
+
+      const routerContract = new ethers.Contract(routerAddress, routerABI, signer);
+
+      //AVAX -> WETH
+      if(this.state.coinInput === " AVAX" && this.state.coinOutput === " WETH"){
+        const tokens = [WAVAX_Address,WETH_Address]
+        const amountIn1 = parseInt(ethers.utils.parseUnits(Number(value_e).toString(),18)._hex.toString()).toString();
+        routerContract.getAmountsOut(amountIn1,tokens).then(result => {
+          let int = parseInt(result[1]._hex.toString())
+          //console.log(parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6)))
+          this.setState({amountOutput:parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6))})
+        })        
+      }
+      //WETH -> AVAX
+      else if(this.state.coinInput === " WETH" && this.state.coinOutput === " AVAX" ){
+        const tokens = [WETH_Address,WAVAX_Address]
+        const amountIn1 = parseInt(ethers.utils.parseUnits(Number(value_e).toString(),18)._hex.toString()).toString();
+        routerContract.getAmountsOut(amountIn1,tokens).then(result => {
+          let int = parseInt(result[1]._hex.toString())
+          //console.log(parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6)))
+          this.setState({amountOutput:parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6))})
+        })   
+      }
+      //WETH -> USDC
+      else if(this.state.coinInput === " WETH" && this.state.coinOutput === " USDC" ){
+        const tokens = [WETH_Address,USDC_Address]
+        const amountIn1 = parseInt(ethers.utils.parseUnits(Number(value_e).toString(),18)._hex.toString()).toString();
+        routerContract.getAmountsOut(amountIn1,tokens).then(result => {
+          let int = parseInt(result[1]._hex.toString())
+          //console.log(parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6)))
+          this.setState({amountOutput:parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6))})
+        })   
+      }
+      //USDC -> WETH
+      else if(this.state.coinInput === " USDC" && this.state.coinOutput === " WETH" ){
+        const tokens = [USDC_Address,WETH_Address]
+        const amountIn1 = parseInt(ethers.utils.parseUnits(Number(value_e).toString(),18)._hex.toString()).toString();
+        routerContract.getAmountsOut(amountIn1,tokens).then(result => {
+          let int = parseInt(result[1]._hex.toString())
+          //console.log(parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6)))
+          this.setState({amountOutput:parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6))})
+        })   
+      }
+      //WAVAX -> USDC
+      else if(this.state.coinInput === " AVAX" && this.state.coinOutput === " USDC" ){
+        const tokens = [WAVAX_Address,USDC_Address]
+        const amountIn1 = parseInt(ethers.utils.parseUnits(Number(value_e).toString(),18)._hex.toString()).toString();
+        routerContract.getAmountsOut(amountIn1,tokens).then(result => {
+          let int = parseInt(result[1]._hex.toString())
+          //console.log(parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6)))
+          this.setState({amountOutput:parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6))})
+        })   
+      }
+      //USDC -> WAVAX
+      else if(this.state.coinInput === " USDC" && this.state.coinOutput === " AVAX" ){
+        const tokens = [USDC_Address,WAVAX_Address]
+        const amountIn1 = parseInt(ethers.utils.parseUnits(Number(value_e).toString(),18)._hex.toString()).toString();
+        routerContract.getAmountsOut(amountIn1,tokens).then(result => {
+          let int = parseInt(result[1]._hex.toString())
+          //console.log(parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6)))
+          this.setState({amountOutput:parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6))})
+        })   
+      }
+    }else{
+      console.log("Ethereum object does not exist");
+    }
+  }
   switchAmounts = () => {
+    this.setState({switched:!this.state.switched})
     let inAmount = this.state.amountInput
     let inCoin = this.state.coinInput
     let inCoinImg = this.state.coinInput_img
@@ -109,40 +215,13 @@ class Defi extends React.Component {
     
   }
   allConditionsForSwap(){
-    if(this.state.amountInput !== 0 && this.coinInput !== "" && this.state.coinInput !== "Select Token" && this.state.coinOutput !== "" && this.state.coinOutput !== "Select Token"){
+    if(this.state.amountInput !== 0 && this.state.amountOutput !== 0){
       return true;
     }
     else{
       return false;
     }
   }
-  showEstimatedInput = async (e) => {
-    
-    this.setState({amountInput: e.target.value})
-
-    if(this.state.coinOutput === " AVAX" && this.state.coinInput === " WETH"){
-      const { ethereum } = window;
-      if (ethereum) {
-        const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = provider.getSigner();
-        
-
-      }else{
-        console.log("Ethereum object does not exist");
-      }
-    }    
-    else if(this.state.coinInput === " AVAX" && this.state.coinOutput === " WETH"){
-      const { ethereum } = window;
-      if (ethereum) {
-        const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = provider.getSigner();
-        
-      }else{
-        console.log("Ethereum object does not exist");
-      }
-    }
-  }
-
 
   /**
    * Close Modal if clicked on outside of element
@@ -151,37 +230,6 @@ class Defi extends React.Component {
     if (this.wrapperRef && !this.wrapperRef.current.contains(event.target) && this.state.modalOpen) {
       this.closeModal()
     }
-  }
-
-  componentDidMount = () => {
-    toast.configure()
-    document.body.style.backgroundColor = "#504d4d"
-    this.setState({useFunction:this.props.useFunction})
-    if(this.props.useFunction === "Swap"){
-      document.getElementById("swap").style.backgroundColor = "#504d4d"
-      document.getElementById("swap").style.opacity = "100%"
-    }
-    else if(this.props.useFunction === "Pool"){
-      document.getElementById("pool").style.backgroundColor = "#504d4d"
-      document.getElementById("pool").style.opacity = "100%"
-    }
-    else if(this.props.useFunction === "Loan"){
-      document.getElementById("loan").style.backgroundColor = "#504d4d"
-      document.getElementById("loan").style.opacity = "100%"
-    }
-    else if(this.props.useFunction === "Vote"){
-      document.getElementById("vote").style.backgroundColor = "#504d4d"
-      document.getElementById("vote").style.opacity = "100%"
-    }
-
-    //click anywhere outside of ...
-    this.wrapperRef = React.createRef();
-    this.handleClickOutside = this.handleClickOutside.bind(this);
-    document.addEventListener("mousedown", this.handleClickOutside);
-
-  }
-  componentWillUnmount() {
-    document.removeEventListener("mousedown", this.handleClickOutside);
   }
 
   AddLiquity = async (token1_amount) => {
@@ -200,16 +248,15 @@ class Defi extends React.Component {
 
         //AVAX - WETH
         if((this.state.coinInput === " AVAX" && this.state.coinOutput === " WETH") || (this.state.coinInput === " WETH" && this.state.coinOutput === " AVAX" )){
+          const amountIn1 = parseInt(ethers.utils.parseUnits(token1_amount.toString(),18)._hex.toString()).toString();
+
           const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
           token1.allowance(accounts[0],routerAddress).then(result => {
-            //console.log("Result: "+result._hex.toString())
+            console.log("Result: "+result._hex.toString())
             if(result._hex === "0x00"){
               token1.approve(routerAddress,amountIn1)
             }
           })
-
-          const amountIn1 = parseInt(ethers.utils.parseUnits(token1_amount.toString(),18)._hex.toString()).toString();
-          //const amountIn2 = parseInt(ethers.utils.parseUnits(token2_amount.toString(),18)._hex.toString()).toString();
 
           const amount1Min = amountIn1.slice(0,-1)
           const amount2Min = amountIn1
@@ -225,9 +272,33 @@ class Defi extends React.Component {
           {value: amountIn1})
 
         }
+        else if((this.state.coinInput === " AVAX" && this.state.coinOutput === " USDC") || (this.state.coinInput === " USDC" && this.state.coinOutput === " AVAX" )){
+          const amountIn1 = parseInt(ethers.utils.parseUnits(token1_amount.toString(),18)._hex.toString()).toString();
+
+          const token1 = new ethers.Contract(USDC_Address,ERC20_ABI,signer);
+          token1.allowance(accounts[0],routerAddress).then(result => {
+            console.log("Result: "+result._hex.toString())
+            if(result._hex === "0x00"){
+              token1.approve(routerAddress,amountIn1)
+            }
+          })
+
+          const amount1Min = amountIn1.slice(0,-1)
+          const amount2Min = amountIn1
+
+          await routerContract.addLiquidityETH(USDC_Address,
+          amountIn1,amount1Min,amount2Min,
+          accounts[0],deadline, 
+          {value: amountIn1})
+
+        }
         //USDC - WETH
         else if((this.state.coinInput === " USDC" && this.state.coinOutput === " WETH")||(this.state.coinInput === " WETH" && this.state.coinOutput === " USDC" )){
           const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
+
+          const amountIn1 = parseInt(ethers.utils.parseUnits(token1_amount.toString(),18)._hex.toString()).toString();
+          const amountIn2 = parseInt(ethers.utils.parseUnits(token1_amount.toString(),18)._hex.toString()).toString();
+
           token1.allowance(accounts[0],routerAddress).then(result => {
             //console.log("Result: "+result._hex.toString())
             if(result._hex === "0x00"){
@@ -241,34 +312,27 @@ class Defi extends React.Component {
               token2.approve(routerAddress,amountIn1)
             }
           })
-          const amountIn1 = parseInt(ethers.utils.parseUnits(token1_amount.toString(),18)._hex.toString()).toString();
-          const amountIn2 = parseInt(ethers.utils.parseUnits(token1_amount.toString(),18)._hex.toString()).toString();
 
           const amount1Min = amountIn1.slice(0,-1).toString()
           const amount2Min = amountIn2.slice(0,-1).toString()
-          
-          const myAccount = accounts[0].toString()
-          const deadlineStr = deadline.toString()
-          /*
-          console.log(amountIn1)
-          console.log(amount1Min)
-          console.log(deadline)
-          console.log(accounts[0])
-          */
+
           await routerContract.addLiquidity(WETH_Address,USDC_Address,
             amountIn1,amountIn2,
             amount1Min,amount2Min,
             accounts[0],deadline)
 
         }
-        
-
-      }else{
+      }
+      else{
         console.log("Ethereum object does not exist");
       }
   }
   RemoveLiquity = async (percent) => {
     /*
+    
+    */
+  }
+  needApprove = async () => {
     const { ethereum } = window;
     if (ethereum) {
       
@@ -276,45 +340,28 @@ class Defi extends React.Component {
       const signer = provider.getSigner();
       const accounts = await provider.listAccounts();
 
-      const time = Math.floor(Date.now() / 1000) + 200000;
-      const deadline = ethers.BigNumber.from(time);
-
-      const routerContract = new ethers.Contract(routerAddress, routerABI, signer);
-      const factoryContract = new ethers.Contract(factoryAddress, factoryABI, signer);
-
-      //AVAX - WETH
-      if((this.state.coinInput === " AVAX" && this.state.coinOutput === " WETH") || (this.state.coinInput === " WETH" && this.state.coinOutput === " AVAX" )){
-        const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
-        await token1.approve(routerAddress,token1_amount);
-
-        const amountIn1 = ethers.utils.parseEther(token1_amount.toString());
-        const amountIn2 = ethers.utils.parseEther(token2_amount.toString());
-
-        let amount1min = token1_amount - (token1_amount/3)
-        let amount2min = token2_amount - (token2_amount/3)
-        const amount1Min = ethers.utils.parseEther(amount1min.toString());
-        const amount2Min = ethers.utils.parseEther(amount2min.toString());
-
-        await routerContract.removeLiquityETH(WAVAX_Address,amountIn1,amount1Min,amount2Min,accounts[0],deadline, {value: amountIn2})
-
+      if(this.state.coinInput === " USDC"){
+        const token1 = new ethers.Contract(USDC_Address,ERC20_ABI,signer);
+        token1.allowance(accounts[0],routerAddress).then(result => {
+          console.log("Result: "+result._hex.toString())
+          if(result._hex === "0x00"){
+            return true
+          }
+        })
       }
-      //USDC - WETH
-      else if((this.state.coinInput === " USDC" && this.state.coinOutput === " WETH")||(this.state.coinInput === " WETH" && this.state.coinOutput === " USDC" )){
+      else if(this.state.coinInput === " WETH"){
         const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
-        await token1.approve(routerAddress,token1_amount);
-
-        const amountIn1 = ethers.utils.parseEther(token1_amount.toString());
-        const amountIn2 = ethers.utils.parseEther(token2_amount.toString());
-
-        let amount1min = token1_amount - (token1_amount/3)
-        let amount2min = token2_amount - (token2_amount/3)
-        const amount1Min = ethers.utils.parseEther(amount1min.toString());
-        const amount2Min = ethers.utils.parseEther(amount2min.toString());
-
-        await routerContract.removeLiquidity(USDC_Address,WETH_Address,amountIn1,amountIn2,amount1Min,amount2Min.accounts[0],deadline);
+        token1.allowance(accounts[0],routerAddress).then(result => {
+          console.log("Result: "+result._hex.toString())
+          if(result._hex === "0x00"){
+            return true
+          }
+        })
+      }
+      else{
+        return false;
       }
     }
-    */
   }
   SwapTokens = async (token_amount) => {
   
@@ -331,8 +378,9 @@ class Defi extends React.Component {
         const time = Math.floor(Date.now() / 1000) + 200000;
         const deadline = ethers.BigNumber.from(time);
 
-        //uniswap fork contracts
+        //uniswap fork contract
         const routerContract = new ethers.Contract(routerAddress, routerABI, signer);
+        //parse to Ether
         const amountIn = ethers.utils.parseEther(token_amount.toString());
 
         //AVAX -> WETH
@@ -349,7 +397,7 @@ class Defi extends React.Component {
             //approve erc20
             const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
             token1.allowance(accounts[0],routerAddress).then(result => {
-              //console.log("Result: "+result._hex.toString())
+              console.log("Result: "+result._hex.toString())
               if(result._hex === "0x00"){
                 token1.approve(routerAddress,amountOut)
               }
@@ -416,7 +464,7 @@ class Defi extends React.Component {
             //approve erc20
             const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
             token1.allowance(accounts[0],routerAddress).then(result => {
-              //console.log("Result: "+result._hex.toString())
+              console.log("Result: "+result._hex.toString())
               if(result._hex === "0x00"){
                 token1.approve(routerAddress,amountOut)
               }
@@ -446,7 +494,7 @@ class Defi extends React.Component {
             //approve erc20
             const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
             token1.allowance(accounts[0],routerAddress).then(result => {
-              //console.log("Result: "+result._hex.toString())
+              console.log("Result: "+result._hex.toString())
               if(result._hex === "0x00"){
                 token1.approve(routerAddress,amountOut)
               }
@@ -497,7 +545,7 @@ class Defi extends React.Component {
             //approve erc20
             const token1 = new ethers.Contract(USDC_Address,ERC20_ABI,signer);
             token1.allowance(accounts[0],routerAddress).then(result => {
-              //console.log("Result: "+result._hex.toString())
+              console.log("Result: "+result._hex.toString())
               if(result._hex === "0x00"){
                 token1.approve(routerAddress,amountOut)
               }
@@ -521,7 +569,7 @@ class Defi extends React.Component {
             //approve erc20
             const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
             token1.allowance(accounts[0],routerAddress).then(result => {
-              //console.log("Result: "+result._hex.toString())
+              console.log("Result: "+result._hex.toString())
               if(result._hex === "0x00"){
                 token1.approve(routerAddress,amountOut)
               }
@@ -589,7 +637,7 @@ class Defi extends React.Component {
               {this.state.switched ? <AiOutlineMinusCircle className='fa_arrow_circle'></AiOutlineMinusCircle>:<AiOutlinePlusCircle className='fa_arrow_circle'></AiOutlinePlusCircle>}
             </button> 
             :
-            <button className='button_arrow_circle' onClick={() => this.setState({switched:!this.state.switched})}>
+            <button className='button_arrow_circle' onClick={this.switchAmounts}>
               {this.state.switched ? <BsFillArrowUpCircleFill className='fa_arrow_circle'></BsFillArrowUpCircleFill>:<BsFillArrowDownCircleFill className='fa_arrow_circle'></BsFillArrowDownCircleFill>}
             </button>}
             
@@ -602,8 +650,8 @@ class Defi extends React.Component {
                                   {this.state.coinInput}
                                 </div>
                                 <div className="swapbox_select">
-                                    <input className="number form-control" defaultValue={1}
-                    onChange={(e) => this.showEstimatedInput(e)} id="from_amount"/>
+                                    <input className="number form-control" placeholder={this.state.amountInput}
+                    onChange={(e) => this.getAmountsOutput(e.target.value)} id="from_amount"/>
                                 </div>
                     </div>
                     <div className='swapbox_arrow'><BsFillArrowDownCircleFill className='swapbox_arrow_circle'/></div>
@@ -613,7 +661,7 @@ class Defi extends React.Component {
                                   {this.state.coinOutput}
                                 </div>
                                 <div className="swapbox_select">
-                                    <input className="number form-control" defaultValue={0}
+                                    <input className="number form-control" placeholder={this.state.amountOutput}
                      id="to_amount"/>
                                 </div>
                     </div>
