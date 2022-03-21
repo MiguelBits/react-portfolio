@@ -134,6 +134,7 @@ class Defi extends React.Component {
                 const previous_state_holding= this.state.LPholdings;
                 const updated_state_holding = previous_state_holding.concat(parseFloat(parseInt(ethers.utils.parseEther(balance.toString())._hex.toString()).toString().slice(0,3)))
                 this.setState({LPholdings: updated_state_holding})
+                this.getAmountsOutput(parseFloat(parseInt(ethers.utils.parseEther(balance.toString())._hex.toString()).toString().slice(0,3)))
               })
               
             })
