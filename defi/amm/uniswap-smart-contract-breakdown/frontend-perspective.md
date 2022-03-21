@@ -15,52 +15,35 @@ The `swapTokens` function makes a transaction to the **Router** contract on the 
 * If neither `address1` or `address2` is the address of the **Weth** contract, the `swapTokens` function calls the **Router** function `swapExactTokensForTokens`
 
 ```
-export async function swapTokens(
-  address1,
-  address2,
-  amount,
-  routerContract,
-  accountAddress,
-  signer
-) {
-  const tokens = [address1, address2];
-  const time = Math.floor(Date.now() / 1000) + 200000;
-  const deadline = ethers.BigNumber.from(time);
-  const amountIn = ethers.utils.parseEther(amount.toString());
-  const amountOut = await routerContract.callStatic.getAmountsOut(
-    amountIn,
-    tokens
-  );
-const token1 = new Contract(address1, ERC20.abi, signer);
-  await token1.approve(routerContract.address, amountIn);
-if (address1 === COINS.AUTONITY.address) {
-    // Eth -> Token
-    await routerContract.swapExactETHForTokens(
-      amountOut[1],
-      tokens,
-      accountAddress,
-      deadline,
-      { value: amountIn }
-    );
-  } else if (address2 === COINS.AUTONITY.address) {
-    // Token -> Eth
-    await routerContract.swapExactTokensForETH(
-      amountIn,
-      amountOut[1],
-      tokens,
-      accountAddress,
-      deadline
-    );
-  } else {
-    await routerContract.swapExactTokensForTokens(
-      amountIn,
-      amountOut[1],
-      tokens,
-      accountAddress,
-      deadline
-    );
+const provider = new ethers.providers.Web3Provider(ethereum);
+const accounts = await provider.listAccounts();
+const signer = provider.getSigner();
+
+//time for deadline argument
+const time = Math.floor(Date.now() / 1000) + 200000;
+const deadline = ethers.BigNumber.from(time);
+
+//uniswap fork contract
+const routerContract = new ethers.Contract(routerAddress, routerABI, signer);
+//parse to Ether
+const amountIn = ethers.utils.parseEther(token_amount.toString());
+
+const amountIn = parseInt(ethers.utils.parseUnits(token_amount.toString(),18)._hex.toString()).toString();
+const tokens = [DAI_Address,WETH_Address]
+
+//get amounts output
+const amountOut = await routerContract.callStatic.getAmountsOut(
+  amountIn,
+  tokens
+);
+//approve erc20
+const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
+token1.allowance(accounts[0],routerAddress).then(result => {
+  console.log("Result: "+result._hex.toString())
+  if(result._hex === "0x00"){
+    token1.approve(routerAddress,amountOut)
   }
-}
+})
 ```
 
 The function `getAmountOut` is used to get a preview of a swap. It calls the **Router** function `getAmountsOut` with the amount of the first token and an array of the addresses of the tokens to be swapped as parameters. It returns the amount out of the second token.
@@ -141,50 +124,27 @@ The `addLiquidity` function has a similar layout to the `swapTokens` function de
 It approves the router to spend given amounts for the contracts of the two provided addresses, then makes a transaction to the router contract on the blockchain to perform one of three different liquidity additions (AUT + token, token + AUT, token + token), depending on the pair of addresses provided to it, `address1` and `address2:`
 
 ```
-export async function quoteAddLiquidity(
-  address1,
-  address2,
-  amountADesired,
-  amountBDesired,
-  factory,
-  signer
-) {
-  const pairAddress = await factory.getPair(address1, address2);
-  const pair = new Contract(pairAddress, PAIR.abi, signer);
+const amountIn1 = parseInt(ethers.utils.parseUnits(token1_amount.toString(),18)._hex.toString()).toString();
 
-  const reservesRaw = await fetchReserves(address1, address2, pair); // Returns the reserves already formated as ethers
-  const reserveA = reservesRaw[0];
-  const reserveB = reservesRaw[1];
-
-  if (reserveA === 0 && reserveB === 0) {
-    let amountOut = Math.sqrt(reserveA * reserveB);
-    return [
-      amountADesired.toString(),
-      amountBDesired.toString(),
-      amountOut.toString(),
-    ];
-  } else {
-    let [amountBOptimal, amountOut] = quote(amountADesired, reserveA, reserveB);
-    if (amountBOptimal <= amountBDesired) {
-      return [
-        amountADesired.toString(),
-        amountBOptimal.toString(),
-        amountOut.toString(),
-      ];
-    } else {
-      let [amountAOptimal, amountOut] = quote(
-        amountBDesired,
-        reserveB,
-        reserveA
-      );
-      console.log(amountAOptimal, amountOut);
-      return [
-        amountAOptimal.toString(),
-        amountBDesired.toString(),
-        amountOut.toString(),
-      ];
-    }
+const token1 = new ethers.Contract(USDC_Address,ERC20_ABI,signer);
+token1.allowance(accounts[0],routerAddress).then(result => {
+  console.log("Result: "+result._hex.toString())
+  if(result._hex === "0x00"){
+    token1.approve(routerAddress,amountIn1)
   }
+})
+
+const amount1Min = amountIn1.slice(0,-1)
+const amount2Min = amountIn1
+try{
+  await routerContract.addLiquidityETH(USDC_Address,
+  amountIn1,amount1Min,amount2Min,
+  accounts[0],deadline, 
+  {value: amountIn1})
+}catch{
+  toast.error("Need to approve USDC tokens")
+  let approve1 = await token1.approve(routerAddress,amountIn1)
+  approve1.wait()
 }
 ```
 
