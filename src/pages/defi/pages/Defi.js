@@ -30,7 +30,9 @@ class Defi extends React.Component {
     "https://cryptologos.cc/logos/usd-coin-usdc-logo.png"],
     token1_amount: 0,
     token2_amount: 0,
-    LPholdings: 0,
+
+    LPholdings: [],
+    LP_pairsAddress: [],
 
   }
 
@@ -60,33 +62,46 @@ class Defi extends React.Component {
     this.handleClickOutside = this.handleClickOutside.bind(this);
     document.addEventListener("mousedown", this.handleClickOutside);
 
-    this.needApprove()
     this.getAmountsOutput(this.state.amountInput)
+    this.getLPTokens()
 
   }
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleClickOutside);
   }
+  getLPTokens = async () =>{
+    const { ethereum } = window;
+      if (ethereum) {
+        
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const accounts = await provider.listAccounts();
+
+        const factoryContract = new ethers.Contract(factoryAddress, factoryABI, signer);
+        factoryContract.allPairsLength().then(result=>{
+          for(let i = 0; i < parseInt(result._hex.toString());i++){
+            factoryContract.allPairs(i).then(address => {
+              const previous_state= this.state.LP_pairsAddress;
+              const updated_state = previous_state.concat(address)
+              this.setState({LP_pairsAddress: updated_state})
+
+              const LP_token = new ethers.Contract(address,ERC20_ABI,signer);
+              LP_token.balanceOf(accounts[0]).then(balance =>{
+                const previous_state_holding= this.state.LPholdings;
+                const updated_state_holding = previous_state_holding.concat(parseFloat(parseInt(ethers.utils.parseEther(balance.toString())._hex.toString()).toString().slice(0,3)))
+                this.setState({LPholdings: updated_state_holding})
+              })
+              
+            })
+          }
+        })
+      }else{
+        console.log("Ethereum object does not exist");
+      }
+  }
   checkHoldings = async () => {
     document.getElementById("token_modal_holdings").style.display = "block";
     this.setState({modalOpen:true})
-
-    const { ethereum } = window;
-    if (ethereum) {
-      const provider = new ethers.providers.Web3Provider(ethereum);
-      const signer = provider.getSigner();
-      /*
-      const defiContract = new ethers.Contract(contractAddress, contractABI, signer);
-
-      defiContract.getMyHoldings().then( result => {
-        this.setState({token1_amount:parseInt(result.amountToken1._hex.toString())})
-        this.setState({token2_amount:parseInt(result.amountToken2._hex.toString())})
-        this.setState({LPholdings:parseInt(result.myShare._hex.toString())})
-      })
-      */
-    }else{
-      console.log("Ethereum object does not exist");
-    }
   }
   getAmountsOutput = async (value_e) =>{
     const { ethereum } = window;
@@ -173,6 +188,7 @@ class Defi extends React.Component {
     this.setState({amountOutput:inAmount})
     this.setState({coinOutput:inCoin})
     this.setState({coinOutput_img:inCoinImg})
+
   }
 
   switchToken_Input = () => {
@@ -215,7 +231,10 @@ class Defi extends React.Component {
     
   }
   allConditionsForSwap(){
-    if(this.state.amountInput !== 0 && this.state.amountOutput !== 0){
+    if(this.state.useFunction === "Pool"){
+      return true;
+    }
+    else if(this.state.amountInput !== 0 && this.state.amountOutput !== 0 && !this.state.switched){
       return true;
     }
     else{
@@ -266,12 +285,19 @@ class Defi extends React.Component {
           console.log(deadline)
           console.log(accounts[0])
           */
-          await routerContract.addLiquidityETH(WETH_Address,
-          amountIn1,amount1Min,amount2Min,
-          accounts[0],deadline, 
-          {value: amountIn1})
+          try{
+            await routerContract.addLiquidityETH(WETH_Address,
+            amountIn1,amount1Min,amount2Min,
+            accounts[0],deadline, 
+            {value: amountIn1})
+          }catch{
+            toast.error("Need to approve WETH tokens")
+            let approve1 = await token1.approve(routerAddress,amountIn1)
+            approve1.wait()
+          }
 
         }
+        //AVAX -> USDC
         else if((this.state.coinInput === " AVAX" && this.state.coinOutput === " USDC") || (this.state.coinInput === " USDC" && this.state.coinOutput === " AVAX" )){
           const amountIn1 = parseInt(ethers.utils.parseUnits(token1_amount.toString(),18)._hex.toString()).toString();
 
@@ -285,11 +311,16 @@ class Defi extends React.Component {
 
           const amount1Min = amountIn1.slice(0,-1)
           const amount2Min = amountIn1
-
-          await routerContract.addLiquidityETH(USDC_Address,
-          amountIn1,amount1Min,amount2Min,
-          accounts[0],deadline, 
-          {value: amountIn1})
+          try{
+            await routerContract.addLiquidityETH(USDC_Address,
+            amountIn1,amount1Min,amount2Min,
+            accounts[0],deadline, 
+            {value: amountIn1})
+          }catch{
+            toast.error("Need to approve USDC tokens")
+            let approve1 = await token1.approve(routerAddress,amountIn1)
+            approve1.wait()
+          }
 
         }
         //USDC - WETH
@@ -315,11 +346,18 @@ class Defi extends React.Component {
 
           const amount1Min = amountIn1.slice(0,-1).toString()
           const amount2Min = amountIn2.slice(0,-1).toString()
-
-          await routerContract.addLiquidity(WETH_Address,USDC_Address,
-            amountIn1,amountIn2,
-            amount1Min,amount2Min,
-            accounts[0],deadline)
+          try{
+            await routerContract.addLiquidity(WETH_Address,USDC_Address,
+              amountIn1,amountIn2,
+              amount1Min,amount2Min,
+              accounts[0],deadline)
+          }catch{
+            toast.error("Need to approve your tokens")
+            let approve1 = await token1.approve(routerAddress,amountIn1)
+            approve1.wait()
+            let approve2 = await token2.approve(routerAddress,amountIn1)
+            approve2.wait()
+          }
 
         }
       }
@@ -328,41 +366,58 @@ class Defi extends React.Component {
       }
   }
   RemoveLiquity = async (percent) => {
-    /*
-    
-    */
-  }
-  needApprove = async () => {
     const { ethereum } = window;
-    if (ethereum) {
-      
-      const provider = new ethers.providers.Web3Provider(ethereum);
-      const signer = provider.getSigner();
-      const accounts = await provider.listAccounts();
+      if (ethereum) {
+        
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const accounts = await provider.listAccounts();
 
-      if(this.state.coinInput === " USDC"){
-        const token1 = new ethers.Contract(USDC_Address,ERC20_ABI,signer);
-        token1.allowance(accounts[0],routerAddress).then(result => {
-          console.log("Result: "+result._hex.toString())
-          if(result._hex === "0x00"){
-            return true
-          }
-        })
-      }
-      else if(this.state.coinInput === " WETH"){
-        const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
-        token1.allowance(accounts[0],routerAddress).then(result => {
-          console.log("Result: "+result._hex.toString())
-          if(result._hex === "0x00"){
-            return true
-          }
-        })
+        const time = Math.floor(Date.now() / 1000) + 200000;
+        const deadline = parseInt(ethers.BigNumber.from(time)._hex.toString()).toString();
+
+        const routerContract = new ethers.Contract(routerAddress, routerABI, signer);
+        const factoryContract = new ethers.Contract(factoryAddress, factoryABI, signer);
+
+        //AVAX -> WETH
+        if((this.state.coinInput === " AVAX" && this.state.coinOutput === " WETH") || (this.state.coinInput === " WETH" && this.state.coinOutput === " AVAX" )){
+  
+          factoryContract.getPair(WAVAX_Address,WETH_Address).then(tokenAddress => {
+            const pairContract = new ethers.Contract(tokenAddress,ERC20_ABI,signer)
+            pairContract.balanceOf(accounts[0]).then(balance => {
+              routerContract.removeLiquidityETH(tokenAddress,parseInt(balance._hex.toString()))
+            })
+            
+          })
+        }
+        //AVAX -> USDC
+        else if((this.state.coinInput === " AVAX" && this.state.coinOutput === " USDC") || (this.state.coinInput === " USDC" && this.state.coinOutput === " AVAX" )){
+            
+          factoryContract.getPair(WAVAX_Address,USDC_Address).then(tokenAddress => {
+            const pairContract = new ethers.Contract(tokenAddress,ERC20_ABI,signer)
+            pairContract.balanceOf(accounts[0]).then(balance => {
+              routerContract.removeLiquidityETH(tokenAddress,parseInt(balance._hex.toString()))
+            })
+            
+          })
+        }
+        //USDC - WETH
+        else if((this.state.coinInput === " USDC" && this.state.coinOutput === " WETH")||(this.state.coinInput === " WETH" && this.state.coinOutput === " USDC" )){
+            
+          factoryContract.getPair(USDC_Address,WETH_Address).then(tokenAddress => {
+            const pairContract = new ethers.Contract(tokenAddress,ERC20_ABI,signer)
+            pairContract.balanceOf(accounts[0]).then(balance => {
+              routerContract.removeLiquidityETH(tokenAddress,parseInt(balance._hex.toString()))
+            })
+            
+          })
+        }
       }
       else{
-        return false;
+        console.log("Ethereum object does not exist");
       }
-    }
   }
+  
   SwapTokens = async (token_amount) => {
   
       const { ethereum } = window;
@@ -371,8 +426,6 @@ class Defi extends React.Component {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const accounts = await provider.listAccounts();
         const signer = provider.getSigner();
-
-        let txnwait;
 
         //time for deadline argument
         const time = Math.floor(Date.now() / 1000) + 200000;
@@ -402,7 +455,7 @@ class Defi extends React.Component {
                 token1.approve(routerAddress,amountOut)
               }
             })
-
+            
             //swap native coin for erc20
             await routerContract.swapExactTokensForETH(
               amountIn,
@@ -523,7 +576,7 @@ class Defi extends React.Component {
                 token1.approve(routerAddress,amountOut)
               }
             })
-
+            
             await routerContract.swapExactTokensForTokens(
               amountIn,
               amountOut[1],
@@ -695,17 +748,13 @@ class Defi extends React.Component {
                       </div>
                     </div>
                     <div className="modal-body">
-                      <div id="token_selection" className='token_row' >
-                        LP Token: {this.state.LPholdings}
-                      </div>
-                      <br></br>
-                      <div id="token_selection" className='token_row' >
-                        Token1 Amount: {this.state.token1_amount}
-                      </div>
-                      <br></br>
-                      <div id="token_selection" className='token_row' >
-                        Token2 Amount: {this.state.token2_amount}
-                      </div>
+                      {this.state.LPholdings.map( (item,i) => {
+                            return(
+                              <div key={i} id="token_selection" className='token_row'>
+                                <span className='token_list_text' >{item} ether of <br></br> {this.state.LP_pairsAddress[i]}</span>
+                              </div>
+                            )
+                        } )}
                     </div>
                   </div>
                 </div>
