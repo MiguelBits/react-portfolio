@@ -690,7 +690,7 @@ class Defi extends React.Component {
       }
   }
   Loan = async () => {
-
+    toast("Loan")
   }
   Swapper = () => {
     if(this.state.coinInput === this.state.coinOutput){
