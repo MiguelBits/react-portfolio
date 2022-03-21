@@ -35,6 +35,7 @@ class Defi extends React.Component {
     LP_pairsAddress: [],
 
     gasEstimate: 0,
+    coinHolding: 0,
   }
 
   componentDidMount = () => {
@@ -66,9 +67,39 @@ class Defi extends React.Component {
     this.getAmountsOutput(this.state.amountInput)
     this.getLPTokens()
     this.getGas()
+    this.getMaxAmount()
   }
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+  getMaxAmount = async () => {
+    const { ethereum } = window;
+      if (ethereum) {
+        
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const accounts = await provider.listAccounts();
+
+        let address;
+
+        if(this.state.coinInput === " AVAX"){
+          address = WAVAX_Address
+        }
+        else if(this.state.coinInput === " WETH"){
+          address = WETH_Address
+        }
+        else if(this.state.coinInput === " USDC"){
+          address =  USDC_Address
+        }
+
+        const tokenContract = new ethers.Contract(address,ERC20_ABI,signer);
+        tokenContract.balanceOf(accounts[0]).then(balance => {
+          this.setState({coinHolding:parseFloat(parseInt(ethers.utils.parseEther(balance.toString())._hex.toString()).toString().slice(0,5))})
+        })
+
+      }else{
+        console.log("Ethereum object does not exist");
+      }
   }
   getGas = async () => {
     const { ethereum } = window;
@@ -76,7 +107,7 @@ class Defi extends React.Component {
         
         const provider = new ethers.providers.Web3Provider(ethereum);
         const gasPrice = await provider.getGasPrice()
-        this.setState({gasEstimate:parseInt(parseFloat(parseInt(ethers.utils.parseEther(gasPrice.toString())._hex.toString()).toString()))})
+        this.setState({gasEstimate:parseFloat(parseInt(ethers.utils.parseEther(gasPrice.toString())._hex.toString()).toString().slice(0,3))})
       }else{
         console.log("Ethereum object does not exist");
       }
@@ -721,7 +752,9 @@ class Defi extends React.Component {
                                 <div className="swapbox_select">
                                     <input className="number form-control" placeholder={this.state.amountInput}
                     onChange={(e) => this.getAmountsOutput(e.target.value)} id="from_amount"/>
+                                    <div onClick={()=>this.setState({amountInput:this.state.coinHolding})} className='max_holdings'>MAX: {this.state.coinHolding}</div>
                                 </div>
+                                
                     </div>
                     <div className='swapbox_arrow'><BsFillArrowDownCircleFill className='swapbox_arrow_circle'/></div>
                     <div className="swapbox">
@@ -764,6 +797,15 @@ class Defi extends React.Component {
                       </div>
                     </div>
                     <div className="modal-body">
+                      <div id="modal_section">Liquidity :</div>
+                      {this.state.LPholdings.map( (item,i) => {
+                            return(
+                              <div key={i} id="token_selection" className='token_row'>
+                                <span className='token_list_text' >{item} ether of <br></br> {this.state.LP_pairsAddress[i]}</span>
+                              </div>
+                            )
+                        } )}
+                      <div id="modal_section">Collaterals :</div>
                       {this.state.LPholdings.map( (item,i) => {
                             return(
                               <div key={i} id="token_selection" className='token_row'>
