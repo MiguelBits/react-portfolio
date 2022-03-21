@@ -184,7 +184,7 @@ class Defi extends React.Component {
     document.removeEventListener("mousedown", this.handleClickOutside);
   }
 
-  AddLiquity = async (token1_amount,token2_amount) => {
+  AddLiquity = async (token1_amount) => {
 
       const { ethereum } = window;
       if (ethereum) {
@@ -197,7 +197,6 @@ class Defi extends React.Component {
         const deadline = parseInt(ethers.BigNumber.from(time)._hex.toString()).toString();
 
         const routerContract = new ethers.Contract(routerAddress, routerABI, signer);
-        const factoryContract = new ethers.Contract(factoryAddress, factoryABI, signer);
 
         //AVAX - WETH
         if((this.state.coinInput === " AVAX" && this.state.coinOutput === " WETH") || (this.state.coinInput === " WETH" && this.state.coinOutput === " AVAX" )){
@@ -579,7 +578,7 @@ class Defi extends React.Component {
         <img className="defi-logo" alt="logo" src="https://github.com/mcruzvas/react-portfolio/blob/master/public/image/bullfarm.png?raw=true"></img>
       </div>
 
-      <div className='defi-name' > Bull Farmer </div>
+      <div className='defi-name' onClick={()=>window.location.href='/Defi'}> Bull Farmer </div>
 
       <div className='container'>
         {/* SWAP BOX */}
