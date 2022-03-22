@@ -1186,7 +1186,7 @@ export const factoryABI = [
 export const WAVAX_Address = "0xd00ae08403B9bbb9124bB305C09058E32C39A48c"
 export const WETH_Address = "0x51afAcC997Ac9c3fEC1BbeeDdd2373772C3D96DC"
 export const USDC_Address = "0xFa678A3fF451c4499bd1FA155FDBEA21D9312eE2"
-export const DAI_Address = ""
+export const DAI_Address = "0x048A67C0E944029c7546d2a4545d81c214Ad6d5e"
 export const ERC20_ABI = [
 	{
 		"inputs": [
