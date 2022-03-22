@@ -83,22 +83,27 @@ class Defi extends React.Component {
 
         if(this.state.coinInput === " AVAX"){
           await provider.getBalance(accounts[0]).then(balance => {
-            this.setState({coinHolding:ethers.utils.formatEther(balance).slice(0,3)})
-            return
+            this.setState({coinHolding:ethers.utils.formatEther(balance).slice(0,5)})
           })
         }
         else if(this.state.coinInput === " WETH"){
           address = WETH_Address
-        }
-        else if(this.state.coinInput === " USDC"){
-          address =  USDC_Address
-        }
-
-        const tokenContract = new ethers.Contract(address,ERC20_ABI,signer);
+          const tokenContract = new ethers.Contract(address,ERC20_ABI,signer);
         tokenContract.balanceOf(accounts[0]).then(balance => {
           let int = ethers.utils.formatEther(parseInt(balance._hex.toString()).toString()).slice(0,6)
           this.setState({coinHolding:int})
         })
+        }
+        else if(this.state.coinInput === " USDC"){
+          address =  USDC_Address
+          const tokenContract = new ethers.Contract(address,ERC20_ABI,signer);
+        tokenContract.balanceOf(accounts[0]).then(balance => {
+          let int = ethers.utils.formatEther(parseInt(balance._hex.toString()).toString()).slice(0,6)
+          this.setState({coinHolding:int})
+        })
+        }
+
+        
 
       }else{
         console.log("Ethereum object does not exist");
@@ -218,7 +223,10 @@ class Defi extends React.Component {
     }
   }
   switchAmounts = () => {
-    this.setState({switched:!this.state.switched})
+    if(this.state.useFunction !== "Pool"){
+      this.setState({switched:!this.state.switched})
+    }
+    
     let inAmount = this.state.amountInput
     let inCoin = this.state.coinInput
     let inCoinImg = this.state.coinInput_img
@@ -280,7 +288,7 @@ class Defi extends React.Component {
     if(this.state.useFunction === "Pool"){
       return true;
     }
-    else if(this.state.amountInput !== 0 && this.state.amountOutput !== 0 && !this.state.switched){
+    else if(this.state.amountInput !== 0 && this.state.amountOutput !== 0 ){
       return true;
     }
     else{
@@ -315,7 +323,7 @@ class Defi extends React.Component {
         this.getAmountsOutput(this.state.amountInput)
         const amountIn2 = ethers.utils.parseUnits(this.state.amountOutput.toString()).toString()
 
-        console.log("amount1 "+amountIn1)
+        //console.log("amount1 "+amountIn1)
         //console.log("amount2 "+ amountIn2)
 
         //AVAX - WETH
@@ -330,7 +338,7 @@ class Defi extends React.Component {
           })
 
           const amount1Min = amountIn1.slice(0,-1)
-          const amount2Min = amountIn1.slice(0,-1)
+          const amount2Min = amountIn2.slice(0,-1)
           /*
           console.log(amountIn1)
           console.log(amount1Min)
@@ -349,7 +357,7 @@ class Defi extends React.Component {
             }
             else{
               const txn = await routerContract.addLiquidityETH(WETH_Address,
-              amountIn1,amount1Min,amount2Min,
+              amountIn2,amount2Min,amount1Min,
               accounts[0],deadline, 
               {value: amountIn1})
               txn.wait().then(
@@ -392,7 +400,7 @@ class Defi extends React.Component {
             }
             else{
               const txn = await routerContract.addLiquidityETH(USDC_Address,
-              amountIn1,amount1Min,amount2Min,
+                amountIn2,amount1Min,amount2Min,
               accounts[0],deadline, 
               {value: amountIn1})
               txn.wait().then(
