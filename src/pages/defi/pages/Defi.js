@@ -4,7 +4,7 @@ import NavTab from "./../components/NavTab"
 import ShowBalance from '../components/ShowBalance'
 import { BsFillArrowDownCircleFill, BsFillArrowUpCircleFill } from 'react-icons/bs'
 import { AiOutlinePlusCircle,AiOutlineMinusCircle } from 'react-icons/ai';
-import { toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 import { ethers } from 'ethers';
 import {routerAddress, routerABI, factoryAddress, factoryABI, WAVAX_Address, WETH_Address, USDC_Address, ERC20_ABI} from '../contracts/contract_abi';
 
@@ -156,7 +156,7 @@ class Defi extends React.Component {
 
   }
   getAmountsOutput = async (value_e) =>{
-    
+    this.setState({amountInput:Number(value_e)})
     const { ethereum } = window;
     if (ethereum) {
 
@@ -297,7 +297,7 @@ class Defi extends React.Component {
     }
   }
 
-  AddLiquity = async (token1_amount) => {
+  AddLiquity = async () => {
 
       const { ethereum } = window;
       if (ethereum) {
@@ -311,11 +311,11 @@ class Defi extends React.Component {
 
         const routerContract = new ethers.Contract(routerAddress, routerABI, signer);
 
-        const amountIn1 = ethers.utils.parseUnits(token1_amount.toString()).toString()
-        this.getAmountsOutput(token1_amount)
+        const amountIn1 = ethers.utils.parseUnits(this.state.amountInput.toString()).toString()
+        this.getAmountsOutput(this.state.amountInput)
         const amountIn2 = ethers.utils.parseUnits(this.state.amountOutput.toString()).toString()
 
-        //console.log("amount1 "+amountIn1)
+        console.log("amount1 "+amountIn1)
         //console.log("amount2 "+ amountIn2)
 
         //AVAX - WETH
@@ -339,20 +339,26 @@ class Defi extends React.Component {
           */
           try{
             if(this.state.coinInput === " WETH"){
-              await routerContract.addLiquidityETH(WETH_Address,
+              const txn = await routerContract.addLiquidityETH(WETH_Address,
               amountIn1,amount1Min,amount2Min,
               accounts[0],deadline, 
               {value: amountIn2})
+              txn.wait().then(
+                toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+              )
             }
             else{
-              await routerContract.addLiquidityETH(WETH_Address,
+              const txn = await routerContract.addLiquidityETH(WETH_Address,
               amountIn1,amount1Min,amount2Min,
               accounts[0],deadline, 
               {value: amountIn1})
+              txn.wait().then(
+                toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+              )
             }
             
           }catch(e){
-            if(e.code !== 4001){
+            if(e.code !== 4001 && e.code !== -32603){
               toast.error("Need to approve WETH tokens")
               let approve1 = await token1.approve(routerAddress,amountIn1)
               approve1.wait()
@@ -376,20 +382,26 @@ class Defi extends React.Component {
           const amount2Min = amountIn2.toString().slice(0,-1)
           try{
             if(this.state.coinInput === " USDC"){
-              await routerContract.addLiquidityETH(USDC_Address,
+              const txn = await routerContract.addLiquidityETH(USDC_Address,
               amountIn1,amount1Min,amount2Min,
               accounts[0],deadline, 
               {value: amountIn2})
+              txn.wait().then(
+                toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+              )
             }
             else{
-              await routerContract.addLiquidityETH(USDC_Address,
+              const txn = await routerContract.addLiquidityETH(USDC_Address,
               amountIn1,amount1Min,amount2Min,
               accounts[0],deadline, 
               {value: amountIn1})
+              txn.wait().then(
+                toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+              )
             }
             
           }catch(e){
-            if(e.code !== 4001){
+            if(e.code !== 4001 && e.code !== -32603){
               toast.error("Need to approve USDC tokens")
               let approve1 = await token1.approve(routerAddress,amountIn1)
               approve1.wait()
@@ -418,12 +430,15 @@ class Defi extends React.Component {
           const amount1Min = amountIn1.slice(0,-1).toString()
           const amount2Min = amountIn2.toString().slice(0,-1).toString()
           try{
-            await routerContract.addLiquidity(WETH_Address,USDC_Address,
+            const txn = await routerContract.addLiquidity(WETH_Address,USDC_Address,
               amountIn1,amountIn2,
               amount1Min,amount2Min,
               accounts[0],deadline)
+              txn.wait().then(
+                toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+              )
           }catch(e){
-            if(e.code !== 4001){
+            if(e.code !== 4001 && e.code !== -32603){
               toast.error("Need to approve your tokens")
               let approve1 = await token1.approve(routerAddress,amountIn1)
               approve1.wait()
@@ -491,7 +506,7 @@ class Defi extends React.Component {
       }
   }
   
-  SwapTokens = async (token_amount) => {
+  SwapTokens = async () => {
   
       const { ethereum } = window;
       if (ethereum) {
@@ -507,12 +522,11 @@ class Defi extends React.Component {
         //uniswap fork contract
         const routerContract = new ethers.Contract(routerAddress, routerABI, signer);
         //parse to Ether
-        const amountIn = ethers.utils.parseEther(token_amount.toString());
+        const amountIn = ethers.utils.parseUnits(Number(this.state.amountInput).toString()).toString();
 
         //AVAX -> WETH
         if(this.state.coinInput === " AVAX" && this.state.coinOutput === " WETH"){
           if(this.state.switched){
-            const amountIn = parseInt(ethers.utils.parseUnits(token_amount.toString(),18)._hex.toString()).toString();
             const tokens = [WETH_Address,WAVAX_Address]
             
             //get amounts output
@@ -523,20 +537,23 @@ class Defi extends React.Component {
             //approve erc20
             const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
             token1.allowance(accounts[0],routerAddress).then(result => {
-              console.log("Result: "+result._hex.toString())
+              //console.log("Result: "+result._hex.toString())
               if(result._hex === "0x00"){
                 token1.approve(routerAddress,amountOut)
               }
             })
             
             //swap native coin for erc20
-            await routerContract.swapExactTokensForETH(
+            const txn = await routerContract.swapExactTokensForETH(
               amountIn,
               amountOut[1],
               tokens,
               accounts[0],
               deadline
             );
+            txn.wait().then(
+              toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+            )
           }
           else{
             const tokens = [WAVAX_Address,WETH_Address]
@@ -548,13 +565,16 @@ class Defi extends React.Component {
             );
             
             //swap native coin for erc20
-            await routerContract.swapExactETHForTokens(
+            const txn = await routerContract.swapExactETHForTokens(
               amountOut[1],
               tokens,
               accounts[0],
               deadline,
               { value: amountIn }
             );
+            txn.wait().then(
+              toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+            )
           }
         }
         //WETH -> AVAX
@@ -570,16 +590,18 @@ class Defi extends React.Component {
             );
             
             //swap native coin for erc20
-            await routerContract.swapExactETHForTokens(
+            const txn = await routerContract.swapExactETHForTokens(
               amountOut[1],
               tokens,
               accounts[0],
               deadline,
               { value: amountIn }
             );
+            txn.wait().then(
+              toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+            )
           }
           else{
-            const amountIn = parseInt(ethers.utils.parseUnits(token_amount.toString(),18)._hex.toString()).toString();
             const tokens = [WETH_Address,WAVAX_Address]
             
             //get amounts output
@@ -590,20 +612,25 @@ class Defi extends React.Component {
             //approve erc20
             const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
             token1.allowance(accounts[0],routerAddress).then(result => {
-              console.log("Result: "+result._hex.toString())
+              //console.log("Result: "+result._hex.toString())
               if(result._hex === "0x00"){
                 token1.approve(routerAddress,amountOut)
               }
             })
-
+            //console.log(amountIn)
+            //console.log(amountOut[1].toString())
+            
             //swap native coin for erc20
-            await routerContract.swapExactTokensForETH(
+            const txn = await routerContract.swapExactTokensForETH(
               amountIn,
-              amountOut[1],
+              amountOut[1].toString(),
               tokens,
               accounts[0],
               deadline
             );
+            txn.wait().then(
+              toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+            )
           }
           
         }
@@ -620,19 +647,22 @@ class Defi extends React.Component {
             //approve erc20
             const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
             token1.allowance(accounts[0],routerAddress).then(result => {
-              console.log("Result: "+result._hex.toString())
+              //console.log("Result: "+result._hex.toString())
               if(result._hex === "0x00"){
                 token1.approve(routerAddress,amountOut)
               }
             })
 
-            await routerContract.swapExactTokensForTokens(
+            const txn = await routerContract.swapExactTokensForTokens(
               amountIn,
               amountOut[1],
               tokens,
               accounts[0],
               deadline
             );
+            txn.wait().then(
+              toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+            )
           }
           else{
             const tokens = [USDC_Address,WETH_Address]
@@ -650,13 +680,16 @@ class Defi extends React.Component {
               }
             })
             
-            await routerContract.swapExactTokensForTokens(
+            const txn = await routerContract.swapExactTokensForTokens(
               amountIn,
               amountOut[1],
               tokens,
               accounts[0],
               deadline
             );
+            txn.wait().then(
+              toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+            )
           }
         }
         // WETH -> USDC
@@ -671,19 +704,22 @@ class Defi extends React.Component {
             //approve erc20
             const token1 = new ethers.Contract(USDC_Address,ERC20_ABI,signer);
             token1.allowance(accounts[0],routerAddress).then(result => {
-              console.log("Result: "+result._hex.toString())
+              //console.log("Result: "+result._hex.toString())
               if(result._hex === "0x00"){
                 token1.approve(routerAddress,amountOut)
               }
             })
 
-            await routerContract.swapExactTokensForTokens(
+            const txn = await routerContract.swapExactTokensForTokens(
               amountIn,
               amountOut[1],
               tokens,
               accounts[0],
               deadline
             );
+            txn.wait().then(
+              toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+            )
           }
           else{
             const tokens = [WETH_Address,USDC_Address]
@@ -695,19 +731,22 @@ class Defi extends React.Component {
             //approve erc20
             const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
             token1.allowance(accounts[0],routerAddress).then(result => {
-              console.log("Result: "+result._hex.toString())
+              //console.log("Result: "+result._hex.toString())
               if(result._hex === "0x00"){
                 token1.approve(routerAddress,amountOut)
               }
             })
 
-            await routerContract.swapExactTokensForTokens(
+            const txn = await routerContract.swapExactTokensForTokens(
               amountIn,
               amountOut[1],
               tokens,
               accounts[0],
               deadline
             );
+            txn.wait().then(
+              toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+            )
           }
         }
         //await txnwait.wait()
@@ -725,11 +764,11 @@ class Defi extends React.Component {
     }
     else{
       if(this.props.useFunction === "Swap"){
-        this.SwapTokens(Number(this.state.amountInput))
+        this.SwapTokens()
       }
       else if(this.props.useFunction === "Pool"){
-        if(!this.state.switched)this.AddLiquity(Number(this.state.amountInput),Number(this.state.amountOutput ))
-        else this.RemoveLiquity(Number(this.state.amountInput),Number(this.state.amountOutput ))
+        if(!this.state.switched)this.AddLiquity()
+        else this.RemoveLiquity()
       }
       else if(this.props.useFunction === "Loan"){
         this.Loan()
@@ -747,7 +786,7 @@ class Defi extends React.Component {
     <div className='DefiPage'>
 
       <NavTab></NavTab>
-
+      <ToastContainer></ToastContainer>
       <ShowBalance></ShowBalance>
 
       <div onClick={this.checkHoldings}>
