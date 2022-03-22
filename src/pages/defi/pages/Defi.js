@@ -75,7 +75,6 @@ class Defi extends React.Component {
   getMaxAmount = async () => {
     const { ethereum } = window;
       if (ethereum) {
-        
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const accounts = await provider.listAccounts();
@@ -84,7 +83,7 @@ class Defi extends React.Component {
 
         if(this.state.coinInput === " AVAX"){
           await provider.getBalance(accounts[0]).then(balance => {
-            this.setState({coinHolding:ethers.utils.formatEther(balance).slice(0,5)})
+            this.setState({coinHolding:ethers.utils.formatEther(balance).slice(0,3)})
             return
           })
         }
@@ -97,12 +96,17 @@ class Defi extends React.Component {
 
         const tokenContract = new ethers.Contract(address,ERC20_ABI,signer);
         tokenContract.balanceOf(accounts[0]).then(balance => {
-          this.setState({coinHolding:parseFloat(parseInt(ethers.utils.parseEther(balance.toString())._hex.toString()).toString().slice(0,5))*100})
+          let int = ethers.utils.formatEther(parseInt(balance._hex.toString()).toString()).slice(0,6)
+          this.setState({coinHolding:int})
         })
 
       }else{
         console.log("Ethereum object does not exist");
       }
+  }
+  clickMax = () => {
+    this.setState({amountInput:this.state.coinHolding})
+    this.getAmountsOutput(this.state.coinHolding)
   }
   getGas = async () => {
     const { ethereum } = window;
@@ -137,7 +141,6 @@ class Defi extends React.Component {
                 const previous_state_holding= this.state.LPholdings;
                 const updated_state_holding = previous_state_holding.concat(parseFloat(parseInt(ethers.utils.parseEther(balance.toString())._hex.toString()).toString().slice(0,3)))
                 this.setState({LPholdings: updated_state_holding})
-                this.getAmountsOutput(parseFloat(parseInt(ethers.utils.parseEther(balance.toString())._hex.toString()).toString().slice(0,3)))
               })
               
             })
@@ -153,72 +156,62 @@ class Defi extends React.Component {
 
   }
   getAmountsOutput = async (value_e) =>{
+    
     const { ethereum } = window;
     if (ethereum) {
+
+      this.getMaxAmount()
+
       const provider = new ethers.providers.Web3Provider(ethereum);
       const signer = provider.getSigner();
 
       const routerContract = new ethers.Contract(routerAddress, routerABI, signer);
 
+      const amountIn1 = ethers.utils.parseUnits(value_e.toString()).toString()
+      //console.log(amountIn1)
+
       //AVAX -> WETH
       if(this.state.coinInput === " AVAX" && this.state.coinOutput === " WETH"){
         const tokens = [WAVAX_Address,WETH_Address]
-        const amountIn1 = parseInt(ethers.utils.parseUnits(Number(value_e).toString(),18)._hex.toString()).toString();
         routerContract.getAmountsOut(amountIn1,tokens).then(result => {
-          let int = parseInt(result[1]._hex.toString())
-          //console.log(parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6)))
-          this.setState({amountOutput:parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6))})
-        })        
+          let int = ethers.utils.formatEther(parseInt(result[1]._hex.toString()).toString()).slice(0,6)
+          this.setState({amountOutput:int})        })        
       }
       //WETH -> AVAX
       else if(this.state.coinInput === " WETH" && this.state.coinOutput === " AVAX" ){
         const tokens = [WETH_Address,WAVAX_Address]
-        const amountIn1 = parseInt(ethers.utils.parseUnits(Number(value_e).toString(),18)._hex.toString()).toString();
         routerContract.getAmountsOut(amountIn1,tokens).then(result => {
-          let int = parseInt(result[1]._hex.toString())
-          //console.log(parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6)))
-          this.setState({amountOutput:parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6))})
+          let int = ethers.utils.formatEther(parseInt(result[1]._hex.toString()).toString()).slice(0,6)
+          this.setState({amountOutput:int})
         })   
       }
       //WETH -> USDC
       else if(this.state.coinInput === " WETH" && this.state.coinOutput === " USDC" ){
         const tokens = [WETH_Address,USDC_Address]
-        const amountIn1 = parseInt(ethers.utils.parseUnits(Number(value_e).toString(),18)._hex.toString()).toString();
         routerContract.getAmountsOut(amountIn1,tokens).then(result => {
-          let int = parseInt(result[1]._hex.toString())
-          //console.log(parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6)))
-          this.setState({amountOutput:parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6))})
-        })   
+          let int = ethers.utils.formatEther(parseInt(result[1]._hex.toString()).toString()).slice(0,6)
+          this.setState({amountOutput:int})        })   
       }
       //USDC -> WETH
       else if(this.state.coinInput === " USDC" && this.state.coinOutput === " WETH" ){
         const tokens = [USDC_Address,WETH_Address]
-        const amountIn1 = parseInt(ethers.utils.parseUnits(Number(value_e).toString(),18)._hex.toString()).toString();
         routerContract.getAmountsOut(amountIn1,tokens).then(result => {
-          let int = parseInt(result[1]._hex.toString())
-          //console.log(parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6)))
-          this.setState({amountOutput:parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6))})
-        })   
+          let int = ethers.utils.formatEther(parseInt(result[1]._hex.toString()).toString()).slice(0,6)
+          this.setState({amountOutput:int})        })   
       }
       //WAVAX -> USDC
       else if(this.state.coinInput === " AVAX" && this.state.coinOutput === " USDC" ){
         const tokens = [WAVAX_Address,USDC_Address]
-        const amountIn1 = parseInt(ethers.utils.parseUnits(Number(value_e).toString(),18)._hex.toString()).toString();
         routerContract.getAmountsOut(amountIn1,tokens).then(result => {
-          let int = parseInt(result[1]._hex.toString())
-          //console.log(parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6)))
-          this.setState({amountOutput:parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6))})
-        })   
+          let int = ethers.utils.formatEther(parseInt(result[1]._hex.toString()).toString()).slice(0,6)
+          this.setState({amountOutput:int})        })   
       }
       //USDC -> WAVAX
       else if(this.state.coinInput === " USDC" && this.state.coinOutput === " AVAX" ){
         const tokens = [USDC_Address,WAVAX_Address]
-        const amountIn1 = parseInt(ethers.utils.parseUnits(Number(value_e).toString(),18)._hex.toString()).toString();
         routerContract.getAmountsOut(amountIn1,tokens).then(result => {
-          let int = parseInt(result[1]._hex.toString())
-          //console.log(parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6)))
-          this.setState({amountOutput:parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6))})
-        })   
+          let int = ethers.utils.formatEther(parseInt(result[1]._hex.toString()).toString()).slice(0,6)
+          this.setState({amountOutput:int})        })   
       }
     }else{
       console.log("Ethereum object does not exist");
@@ -267,6 +260,7 @@ class Defi extends React.Component {
       this.setState({coinInput:item})
       this.setState({coinInput_img:this.state.tokens_img[i]})
       this.closeModal()
+      this.getMaxAmount()
     }
     
   }
@@ -278,6 +272,7 @@ class Defi extends React.Component {
       this.setState({coinOutput:item})
       this.setState({coinOutput_img:this.state.tokens_img[i]})
       this.closeModal()
+      this.getMaxAmount()
     }
     
   }
@@ -316,20 +311,26 @@ class Defi extends React.Component {
 
         const routerContract = new ethers.Contract(routerAddress, routerABI, signer);
 
+        const amountIn1 = ethers.utils.parseUnits(token1_amount.toString()).toString()
+        this.getAmountsOutput(token1_amount)
+        const amountIn2 = ethers.utils.parseUnits(this.state.amountOutput.toString()).toString()
+
+        console.log(amountIn1)
+        console.log(amountIn2)
+
         //AVAX - WETH
         if((this.state.coinInput === " AVAX" && this.state.coinOutput === " WETH") || (this.state.coinInput === " WETH" && this.state.coinOutput === " AVAX" )){
-          const amountIn1 = parseInt(ethers.utils.parseUnits(token1_amount.toString(),18)._hex.toString()).toString();
 
           const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
           token1.allowance(accounts[0],routerAddress).then(result => {
-            console.log("Result: "+result._hex.toString())
+            //console.log("Result: "+result._hex.toString())
             if(result._hex === "0x00"){
               token1.approve(routerAddress,amountIn1)
             }
           })
 
           const amount1Min = amountIn1.slice(0,-1)
-          const amount2Min = amountIn1
+          const amount2Min = amountIn1.toString().slice(0,-1)
           /*
           console.log(amountIn1)
           console.log(amount1Min)
@@ -350,18 +351,17 @@ class Defi extends React.Component {
         }
         //AVAX -> USDC
         else if((this.state.coinInput === " AVAX" && this.state.coinOutput === " USDC") || (this.state.coinInput === " USDC" && this.state.coinOutput === " AVAX" )){
-          const amountIn1 = parseInt(ethers.utils.parseUnits(token1_amount.toString(),18)._hex.toString()).toString();
 
           const token1 = new ethers.Contract(USDC_Address,ERC20_ABI,signer);
           token1.allowance(accounts[0],routerAddress).then(result => {
-            console.log("Result: "+result._hex.toString())
+            //console.log("Result: "+result._hex.toString())
             if(result._hex === "0x00"){
               token1.approve(routerAddress,amountIn1)
             }
           })
 
           const amount1Min = amountIn1.slice(0,-1)
-          const amount2Min = amountIn1
+          const amount2Min = amountIn2.toString().slice(0,-1)
           try{
             await routerContract.addLiquidityETH(USDC_Address,
             amountIn1,amount1Min,amount2Min,
@@ -378,9 +378,6 @@ class Defi extends React.Component {
         else if((this.state.coinInput === " USDC" && this.state.coinOutput === " WETH")||(this.state.coinInput === " WETH" && this.state.coinOutput === " USDC" )){
           const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
 
-          const amountIn1 = parseInt(ethers.utils.parseUnits(token1_amount.toString(),18)._hex.toString()).toString();
-          const amountIn2 = parseInt(ethers.utils.parseUnits(token1_amount.toString(),18)._hex.toString()).toString();
-
           token1.allowance(accounts[0],routerAddress).then(result => {
             //console.log("Result: "+result._hex.toString())
             if(result._hex === "0x00"){
@@ -396,7 +393,7 @@ class Defi extends React.Component {
           })
 
           const amount1Min = amountIn1.slice(0,-1).toString()
-          const amount2Min = amountIn2.slice(0,-1).toString()
+          const amount2Min = amountIn2.toString().slice(0,-1).toString()
           try{
             await routerContract.addLiquidity(WETH_Address,USDC_Address,
               amountIn1,amountIn2,
@@ -758,7 +755,7 @@ class Defi extends React.Component {
                                 <div className="swapbox_select">
                                     <input className="number form-control" placeholder={this.state.amountInput}
                     onChange={(e) => this.getAmountsOutput(e.target.value)} id="from_amount"/>
-                                    <div onClick={()=>this.setState({amountInput:this.state.coinHolding})} className='max_holdings'>MAX: {this.state.coinHolding}</div>
+                                    <div onClick={this.clickMax} className='max_holdings'>MAX: {this.state.coinHolding}</div>
                                 </div>
                                 
                     </div>
