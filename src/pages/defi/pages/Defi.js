@@ -83,7 +83,10 @@ class Defi extends React.Component {
         let address;
 
         if(this.state.coinInput === " AVAX"){
-          address = WAVAX_Address
+          await provider.getBalance(accounts[0]).then(balance => {
+            this.setState({coinHolding:ethers.utils.formatEther(balance).slice(0,5)})
+            return
+          })
         }
         else if(this.state.coinInput === " WETH"){
           address = WETH_Address
@@ -94,7 +97,7 @@ class Defi extends React.Component {
 
         const tokenContract = new ethers.Contract(address,ERC20_ABI,signer);
         tokenContract.balanceOf(accounts[0]).then(balance => {
-          this.setState({coinHolding:parseFloat(parseInt(ethers.utils.parseEther(balance.toString())._hex.toString()).toString().slice(0,5))})
+          this.setState({coinHolding:parseFloat(parseInt(ethers.utils.parseEther(balance.toString())._hex.toString()).toString().slice(0,5))*100})
         })
 
       }else{
@@ -234,6 +237,8 @@ class Defi extends React.Component {
     this.setState({amountOutput:inAmount})
     this.setState({coinOutput:inCoin})
     this.setState({coinOutput_img:inCoinImg})
+
+    this.getMaxAmount()
 
   }
 
