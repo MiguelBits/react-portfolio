@@ -315,8 +315,8 @@ class Defi extends React.Component {
         this.getAmountsOutput(token1_amount)
         const amountIn2 = ethers.utils.parseUnits(this.state.amountOutput.toString()).toString()
 
-        console.log(amountIn1)
-        console.log(amountIn2)
+        //console.log("amount1 "+amountIn1)
+        //console.log("amount2 "+ amountIn2)
 
         //AVAX - WETH
         if((this.state.coinInput === " AVAX" && this.state.coinOutput === " WETH") || (this.state.coinInput === " WETH" && this.state.coinOutput === " AVAX" )){
@@ -330,7 +330,7 @@ class Defi extends React.Component {
           })
 
           const amount1Min = amountIn1.slice(0,-1)
-          const amount2Min = amountIn1.toString().slice(0,-1)
+          const amount2Min = amountIn1.slice(0,-1)
           /*
           console.log(amountIn1)
           console.log(amount1Min)
@@ -342,10 +342,13 @@ class Defi extends React.Component {
             amountIn1,amount1Min,amount2Min,
             accounts[0],deadline, 
             {value: amountIn1})
-          }catch{
-            toast.error("Need to approve WETH tokens")
-            let approve1 = await token1.approve(routerAddress,amountIn1)
-            approve1.wait()
+          }catch(e){
+            if(e.code !== 4001){
+              toast.error("Need to approve WETH tokens")
+              let approve1 = await token1.approve(routerAddress,amountIn1)
+              approve1.wait()
+            }
+            
           }
 
         }
@@ -367,10 +370,12 @@ class Defi extends React.Component {
             amountIn1,amount1Min,amount2Min,
             accounts[0],deadline, 
             {value: amountIn1})
-          }catch{
-            toast.error("Need to approve USDC tokens")
-            let approve1 = await token1.approve(routerAddress,amountIn1)
-            approve1.wait()
+          }catch(e){
+            if(e.code !== 4001){
+              toast.error("Need to approve USDC tokens")
+              let approve1 = await token1.approve(routerAddress,amountIn1)
+              approve1.wait()
+            }
           }
 
         }
@@ -399,12 +404,14 @@ class Defi extends React.Component {
               amountIn1,amountIn2,
               amount1Min,amount2Min,
               accounts[0],deadline)
-          }catch{
-            toast.error("Need to approve your tokens")
-            let approve1 = await token1.approve(routerAddress,amountIn1)
-            approve1.wait()
-            let approve2 = await token2.approve(routerAddress,amountIn1)
-            approve2.wait()
+          }catch(e){
+            if(e.code !== 4001){
+              toast.error("Need to approve your tokens")
+              let approve1 = await token1.approve(routerAddress,amountIn1)
+              approve1.wait()
+              let approve2 = await token2.approve(routerAddress,amountIn1)
+              approve2.wait()
+            }
           }
 
         }
