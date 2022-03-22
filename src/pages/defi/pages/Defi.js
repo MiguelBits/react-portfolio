@@ -4,9 +4,9 @@ import NavTab from "./../components/NavTab"
 import ShowBalance from '../components/ShowBalance'
 import { BsFillArrowDownCircleFill, BsFillArrowUpCircleFill } from 'react-icons/bs'
 import { AiOutlinePlusCircle,AiOutlineMinusCircle } from 'react-icons/ai';
-import { toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 import { ethers } from 'ethers';
-import {routerAddress, routerABI, factoryAddress, factoryABI, WAVAX_Address, WETH_Address, USDC_Address, ERC20_ABI} from '../contracts/contract_abi';
+import {routerAddress, routerABI, factoryAddress, factoryABI, WAVAX_Address, WETH_Address, USDC_Address, ERC20_ABI, DAI_Address} from '../contracts/contract_abi';
 
 class Defi extends React.Component {
   state = {
@@ -23,11 +23,12 @@ class Defi extends React.Component {
     coinOutput: " AVAX",
     coinOutput_img: "https://cryptologos.cc/logos/avalanche-avax-logo.svg?v=022",
 
-    tokens: [" WETH"," AVAX"," USDC"],
+    tokens: [" WETH"," AVAX"," USDC"," DAI"],
     tokens_img: [
     "https://assets.coingecko.com/coins/images/17238/large/aWETH_2x.png?1626940782",
     "https://cryptologos.cc/logos/avalanche-avax-logo.svg?v=022",
-    "https://cryptologos.cc/logos/usd-coin-usdc-logo.png"],
+    "https://cryptologos.cc/logos/usd-coin-usdc-logo.png",
+    "https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.png"],
     token1_amount: 0,
     token2_amount: 0,
 
@@ -75,7 +76,6 @@ class Defi extends React.Component {
   getMaxAmount = async () => {
     const { ethereum } = window;
       if (ethereum) {
-        
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const accounts = await provider.listAccounts();
@@ -83,23 +83,44 @@ class Defi extends React.Component {
         let address;
 
         if(this.state.coinInput === " AVAX"){
-          address = WAVAX_Address
+          await provider.getBalance(accounts[0]).then(balance => {
+            this.setState({coinHolding:ethers.utils.formatEther(balance).slice(0,5)})
+          })
         }
         else if(this.state.coinInput === " WETH"){
           address = WETH_Address
+          const tokenContract = new ethers.Contract(address,ERC20_ABI,signer);
+        tokenContract.balanceOf(accounts[0]).then(balance => {
+          let int = ethers.utils.formatEther(parseInt(balance._hex.toString()).toString()).slice(0,6)
+          this.setState({coinHolding:int})
+        })
         }
         else if(this.state.coinInput === " USDC"){
           address =  USDC_Address
+          const tokenContract = new ethers.Contract(address,ERC20_ABI,signer);
+        tokenContract.balanceOf(accounts[0]).then(balance => {
+          let int = ethers.utils.formatEther(parseInt(balance._hex.toString()).toString()).slice(0,6)
+          this.setState({coinHolding:int})
+        })
+        }
+        else if(this.state.coinInput === " DAI"){
+          address =  DAI_Address
+          const tokenContract = new ethers.Contract(address,ERC20_ABI,signer);
+        tokenContract.balanceOf(accounts[0]).then(balance => {
+          //console.log(ethers.utils.formatEther(balance.toString()))
+          this.setState({coinHolding:ethers.utils.formatEther(balance.toString())})
+        })
         }
 
-        const tokenContract = new ethers.Contract(address,ERC20_ABI,signer);
-        tokenContract.balanceOf(accounts[0]).then(balance => {
-          this.setState({coinHolding:parseFloat(parseInt(ethers.utils.parseEther(balance.toString())._hex.toString()).toString().slice(0,5))})
-        })
+        
 
       }else{
         console.log("Ethereum object does not exist");
       }
+  }
+  clickMax = () => {
+    this.setState({amountInput:this.state.coinHolding})
+    this.getAmountsOutput(this.state.coinHolding)
   }
   getGas = async () => {
     const { ethereum } = window;
@@ -134,7 +155,6 @@ class Defi extends React.Component {
                 const previous_state_holding= this.state.LPholdings;
                 const updated_state_holding = previous_state_holding.concat(parseFloat(parseInt(ethers.utils.parseEther(balance.toString())._hex.toString()).toString().slice(0,3)))
                 this.setState({LPholdings: updated_state_holding})
-                this.getAmountsOutput(parseFloat(parseInt(ethers.utils.parseEther(balance.toString())._hex.toString()).toString().slice(0,3)))
               })
               
             })
@@ -150,79 +170,114 @@ class Defi extends React.Component {
 
   }
   getAmountsOutput = async (value_e) =>{
+    this.setState({amountInput:Number(value_e)})
     const { ethereum } = window;
     if (ethereum) {
+
+      this.getMaxAmount()
+
       const provider = new ethers.providers.Web3Provider(ethereum);
       const signer = provider.getSigner();
 
       const routerContract = new ethers.Contract(routerAddress, routerABI, signer);
 
+      const amountIn1 = ethers.utils.parseUnits(value_e.toString()).toString()
+      //console.log(amountIn1)
+
       //AVAX -> WETH
       if(this.state.coinInput === " AVAX" && this.state.coinOutput === " WETH"){
         const tokens = [WAVAX_Address,WETH_Address]
-        const amountIn1 = parseInt(ethers.utils.parseUnits(Number(value_e).toString(),18)._hex.toString()).toString();
         routerContract.getAmountsOut(amountIn1,tokens).then(result => {
-          let int = parseInt(result[1]._hex.toString())
-          //console.log(parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6)))
-          this.setState({amountOutput:parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6))})
-        })        
+          let int = ethers.utils.formatEther(parseInt(result[1]._hex.toString()).toString()).slice(0,6)
+          this.setState({amountOutput:int})        })        
       }
       //WETH -> AVAX
       else if(this.state.coinInput === " WETH" && this.state.coinOutput === " AVAX" ){
         const tokens = [WETH_Address,WAVAX_Address]
-        const amountIn1 = parseInt(ethers.utils.parseUnits(Number(value_e).toString(),18)._hex.toString()).toString();
         routerContract.getAmountsOut(amountIn1,tokens).then(result => {
-          let int = parseInt(result[1]._hex.toString())
-          //console.log(parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6)))
-          this.setState({amountOutput:parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6))})
+          let int = ethers.utils.formatEther(parseInt(result[1]._hex.toString()).toString()).slice(0,6)
+          this.setState({amountOutput:int})
         })   
       }
       //WETH -> USDC
       else if(this.state.coinInput === " WETH" && this.state.coinOutput === " USDC" ){
         const tokens = [WETH_Address,USDC_Address]
-        const amountIn1 = parseInt(ethers.utils.parseUnits(Number(value_e).toString(),18)._hex.toString()).toString();
         routerContract.getAmountsOut(amountIn1,tokens).then(result => {
-          let int = parseInt(result[1]._hex.toString())
-          //console.log(parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6)))
-          this.setState({amountOutput:parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6))})
-        })   
+          let int = ethers.utils.formatEther(parseInt(result[1]._hex.toString()).toString()).slice(0,6)
+          this.setState({amountOutput:int})        })   
       }
       //USDC -> WETH
       else if(this.state.coinInput === " USDC" && this.state.coinOutput === " WETH" ){
         const tokens = [USDC_Address,WETH_Address]
-        const amountIn1 = parseInt(ethers.utils.parseUnits(Number(value_e).toString(),18)._hex.toString()).toString();
         routerContract.getAmountsOut(amountIn1,tokens).then(result => {
-          let int = parseInt(result[1]._hex.toString())
-          //console.log(parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6)))
-          this.setState({amountOutput:parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6))})
-        })   
+          let int = ethers.utils.formatEther(parseInt(result[1]._hex.toString()).toString()).slice(0,6)
+          this.setState({amountOutput:int})        })   
       }
       //WAVAX -> USDC
       else if(this.state.coinInput === " AVAX" && this.state.coinOutput === " USDC" ){
         const tokens = [WAVAX_Address,USDC_Address]
-        const amountIn1 = parseInt(ethers.utils.parseUnits(Number(value_e).toString(),18)._hex.toString()).toString();
         routerContract.getAmountsOut(amountIn1,tokens).then(result => {
-          let int = parseInt(result[1]._hex.toString())
-          //console.log(parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6)))
-          this.setState({amountOutput:parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6))})
-        })   
+          let int = ethers.utils.formatEther(parseInt(result[1]._hex.toString()).toString()).slice(0,6)
+          this.setState({amountOutput:int})        })   
       }
       //USDC -> WAVAX
       else if(this.state.coinInput === " USDC" && this.state.coinOutput === " AVAX" ){
         const tokens = [USDC_Address,WAVAX_Address]
-        const amountIn1 = parseInt(ethers.utils.parseUnits(Number(value_e).toString(),18)._hex.toString()).toString();
         routerContract.getAmountsOut(amountIn1,tokens).then(result => {
-          let int = parseInt(result[1]._hex.toString())
-          //console.log(parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6)))
-          this.setState({amountOutput:parseFloat(parseInt(ethers.utils.parseEther(int.toString())._hex.toString()).toString().slice(0,6))})
-        })   
+          let int = ethers.utils.formatEther(parseInt(result[1]._hex.toString()).toString()).slice(0,6)
+          this.setState({amountOutput:int})        })   
+      }
+      //DAI -> WAVAX
+      else if(this.state.coinInput === " DAI" && this.state.coinOutput === " AVAX" ){
+        const tokens = [DAI_Address,WAVAX_Address]
+        routerContract.getAmountsOut(amountIn1,tokens).then(result => {
+          let int = ethers.utils.formatEther(parseInt(result[1]._hex.toString()).toString()).slice(0,6)
+          this.setState({amountOutput:int})        })   
+      }
+      //DAI -> WETH
+      else if(this.state.coinInput === " DAI" && this.state.coinOutput === " WETH" ){
+        const tokens = [DAI_Address,WETH_Address]
+        routerContract.getAmountsOut(amountIn1,tokens).then(result => {
+          let int = ethers.utils.formatEther(parseInt(result[1]._hex.toString()).toString()).slice(0,6)
+          this.setState({amountOutput:int})        })   
+      }
+      //DAI -> USDC
+      else if(this.state.coinInput === " DAI" && this.state.coinOutput === " USDC" ){
+        const tokens = [DAI_Address,USDC_Address]
+        routerContract.getAmountsOut(amountIn1,tokens).then(result => {
+          let int = ethers.utils.formatEther(parseInt(result[1]._hex.toString()).toString()).slice(0,6)
+          this.setState({amountOutput:int})        })   
+      }
+      //WAVAX -> DAI
+      else if(this.state.coinInput === " AVAX" && this.state.coinOutput === " DAI" ){
+        const tokens = [WAVAX_Address,DAI_Address]
+        routerContract.getAmountsOut(amountIn1,tokens).then(result => {
+          let int = ethers.utils.formatEther(parseInt(result[1]._hex.toString()).toString()).slice(0,6)
+          this.setState({amountOutput:int})        })   
+      }
+      //WETH -> DAI
+      else if(this.state.coinInput === " WETH" && this.state.coinOutput === " DAI" ){
+        const tokens = [WETH_Address,DAI_Address]
+        routerContract.getAmountsOut(amountIn1,tokens).then(result => {
+          let int = ethers.utils.formatEther(parseInt(result[1]._hex.toString()).toString()).slice(0,6)
+          this.setState({amountOutput:int})        })   
+      }
+      //USDC -> DAI
+      else if(this.state.coinInput === " USDC" && this.state.coinOutput === " DAI" ){
+        const tokens = [USDC_Address,DAI_Address]
+        routerContract.getAmountsOut(amountIn1,tokens).then(result => {
+          let int = ethers.utils.formatEther(parseInt(result[1]._hex.toString()).toString()).slice(0,6)
+          this.setState({amountOutput:int})        })   
       }
     }else{
       console.log("Ethereum object does not exist");
     }
   }
   switchAmounts = () => {
-    this.setState({switched:!this.state.switched})
+    if(this.state.useFunction !== "Pool"){
+      this.setState({switched:!this.state.switched})
+    }
+    
     let inAmount = this.state.amountInput
     let inCoin = this.state.coinInput
     let inCoinImg = this.state.coinInput_img
@@ -234,6 +289,8 @@ class Defi extends React.Component {
     this.setState({amountOutput:inAmount})
     this.setState({coinOutput:inCoin})
     this.setState({coinOutput_img:inCoinImg})
+
+    this.getMaxAmount()
 
   }
 
@@ -262,6 +319,7 @@ class Defi extends React.Component {
       this.setState({coinInput:item})
       this.setState({coinInput_img:this.state.tokens_img[i]})
       this.closeModal()
+      this.getMaxAmount()
     }
     
   }
@@ -273,6 +331,7 @@ class Defi extends React.Component {
       this.setState({coinOutput:item})
       this.setState({coinOutput_img:this.state.tokens_img[i]})
       this.closeModal()
+      this.getMaxAmount()
     }
     
   }
@@ -280,7 +339,7 @@ class Defi extends React.Component {
     if(this.state.useFunction === "Pool"){
       return true;
     }
-    else if(this.state.amountInput !== 0 && this.state.amountOutput !== 0 && !this.state.switched){
+    else if(this.state.amountInput !== 0 && this.state.amountOutput !== 0 ){
       return true;
     }
     else{
@@ -297,7 +356,7 @@ class Defi extends React.Component {
     }
   }
 
-  AddLiquity = async (token1_amount) => {
+  AddLiquity = async () => {
 
       const { ethereum } = window;
       if (ethereum) {
@@ -311,20 +370,26 @@ class Defi extends React.Component {
 
         const routerContract = new ethers.Contract(routerAddress, routerABI, signer);
 
+        const amountIn1 = ethers.utils.parseUnits(this.state.amountInput.toString()).toString()
+        this.getAmountsOutput(this.state.amountInput)
+        const amountIn2 = ethers.utils.parseUnits(this.state.amountOutput.toString()).toString()
+
+        //console.log("amount1 "+amountIn1)
+        //console.log("amount2 "+ amountIn2)
+
         //AVAX - WETH
         if((this.state.coinInput === " AVAX" && this.state.coinOutput === " WETH") || (this.state.coinInput === " WETH" && this.state.coinOutput === " AVAX" )){
-          const amountIn1 = parseInt(ethers.utils.parseUnits(token1_amount.toString(),18)._hex.toString()).toString();
 
           const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
           token1.allowance(accounts[0],routerAddress).then(result => {
-            console.log("Result: "+result._hex.toString())
+            //console.log("Result: "+result._hex.toString())
             if(result._hex === "0x00"){
               token1.approve(routerAddress,amountIn1)
             }
           })
 
           const amount1Min = amountIn1.slice(0,-1)
-          const amount2Min = amountIn1
+          const amount2Min = amountIn2.slice(0,-1)
           /*
           console.log(amountIn1)
           console.log(amount1Min)
@@ -332,49 +397,85 @@ class Defi extends React.Component {
           console.log(accounts[0])
           */
           try{
-            await routerContract.addLiquidityETH(WETH_Address,
-            amountIn1,amount1Min,amount2Min,
-            accounts[0],deadline, 
-            {value: amountIn1})
-          }catch{
-            toast.error("Need to approve WETH tokens")
-            let approve1 = await token1.approve(routerAddress,amountIn1)
-            approve1.wait()
+            if(this.state.coinInput === " WETH"){
+              const txn = await routerContract.addLiquidityETH(WETH_Address,
+              amountIn1,amount1Min,amount2Min,
+              accounts[0],deadline, 
+              {value: amountIn2})
+              txn.wait().then(
+                toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+              )
+            }
+            else{
+              const txn = await routerContract.addLiquidityETH(WETH_Address,
+              amountIn2,amount2Min,amount1Min,
+              accounts[0],deadline, 
+              {value: amountIn1})
+              txn.wait().then(
+                toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+              )
+            }
+            
+          }catch(e){
+            if(e.code !== 4001 && e.code !== -32603){
+              toast.error("Need to approve WETH tokens")
+              let approve1 = await token1.approve(routerAddress,amountIn1)
+              approve1.wait()
+            }
+            else{
+              toast.info("This page is a Work in Progress")
+            }
           }
 
         }
         //AVAX -> USDC
         else if((this.state.coinInput === " AVAX" && this.state.coinOutput === " USDC") || (this.state.coinInput === " USDC" && this.state.coinOutput === " AVAX" )){
-          const amountIn1 = parseInt(ethers.utils.parseUnits(token1_amount.toString(),18)._hex.toString()).toString();
 
           const token1 = new ethers.Contract(USDC_Address,ERC20_ABI,signer);
           token1.allowance(accounts[0],routerAddress).then(result => {
-            console.log("Result: "+result._hex.toString())
+            //console.log("Result: "+result._hex.toString())
             if(result._hex === "0x00"){
               token1.approve(routerAddress,amountIn1)
             }
           })
 
           const amount1Min = amountIn1.slice(0,-1)
-          const amount2Min = amountIn1
+          const amount2Min = amountIn2.toString().slice(0,-1)
           try{
-            await routerContract.addLiquidityETH(USDC_Address,
-            amountIn1,amount1Min,amount2Min,
-            accounts[0],deadline, 
-            {value: amountIn1})
-          }catch{
-            toast.error("Need to approve USDC tokens")
-            let approve1 = await token1.approve(routerAddress,amountIn1)
-            approve1.wait()
+            if(this.state.coinInput === " USDC"){
+              const txn = await routerContract.addLiquidityETH(USDC_Address,
+              amountIn1,amount1Min,amount2Min,
+              accounts[0],deadline, 
+              {value: amountIn2})
+              txn.wait().then(
+                toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+              )
+            }
+            else{
+              const txn = await routerContract.addLiquidityETH(USDC_Address,
+                amountIn2,amount1Min,amount2Min,
+              accounts[0],deadline, 
+              {value: amountIn1})
+              txn.wait().then(
+                toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+              )
+            }
+            
+          }catch(e){
+            if(e.code !== 4001 && e.code !== -32603){
+              toast.error("Need to approve USDC tokens")
+              let approve1 = await token1.approve(routerAddress,amountIn1)
+              approve1.wait()
+            }
+            else{
+              toast.info("This page is a Work in Progress")
+            }
           }
 
         }
         //USDC - WETH
         else if((this.state.coinInput === " USDC" && this.state.coinOutput === " WETH")||(this.state.coinInput === " WETH" && this.state.coinOutput === " USDC" )){
           const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
-
-          const amountIn1 = parseInt(ethers.utils.parseUnits(token1_amount.toString(),18)._hex.toString()).toString();
-          const amountIn2 = parseInt(ethers.utils.parseUnits(token1_amount.toString(),18)._hex.toString()).toString();
 
           token1.allowance(accounts[0],routerAddress).then(result => {
             //console.log("Result: "+result._hex.toString())
@@ -391,20 +492,151 @@ class Defi extends React.Component {
           })
 
           const amount1Min = amountIn1.slice(0,-1).toString()
-          const amount2Min = amountIn2.slice(0,-1).toString()
+          const amount2Min = amountIn2.toString().slice(0,-1).toString()
           try{
-            await routerContract.addLiquidity(WETH_Address,USDC_Address,
+            const txn = await routerContract.addLiquidity(WETH_Address,USDC_Address,
               amountIn1,amountIn2,
               amount1Min,amount2Min,
               accounts[0],deadline)
-          }catch{
-            toast.error("Need to approve your tokens")
-            let approve1 = await token1.approve(routerAddress,amountIn1)
-            approve1.wait()
-            let approve2 = await token2.approve(routerAddress,amountIn1)
-            approve2.wait()
+              txn.wait().then(
+                toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+              )
+          }catch(e){
+            if(e.code !== 4001 && e.code !== -32603){
+              toast.error("Need to approve your tokens")
+              let approve1 = await token1.approve(routerAddress,amountIn1)
+              approve1.wait()
+              let approve2 = await token2.approve(routerAddress,amountIn1)
+              approve2.wait()
+            }else{
+              toast.info("This page is a Work in Progress")
+            }
           }
 
+        }
+        //AVAX -> DAI
+        else if((this.state.coinInput === " AVAX" && this.state.coinOutput === " DAI") || (this.state.coinInput === " DAI" && this.state.coinOutput === " AVAX" )){
+
+          const token1 = new ethers.Contract(DAI_Address,ERC20_ABI,signer);
+          token1.allowance(accounts[0],routerAddress).then(result => {
+            //console.log("Result: "+result._hex.toString())
+            if(result._hex === "0x00"){
+              token1.approve(routerAddress,amountIn1)
+            }
+          })
+
+          const amount1Min = amountIn1.slice(0,-1)
+          const amount2Min = amountIn2.toString().slice(0,-1)
+          try{
+            if(this.state.coinInput === " DAI"){
+              const txn = await routerContract.addLiquidityETH(DAI_Address,
+              amountIn1,amount1Min,amount2Min,
+              accounts[0],deadline, 
+              {value: amountIn2})
+              txn.wait().then(
+                toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+              )
+            }
+            else{
+              const txn = await routerContract.addLiquidityETH(DAI_Address,
+                amountIn2,amount1Min,amount2Min,
+              accounts[0],deadline, 
+              {value: amountIn1})
+              txn.wait().then(
+                toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+              )
+            }
+            
+          }catch(e){
+            if(e.code !== 4001 && e.code !== -32603){
+              toast.error("Need to approve DAI tokens")
+              let approve1 = await token1.approve(routerAddress,amountIn1)
+              approve1.wait()
+            }else{
+              toast.info("This page is a Work in Progress")
+            }
+          }
+
+        }
+        //DAI - WETH
+        else if((this.state.coinInput === " DAI" && this.state.coinOutput === " WETH")||(this.state.coinInput === " WETH" && this.state.coinOutput === " DAI" )){
+          const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
+
+          token1.allowance(accounts[0],routerAddress).then(result => {
+            //console.log("Result: "+result._hex.toString())
+            if(result._hex === "0x00"){
+              token1.approve(routerAddress,amountIn1)
+            }
+          })
+          const token2 = new ethers.Contract(DAI_Address,ERC20_ABI,signer);
+          token2.allowance(accounts[0],routerAddress).then(result => {
+            //console.log("Result: "+result._hex.toString())
+            if(result._hex === "0x00"){
+              token2.approve(routerAddress,amountIn1)
+            }
+          })
+
+          const amount1Min = amountIn1.slice(0,-1).toString()
+          const amount2Min = amountIn2.toString().slice(0,-1).toString()
+          try{
+            const txn = await routerContract.addLiquidity(WETH_Address,DAI_Address,
+              amountIn1,amountIn2,
+              amount1Min,amount2Min,
+              accounts[0],deadline)
+              txn.wait().then(
+                toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+              )
+          }catch(e){
+            if(e.code !== 4001 && e.code !== -32603){
+              toast.error("Need to approve your tokens")
+              let approve1 = await token1.approve(routerAddress,amountIn1)
+              approve1.wait()
+              let approve2 = await token2.approve(routerAddress,amountIn1)
+              approve2.wait()
+            }else{
+              toast.info("This page is a Work in Progress")
+            }
+          }
+        }
+        //DAI - USDC
+        else if((this.state.coinInput === " DAI" && this.state.coinOutput === " USDC")||(this.state.coinInput === " USDC" && this.state.coinOutput === " DAI" )){
+          const token1 = new ethers.Contract(USDC_Address,ERC20_ABI,signer);
+
+          token1.allowance(accounts[0],routerAddress).then(result => {
+            //console.log("Result: "+result._hex.toString())
+            if(result._hex === "0x00"){
+              token1.approve(routerAddress,amountIn1)
+            }
+          })
+          const token2 = new ethers.Contract(DAI_Address,ERC20_ABI,signer);
+          token2.allowance(accounts[0],routerAddress).then(result => {
+            //console.log("Result: "+result._hex.toString())
+            if(result._hex === "0x00"){
+              token2.approve(routerAddress,amountIn1)
+            }
+          })
+
+          const amount1Min = amountIn1.slice(0,-1).toString()
+          const amount2Min = amountIn2.toString().slice(0,-1).toString()
+          try{
+            const txn = await routerContract.addLiquidity(USDC_Address,DAI_Address,
+              amountIn1,amountIn2,
+              amount1Min,amount2Min,
+              accounts[0],deadline)
+              txn.wait().then(
+                toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+              )
+          }catch(e){
+            if(e.code !== 4001 && e.code !== -32603){
+              toast.error("Need to approve your tokens")
+              let approve1 = await token1.approve(routerAddress,amountIn1)
+              approve1.wait()
+              let approve2 = await token2.approve(routerAddress,amountIn1)
+              approve2.wait()
+            }else{
+              toast.info("This page is a Work in Progress")
+            }
+          }
         }
       }
       else{
@@ -430,8 +662,10 @@ class Defi extends React.Component {
   
           factoryContract.getPair(WAVAX_Address,WETH_Address).then(tokenAddress => {
             const pairContract = new ethers.Contract(tokenAddress,ERC20_ABI,signer)
+            
             pairContract.balanceOf(accounts[0]).then(balance => {
-              routerContract.removeLiquidityETH(tokenAddress,parseInt(balance._hex.toString()))
+              pairContract.approve(routerAddress,balance.toString())
+              routerContract.removeLiquidityETH(tokenAddress,balance.toString())
             })
             
           })
@@ -464,7 +698,7 @@ class Defi extends React.Component {
       }
   }
   
-  SwapTokens = async (token_amount) => {
+  SwapTokens = async () => {
   
       const { ethereum } = window;
       if (ethereum) {
@@ -480,12 +714,11 @@ class Defi extends React.Component {
         //uniswap fork contract
         const routerContract = new ethers.Contract(routerAddress, routerABI, signer);
         //parse to Ether
-        const amountIn = ethers.utils.parseEther(token_amount.toString());
+        const amountIn = ethers.utils.parseUnits(Number(this.state.amountInput).toString()).toString();
 
         //AVAX -> WETH
         if(this.state.coinInput === " AVAX" && this.state.coinOutput === " WETH"){
           if(this.state.switched){
-            const amountIn = parseInt(ethers.utils.parseUnits(token_amount.toString(),18)._hex.toString()).toString();
             const tokens = [WETH_Address,WAVAX_Address]
             
             //get amounts output
@@ -496,20 +729,23 @@ class Defi extends React.Component {
             //approve erc20
             const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
             token1.allowance(accounts[0],routerAddress).then(result => {
-              console.log("Result: "+result._hex.toString())
+              //console.log("Result: "+result._hex.toString())
               if(result._hex === "0x00"){
                 token1.approve(routerAddress,amountOut)
               }
             })
             
             //swap native coin for erc20
-            await routerContract.swapExactTokensForETH(
+            const txn = await routerContract.swapExactTokensForETH(
               amountIn,
               amountOut[1],
               tokens,
               accounts[0],
               deadline
             );
+            txn.wait().then(
+              toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+            )
           }
           else{
             const tokens = [WAVAX_Address,WETH_Address]
@@ -521,13 +757,16 @@ class Defi extends React.Component {
             );
             
             //swap native coin for erc20
-            await routerContract.swapExactETHForTokens(
+            const txn = await routerContract.swapExactETHForTokens(
               amountOut[1],
               tokens,
               accounts[0],
               deadline,
               { value: amountIn }
             );
+            txn.wait().then(
+              toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+            )
           }
         }
         //WETH -> AVAX
@@ -543,16 +782,18 @@ class Defi extends React.Component {
             );
             
             //swap native coin for erc20
-            await routerContract.swapExactETHForTokens(
+            const txn = await routerContract.swapExactETHForTokens(
               amountOut[1],
               tokens,
               accounts[0],
               deadline,
               { value: amountIn }
             );
+            txn.wait().then(
+              toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+            )
           }
           else{
-            const amountIn = parseInt(ethers.utils.parseUnits(token_amount.toString(),18)._hex.toString()).toString();
             const tokens = [WETH_Address,WAVAX_Address]
             
             //get amounts output
@@ -563,20 +804,25 @@ class Defi extends React.Component {
             //approve erc20
             const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
             token1.allowance(accounts[0],routerAddress).then(result => {
-              console.log("Result: "+result._hex.toString())
+              //console.log("Result: "+result._hex.toString())
               if(result._hex === "0x00"){
                 token1.approve(routerAddress,amountOut)
               }
             })
-
+            //console.log(amountIn)
+            //console.log(amountOut[1].toString())
+            
             //swap native coin for erc20
-            await routerContract.swapExactTokensForETH(
+            const txn = await routerContract.swapExactTokensForETH(
               amountIn,
-              amountOut[1],
+              amountOut[1].toString(),
               tokens,
               accounts[0],
               deadline
             );
+            txn.wait().then(
+              toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+            )
           }
           
         }
@@ -593,19 +839,22 @@ class Defi extends React.Component {
             //approve erc20
             const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
             token1.allowance(accounts[0],routerAddress).then(result => {
-              console.log("Result: "+result._hex.toString())
+              //console.log("Result: "+result._hex.toString())
               if(result._hex === "0x00"){
                 token1.approve(routerAddress,amountOut)
               }
             })
 
-            await routerContract.swapExactTokensForTokens(
+            const txn = await routerContract.swapExactTokensForTokens(
               amountIn,
               amountOut[1],
               tokens,
               accounts[0],
               deadline
             );
+            txn.wait().then(
+              toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+            )
           }
           else{
             const tokens = [USDC_Address,WETH_Address]
@@ -623,13 +872,16 @@ class Defi extends React.Component {
               }
             })
             
-            await routerContract.swapExactTokensForTokens(
+            const txn = await routerContract.swapExactTokensForTokens(
               amountIn,
               amountOut[1],
               tokens,
               accounts[0],
               deadline
             );
+            txn.wait().then(
+              toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+            )
           }
         }
         // WETH -> USDC
@@ -644,19 +896,22 @@ class Defi extends React.Component {
             //approve erc20
             const token1 = new ethers.Contract(USDC_Address,ERC20_ABI,signer);
             token1.allowance(accounts[0],routerAddress).then(result => {
-              console.log("Result: "+result._hex.toString())
+              //console.log("Result: "+result._hex.toString())
               if(result._hex === "0x00"){
                 token1.approve(routerAddress,amountOut)
               }
             })
 
-            await routerContract.swapExactTokensForTokens(
+            const txn = await routerContract.swapExactTokensForTokens(
               amountIn,
               amountOut[1],
               tokens,
               accounts[0],
               deadline
             );
+            txn.wait().then(
+              toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+            )
           }
           else{
             const tokens = [WETH_Address,USDC_Address]
@@ -668,19 +923,22 @@ class Defi extends React.Component {
             //approve erc20
             const token1 = new ethers.Contract(WETH_Address,ERC20_ABI,signer);
             token1.allowance(accounts[0],routerAddress).then(result => {
-              console.log("Result: "+result._hex.toString())
+              //console.log("Result: "+result._hex.toString())
               if(result._hex === "0x00"){
                 token1.approve(routerAddress,amountOut)
               }
             })
 
-            await routerContract.swapExactTokensForTokens(
+            const txn = await routerContract.swapExactTokensForTokens(
               amountIn,
               amountOut[1],
               tokens,
               accounts[0],
               deadline
             );
+            txn.wait().then(
+              toast.info(<div>See your transaction <a href={"https://testnet.snowtrace.io/tx/"+txn.hash} target="_blank">here</a></div>)
+            )
           }
         }
         //await txnwait.wait()
@@ -698,11 +956,11 @@ class Defi extends React.Component {
     }
     else{
       if(this.props.useFunction === "Swap"){
-        this.SwapTokens(Number(this.state.amountInput))
+        this.SwapTokens()
       }
       else if(this.props.useFunction === "Pool"){
-        if(!this.state.switched)this.AddLiquity(Number(this.state.amountInput),Number(this.state.amountOutput ))
-        else this.RemoveLiquity(Number(this.state.amountInput),Number(this.state.amountOutput ))
+        if(!this.state.switched)this.AddLiquity()
+        else this.RemoveLiquity()
       }
       else if(this.props.useFunction === "Loan"){
         this.Loan()
@@ -720,7 +978,7 @@ class Defi extends React.Component {
     <div className='DefiPage'>
 
       <NavTab></NavTab>
-
+      <ToastContainer></ToastContainer>
       <ShowBalance></ShowBalance>
 
       <div onClick={this.checkHoldings}>
@@ -753,7 +1011,7 @@ class Defi extends React.Component {
                                 <div className="swapbox_select">
                                     <input className="number form-control" placeholder={this.state.amountInput}
                     onChange={(e) => this.getAmountsOutput(e.target.value)} id="from_amount"/>
-                                    <div onClick={()=>this.setState({amountInput:this.state.coinHolding})} className='max_holdings'>MAX: {this.state.coinHolding}</div>
+                                    <div onClick={this.clickMax} className='max_holdings'>MAX: {this.state.coinHolding}</div>
                                 </div>
                                 
                     </div>
