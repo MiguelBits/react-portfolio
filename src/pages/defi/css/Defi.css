@@ -1,0 +1,431 @@
+/*
+body{
+  background-image: url('https://c.tenor.com/iA5aV0Mke_sAAAAM/hex-bitcoin.gif');
+  background-size: cover;
+  background-position: 10px 10px 10px;
+}
+*/
+
+/* CONNECT WALLET LANDING PAGE*/
+.container-wallet_defi {
+    width: 334px;
+    margin: 0 auto;
+    position: absolute;
+    top: 23.5%;
+    left: 0;
+    text-align: center;
+    right: 0;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+  }
+  
+.one-wallet_defi, .two-wallet_defi, .five-wallet_defi {
+    border: none;
+    border-radius: 4px;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.48);
+    overflow: hidden;
+    padding: 20px 50px 20px 70px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    position: relative;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    width: 100%;
+    -webkit-transition: background-position .7s,box-shadow .4s;
+    transition: background-position .7s,box-shadow .4s;
+    background-size: 110%;
+    font-family: 'Oswald', sans-serif;
+  }
+  .one-wallet_defi:hover, .two-wallet_defi:hover, .five-wallet_defi:hover {
+    background-position: 0% 30%;
+  }
+  .one-wallet_defi:hover:after, .two-wallet_defi:hover:after, .five-wallet_defi:hover:after {
+    right: -40px;
+    -webkit-transition: right .4s,-webkit-transform 30s .2s linear;
+    transition: right .4s,-webkit-transform 30s .2s linear;
+    transition: right .4s,transform 30s .2s linear;
+    transition: right .4s,transform 30s .2s linear,-webkit-transform 30s .2s linear;
+  }
+  .one-wallet_defi:before, .two-wallet_defi:before, .five-wallet_defi:before, .one-wallet_defi:after, .two-wallet_defi:after, .three:after, .four:after, .five-wallet_defi:after {
+    font-family: FontAwesome;
+    display: block;
+    position: absolute;
+  }
+  .one-wallet_defi:before, .two-wallet_defi:before, .five-wallet_defi:before {
+    -webkit-transition: all 1s;
+    transition: all 1s;
+    font-size: 30px;
+    left: 25px;
+    top: 19px;
+  }
+  .one-wallet_defi:after, .two-wallet_defi:after, .five-wallet_defi:after {
+    -webkit-transition: right .4s, -webkit-transform .2s;
+    transition: right .4s, -webkit-transform .2s;
+    transition: right .4s, transform .2s;
+    transition: right .4s, transform .2s, -webkit-transform .2s;
+    font-size: 100px;
+    opacity: .3;
+    right: -120px;
+    top: -17px;
+  }
+  
+  .one-wallet_defi {
+    box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.16) inset, 0px 0px 10px 0px #782CDA;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#782CDA), to(rgba(126, 94, 162, 0.51))), url("https://news.mit.edu/sites/default/files/styles/news_article__image_gallery/public/images/202107/artificial-intelligence-mit-mrl-ericsson-00_0.png?itok=tr9cVrYa");
+    background-image: linear-gradient(to bottom, #782CDA, rgba(126, 94, 162, 0.51)), url("https://news.mit.edu/sites/default/files/styles/news_article__image_gallery/public/images/202107/artificial-intelligence-mit-mrl-ericsson-00_0.png?itok=tr9cVrYa");
+  }
+  .one-wallet_defi:hover {
+    box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.16) inset, 0px 0px 30px 0px #782CDA;
+  }
+  .one-wallet_defi:hover:after {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  .one-wallet_defi:hover:before {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  .one-wallet_defi:after, .one-wallet_defi:before {
+    content: "🦊";
+  }
+  .one-wallet_defi b {
+    color: #DDA6FF;
+    font-weight: 700;
+  }
+  
+  .two-wallet_defi {
+    box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.16) inset, 0px 0px 10px 0px #E48A3C;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#E48A3C), to(rgba(222, 135, 61, 0.24))), url("https://media.istockphoto.com/vectors/giant-anthropomorphic-bitcoin-cryptocurrency-supporting-a-small-vector-id1309012520?k=20&m=1309012520&s=170667a&w=0&h=7CvavMPMK5yXf45ySCoDaL0nR2CE3bvbw4-B-npZ5cQ=");
+    background-image: linear-gradient(to bottom, #E48A3C, rgba(222, 135, 61, 0.24)), url("https://media.istockphoto.com/vectors/giant-anthropomorphic-bitcoin-cryptocurrency-supporting-a-small-vector-id1309012520?k=20&m=1309012520&s=170667a&w=0&h=7CvavMPMK5yXf45ySCoDaL0nR2CE3bvbw4-B-npZ5cQ=");
+  }
+  .two-wallet_defi:hover {
+    box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.16) inset, 0px 0px 30px 0px #E48A3C;
+  }
+  .two-wallet_defi:hover:after {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  .two-wallet_defi:hover:before {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  .two-wallet_defi:after, .two-wallet_defi:before {
+    /*content: "⛃⛂";*/
+    content: "💳";
+  }
+  .two-wallet_defi b {
+    color: #FFD9B4;
+    font-weight: 700;
+  }
+  
+  .five-wallet_defi {
+    box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.16) inset, 0px 0px 10px 0px #DE3964;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#DE3964), to(rgba(154, 40, 87, 0.24))), url("https://image.binance.vision/uploads-original/c5ee3a6ef69847dda30cdf3e0dfa123e.png");
+    background-image: linear-gradient(to bottom, #DE3964, rgba(154, 40, 87, 0.24)), url("https://image.binance.vision/uploads-original/c5ee3a6ef69847dda30cdf3e0dfa123e.png");
+  }
+  .five-wallet_defi:hover {
+    box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.16) inset, 0px 0px 30px 0px #DE3964;
+  }
+  .five-wallet_defi:hover:after {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  .five-wallet_defi:hover:before {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  .five-wallet_defi:after, .five-wallet_defi:before {
+    content: "⛰️ ";
+    color: white;
+  }
+  .five-wallet_defi b {
+    color: #ff6868;
+    font-weight: 700;
+  }
+  
+/*  DEFI SWAP BOX  */
+#window-defi{
+  margin-top: 15%;
+  background-color: rgb(44, 43, 43);
+  color: #fff;
+  padding: 1%;
+  border-radius: 2%;
+  box-shadow: 0 0 5px black;
+  z-index: 0;
+}
+.swapbox_select {
+  width: 50%;
+  float: left;
+  z-index: 3;
+  padding-top: 1%;
+}
+.swapbox{
+  overflow: auto;
+  margin: 0%;
+  padding: 2%;
+  background-color: #504d4d;
+  border-radius: 20px;
+  border: 1px solid #565656;
+  z-index: 1;
+}
+.swapbox_arrow{
+  overflow: auto;
+  margin: 2% 0;
+  padding: 1% 1% 5% 5%;
+  background-color: #504d4d;
+  border-radius: 20px;
+  border: 1px solid #565656;
+
+}
+.swapbox_arrow_circle{
+  overflow: auto;
+  margin-left: 45.8%;
+  margin-top: 0.3%;
+  padding: 1% 1% 1% 1%;
+  background-color: #504d4d;
+  border-radius: 20px;
+  scale: 200%;
+  border: 1px solid #919090;
+  z-index: 2;
+  color: white;
+  display: none;
+}
+.button_arrow_circle{
+  position: absolute;
+  left: 49.6%;
+  bottom: 49.6%;
+}
+.fa_arrow_circle{
+  margin-bottom: 5%;
+  position: sticky;
+  left: 50%;
+  z-index: 2;
+  color: rgb(214, 213, 213);
+  scale: 100%;
+  -webkit-transform:scale(2.0);
+}
+.fa_arrow_circle:hover{
+  opacity: 50%;
+}
+.text-defi{
+  position: relative;
+  left: 3%;
+}
+.modal-header{
+  background-color: #363535;
+}
+.modal-title{
+  color: white;
+}
+.modal-body{
+  height: 600px;
+  overflow: scroll;
+  z-index: 7;
+  background-color: #1a1919;
+}
+
+#modal_close {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  transform: rotate(0deg);
+  transition: .5s ease-in-out;
+  cursor: pointer;
+  scale: 40%;
+}
+
+#modal_close span {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 23px;
+  height: 8px;
+  width: 100%;
+  background: #fff;
+  border-radius: 4px;
+  transform: rotate(0deg);
+  transition: .2s ease-in-out;
+}
+
+#modal_close span:nth-child(1),
+#modal_close span:nth-child(3) {
+  width: 50%;
+  transform: rotate(45deg);
+}
+
+#modal_close span:nth-child(1) {
+  left: 3px;
+  top: 15px;
+}
+
+#modal_close span:nth-child(2) {
+  transform: rotate(-45deg);
+}
+
+#modal_close span:nth-child(3) {
+  left: 20px;
+  top: 31px;
+}
+
+#modal_close.open span:nth-child(1),
+#modal_close.open span:nth-child(3) {
+    left: -1px;
+}
+
+#modal_close.open span:nth-child(1) {
+  top: 15px;
+  transform: rotate(135deg);
+}
+
+#modal_close.open span:nth-child(2) {
+  transform: rotate(0deg);
+}
+
+#modal_close.open span:nth-child(3) {
+  top: 31px;
+  transform: rotate(45deg);
+}
+#modal_section{
+  color: black;
+  border-radius: 25px;
+  background-color: #e4e4e4;
+  text-align: center;
+}
+.token_row{
+  padding: 5px 10px;
+  color: white;
+  border-radius: 25px;
+}
+.token_row:hover{
+  background-color: #e4e4e4;
+  cursor: pointer;
+  color: black;
+}
+.token_list_img, .token_image, .token_select_img{
+  width: 40px;
+  z-index: 5;
+  margin-right: 10px;
+}
+
+.token_select{
+  padding:5px 0;
+}
+.token_select:hover{
+  background-color: #464646;
+  width: 50%;
+  cursor: pointer;
+}
+
+#swap_button{
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  z-index: 2;
+  margin-top: 10px;
+  color: white;
+}
+#swap_button:hover{
+  color: #000000;
+  background-color: rgb(162, 255, 108);
+  border-color: rgb(0, 0, 0);
+}
+
+/* NAVTAB */
+.navtab{
+  position: absolute;
+  background-color: rgb(44, 43, 43);
+  margin-bottom: 1%;
+  width: 10%;
+  top: 10%;
+  left: 42.8%;
+  border-radius: 8px;
+  color: white;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  padding-right: 0.5%;
+  padding-left: 0.5%;
+  overflow: hidden;
+  inline-size: 15%; 
+
+}
+.navtab a{
+  margin-left: 5%;
+  padding-left: 0.5%;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+}
+.tablinks{
+  position: relative;
+  display: inline-block;
+  margin-left: 1%;
+  border-radius: 5px;
+  width: 20%;
+  text-align: center;
+  color: white;
+  opacity: 50%;
+  cursor: pointer;
+  font-size: small;
+  scale: 120%;
+}
+.tablinks:hover{
+  opacity: 100%;
+  text-decoration: none;
+  color: white;
+}
+
+.defi-logo{
+  position: absolute;
+  top: 5vh;
+  left: 15vh;
+  width: 3%;
+  cursor: pointer;
+}
+.defi-logo:hover{
+  opacity: 50%;
+}
+.defi-name{
+  opacity: 10%;
+  color: #DE3964;
+  font-family: 'Poppins', sans-serif;
+  position: absolute;
+  left: 20vh;
+  top: 13%;
+  transform: translate(-50%, -50%);
+  display: block;
+  color: #cf1b1b;
+  font-size: 26px;
+  letter-spacing: 8px;
+  cursor: pointer;
+  text-shadow: 1.5px 1.5px 0px white;
+}
+.defi-name:hover{
+  opacity: 100%;
+  
+}
+
+/*others*/
+.ShowBalance{
+  position: absolute;
+  top: 5vh;
+  right: 100px;
+  background-color: rgb(44, 43, 43);
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: white;
+}
+#gas_estimate{
+  color: greenyellow;
+}
+.max_holdings{
+  position: relative;
+  right: 5%;
+  cursor: pointer;
+  text-align: right;
+  opacity: 50%;
+}
+.max_holdings:hover{
+  opacity: 100%;
+}

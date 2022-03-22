@@ -8,11 +8,11 @@ class Overlay extends Component {
             case 0:
                 return ("ERC1155, Solidity, Ethers.js, Web3")
             case 1:
-                return ("Defi, Solidity, Ethers.js")
+                return ("Solidity, Defi, Ethers.js, Web3")
             case 2:
                 return ("Next.js, Tailwind.css, Typescript")
             case 3:
-                return ("HTML, CSS, Javascript, Web3")
+                return ("NoSQL, Tailwind.css, Web3")
         }
 
     }
@@ -42,19 +42,21 @@ class Overlay extends Component {
                 return "js"
             case "NFT":
                 return "nft"
+            case "NoSQL":
+                return "nft"
             default:
                 return "js"
         }
     }
     render(){
         return (
-        <div className='stack'>Stack: 
+        <div className='stack'> 
             <div>
                 <br></br>
                 <div>
-                    {this.decide_stack_used(this.props.stack_item).split(", ").map( item => {
+                    {this.decide_stack_used(this.props.stack_item).split(", ").map( (item,i) => {
                         return( 
-                        <div className={this.conditionalCss(item)}>
+                        <div key={i} className={this.conditionalCss(item)}>
                             {item}
                         </div>)
                     })}
