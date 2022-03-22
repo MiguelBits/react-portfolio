@@ -422,7 +422,9 @@ class Defi extends React.Component {
               let approve1 = await token1.approve(routerAddress,amountIn1)
               approve1.wait()
             }
-            
+            else{
+              toast.info("This page is a Work in Progress")
+            }
           }
 
         }
@@ -465,6 +467,9 @@ class Defi extends React.Component {
               let approve1 = await token1.approve(routerAddress,amountIn1)
               approve1.wait()
             }
+            else{
+              toast.info("This page is a Work in Progress")
+            }
           }
 
         }
@@ -503,6 +508,8 @@ class Defi extends React.Component {
               approve1.wait()
               let approve2 = await token2.approve(routerAddress,amountIn1)
               approve2.wait()
+            }else{
+              toast.info("This page is a Work in Progress")
             }
           }
 
@@ -545,6 +552,8 @@ class Defi extends React.Component {
               toast.error("Need to approve DAI tokens")
               let approve1 = await token1.approve(routerAddress,amountIn1)
               approve1.wait()
+            }else{
+              toast.info("This page is a Work in Progress")
             }
           }
 
@@ -584,6 +593,8 @@ class Defi extends React.Component {
               approve1.wait()
               let approve2 = await token2.approve(routerAddress,amountIn1)
               approve2.wait()
+            }else{
+              toast.info("This page is a Work in Progress")
             }
           }
         }
@@ -622,6 +633,8 @@ class Defi extends React.Component {
               approve1.wait()
               let approve2 = await token2.approve(routerAddress,amountIn1)
               approve2.wait()
+            }else{
+              toast.info("This page is a Work in Progress")
             }
           }
         }
