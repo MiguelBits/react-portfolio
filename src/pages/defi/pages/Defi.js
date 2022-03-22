@@ -338,10 +338,19 @@ class Defi extends React.Component {
           console.log(accounts[0])
           */
           try{
-            await routerContract.addLiquidityETH(WETH_Address,
-            amountIn1,amount1Min,amount2Min,
-            accounts[0],deadline, 
-            {value: amountIn1})
+            if(this.state.coinInput === " WETH"){
+              await routerContract.addLiquidityETH(WETH_Address,
+              amountIn1,amount1Min,amount2Min,
+              accounts[0],deadline, 
+              {value: amountIn2})
+            }
+            else{
+              await routerContract.addLiquidityETH(WETH_Address,
+              amountIn1,amount1Min,amount2Min,
+              accounts[0],deadline, 
+              {value: amountIn1})
+            }
+            
           }catch(e){
             if(e.code !== 4001){
               toast.error("Need to approve WETH tokens")
@@ -366,10 +375,19 @@ class Defi extends React.Component {
           const amount1Min = amountIn1.slice(0,-1)
           const amount2Min = amountIn2.toString().slice(0,-1)
           try{
-            await routerContract.addLiquidityETH(USDC_Address,
-            amountIn1,amount1Min,amount2Min,
-            accounts[0],deadline, 
-            {value: amountIn1})
+            if(this.state.coinInput === " USDC"){
+              await routerContract.addLiquidityETH(USDC_Address,
+              amountIn1,amount1Min,amount2Min,
+              accounts[0],deadline, 
+              {value: amountIn2})
+            }
+            else{
+              await routerContract.addLiquidityETH(USDC_Address,
+              amountIn1,amount1Min,amount2Min,
+              accounts[0],deadline, 
+              {value: amountIn1})
+            }
+            
           }catch(e){
             if(e.code !== 4001){
               toast.error("Need to approve USDC tokens")
