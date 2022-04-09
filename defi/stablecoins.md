@@ -1,0 +1,29 @@
+---
+description: >-
+  Reference:
+  https://www.youtube.com/watch?v=G6fFHfhW2O0&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ_&index=7
+---
+
+# Stablecoins
+
+![](<../.gitbook/assets/image (17).png>)![](<../.gitbook/assets/image (9).png>)&#x20;
+
+![](<../.gitbook/assets/image (1).png>)
+
+![](<../.gitbook/assets/image (15).png>)
+
+![](<../.gitbook/assets/image (10).png>)
+
+![](<../.gitbook/assets/image (6).png>)
+
+![](<../.gitbook/assets/image (14).png>)
+
+![](<../.gitbook/assets/image (11).png>)
+
+![](<../.gitbook/assets/image (8).png>)![](<../.gitbook/assets/image (13).png>)
+
+![](<../.gitbook/assets/image (7).png>)
+
+![](<../.gitbook/assets/image (16).png>)
+
+![](<../.gitbook/assets/image (12).png>)

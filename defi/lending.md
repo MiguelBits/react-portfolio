@@ -8,7 +8,7 @@ description: >-
 
 ## Actors in this process
 
-![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (1).png>)
+![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (1) (1).png>)
 
 ### Vault
 
@@ -76,12 +76,12 @@ Flash loans are a special form of lending. A flash loan should be taken and **re
 
 If in the repayment of the loan, the loan value and the fee are not paid, then the loan reverts, as if it never happened.
 
-![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (7).png>)
+![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (7) (1).png>)
 
-![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (6).png>)
+![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (6) (1).png>)
 
-![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (8).png>)
+![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (8) (1).png>)
 
 ![](<../.gitbook/assets/image (4).png>)![](<../.gitbook/assets/image (3).png>) In this use case, you borrow 1000DAI from the flash loan, repay your normal loan debt, swap on a DEX the same pair, and repay the flash loan, which gives you a net profit of the collateral APY value. In this example 500 DAI profit.
 
-![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (9).png>)
+![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (9) (1).png>)
