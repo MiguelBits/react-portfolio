@@ -8,7 +8,7 @@ description: >-
 
 ## Actors in this process
 
-![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](../.gitbook/assets/image.png)
+![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (1).png>)
 
 ### Vault
 
@@ -37,7 +37,7 @@ _Reference:_ [_https://medium.com/coinmonks/what-is-liquidation-in-defi-lending-
 
 ## Over-Collateralized Borrowing
 
-![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (3).png>)
+![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (3) (1).png>)
 
 The provision of collateral that is worth more than enough to cover potential losses in cases of default. It is used to effectively manage risk and involves placing an asset as collateral on a loan where the value of the asset exceeds the value of the loan.
 
@@ -70,3 +70,18 @@ At the moment, we can divide undercollateralized loans into eight kinds:
 
 ## Flash Loans
 
+A Loan that you can take from a vault, with a smart contract, do something with that loan, and repay the loan + interest.
+
+Flash loans are a special form of lending. A flash loan should be taken and **repaid in one single atomic transaction.**
+
+If in the repayment of the loan, the loan value and the fee are not paid, then the loan reverts, as if it never happened.
+
+![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (7).png>)
+
+![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (6).png>)
+
+![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (8).png>)
+
+![](<../.gitbook/assets/image (4).png>)![](<../.gitbook/assets/image (3).png>) In this use case, you borrow 1000DAI from the flash loan, repay your normal loan debt, swap on a DEX the same pair, and repay the flash loan, which gives you a net profit of the collateral APY value. In this example 500 DAI profit.
+
+![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (9).png>)
