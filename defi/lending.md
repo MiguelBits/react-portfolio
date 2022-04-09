@@ -33,6 +33,8 @@ After this liquidators are incentivized to issue a liquidation request to do vot
 
 In traditional finance, liquidation occurs when a company or group must sell some of its assets at a loss to cover a debt. DeFi liquidations are similar in that users take out debt from a protocol and provide crypto assets as collateral to back the debt. Thus, DeFi liquidation is the process by which a smart contract sells crypto assets to cover the debt.
 
+_Reference:_ [_https://medium.com/coinmonks/what-is-liquidation-in-defi-lending-and-borrowing-platforms-3326e0ba8d0#:\~:text=What%20does%20liquidation%20mean%20in,collateral%20to%20back%20the%20debt._](https://medium.com/coinmonks/what-is-liquidation-in-defi-lending-and-borrowing-platforms-3326e0ba8d0#:\~:text=What%20does%20liquidation%20mean%20in,collateral%20to%20back%20the%20debt.)__
+
 ## Over-Collateralized Borrowing
 
 ![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (3).png>)
