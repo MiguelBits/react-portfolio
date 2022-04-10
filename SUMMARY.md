@@ -32,4 +32,4 @@
       * [Frontend Perspective](defi/amm/uniswap-smart-contract-breakdown/frontend-perspective.md)
   * [Lending](defi/lending.md)
   * [Stablecoins](defi/stablecoins.md)
-  * [Oracles](defi/oracles.md)
+* [Oracles](oracles.md)

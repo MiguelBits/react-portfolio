@@ -27,7 +27,7 @@ A [decentralized oracle](https://docs.chain.link/docs/architecture-decentralized
 
 Chainlink is a framework for choosing your independent network of nodes to connect the real world’s data to the blockchain to enable smart contracts to reach their true potential. With this, we are leveraging the same reliable decentralized infrastructure concept the blockchain has, but for blockchain oracles. If nodes/sources are hacked, depreciated, or deleted, the network of Chainlink will leverage the decentralized network and carry on.
 
-![Decentralized oracles are the solution. (Image source: Chainlink)](<../.gitbook/assets/image (12).png>)
+![Decentralized oracles are the solution. (Image source: Chainlink)](<.gitbook/assets/image (12).png>)
 
 Using one blockchain oracle is a huge risk and Chainlink offers a fantastic new ecosystem around data. Blockchain oracles are the key to unlocking the future that smart contracts have for us. Oracles also provide a way for blockchains to see into each other. This is known as [interoperability](https://cointelegraph.com/explained/blockchain-interoperability-explained), and is an important next step as well.
 
