@@ -8,7 +8,7 @@ description: >-
 
 ## Actors in this process
 
-![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (1) (1).png>)
+![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (1) (1) (1).png>)
 
 ### Vault
 
@@ -37,7 +37,7 @@ _Reference:_ [_https://medium.com/coinmonks/what-is-liquidation-in-defi-lending-
 
 ## Over-Collateralized Borrowing
 
-![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (3) (1).png>)
+![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (3) (1) (1).png>)
 
 The provision of collateral that is worth more than enough to cover potential losses in cases of default. It is used to effectively manage risk and involves placing an asset as collateral on a loan where the value of the asset exceeds the value of the loan.
 
@@ -47,7 +47,7 @@ An over-collateralized **stablecoins** has a large number of cryptocurrency toke
 
 _reference:_ [_https://coinmarketcap.com/alexandria/glossary/over-collateralization_](https://coinmarketcap.com/alexandria/glossary/over-collateralization)__
 
-![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (2).png>)
+![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (2) (1).png>)
 
 ## Under-Collateralized Borrowing
 
@@ -78,10 +78,10 @@ If in the repayment of the loan, the loan value and the fee are not paid, then t
 
 ![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (7) (1).png>)
 
-![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (6) (1).png>)
+![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (6) (1) (1).png>)
 
 ![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (8) (1).png>)
 
-![](<../.gitbook/assets/image (4).png>)![](<../.gitbook/assets/image (3).png>) In this use case, you borrow 1000DAI from the flash loan, repay your normal loan debt, swap on a DEX the same pair, and repay the flash loan, which gives you a net profit of the collateral APY value. In this example 500 DAI profit.
+![](<../.gitbook/assets/image (4) (1).png>)![](<../.gitbook/assets/image (3) (1).png>) In this use case, you borrow 1000DAI from the flash loan, repay your normal loan debt, swap on a DEX the same pair, and repay the flash loan, which gives you a net profit of the collateral APY value. In this example 500 DAI profit.
 
 ![Reference: https://www.youtube.com/watch?v=dKk9rGWDoTI\&list=PLS01nW3RtgopJOtsMVOK3N7n7qyNMPbJ\_\&index=6](<../.gitbook/assets/image (9) (1).png>)

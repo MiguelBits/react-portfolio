@@ -33,3 +33,4 @@
   * [Lending](defi/lending.md)
   * [Stablecoins](defi/stablecoins.md)
 * [Oracles](oracles.md)
+* [Smart Contract Security](smart-contract-security.md)
