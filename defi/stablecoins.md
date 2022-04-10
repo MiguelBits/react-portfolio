@@ -26,4 +26,4 @@ description: >-
 
 ![](<../.gitbook/assets/image (16).png>)
 
-![](<../.gitbook/assets/image (12).png>)
+![](<../.gitbook/assets/image (12) (1).png>)
