@@ -20,10 +20,10 @@ description: >-
 
 ![](<../.gitbook/assets/image (11) (1).png>)
 
-![](<../.gitbook/assets/image (8).png>)![](<../.gitbook/assets/image (13) (1).png>)
+![](<../.gitbook/assets/image (8).png>)<img src="../.gitbook/assets/image (13) (1).png" alt="" data-size="original">
 
 ![](<../.gitbook/assets/image (7).png>)
 
-![](<../.gitbook/assets/image (16).png>)
+![](<../.gitbook/assets/image (16) (1).png>)
 
 ![](<../.gitbook/assets/image (12) (1).png>)
