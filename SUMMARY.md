@@ -34,6 +34,7 @@
       * [Frontend Perspective](defi/amm/uniswap-smart-contract-breakdown/frontend-perspective.md)
   * [Lending](defi/lending.md)
   * [Stablecoins](defi/stablecoins.md)
+  * [Tokenized Vault Standard ERC4626](defi/tokenized-vault-standard-erc4626.md)
 * [Oracles](oracles.md)
 * [Smart Contract Security](smart-contract-security/README.md)
   * [Re-Entrancy](smart-contract-security/re-entrancy.md)
