@@ -38,3 +38,10 @@
 * [Oracles](oracles.md)
 * [Smart Contract Security](smart-contract-security/README.md)
   * [Re-Entrancy](smart-contract-security/re-entrancy.md)
+
+## Advanced Solidity
+
+* [Design patterns](advanced-solidity/design-patterns/README.md)
+  * [MasterChef](advanced-solidity/design-patterns/masterchef.md)
+  * [Router](advanced-solidity/design-patterns/router.md)
+  * [Factory](advanced-solidity/design-patterns/factory.md)
