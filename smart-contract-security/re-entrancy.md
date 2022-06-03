@@ -8,7 +8,7 @@ Let's say that contract `A` calls contract `B`.
 
 **EtherStore** is a contract where you can deposit and withdraw ETH. This contract is vulnerable to re-entrancy attack. Let's see why.
 
-```solidity
+```
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.10;
 
@@ -89,7 +89,7 @@ Here is how the functions were called
 
 Here is a example of a re-entracy guard**:**
 
-```solidity
+```
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.10;
 

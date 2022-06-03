@@ -17,7 +17,7 @@ Our **DEX** will instantiate an instance of the contract in its constructor and 
 
 We’ll start our Decentralized exchange code by adding our simple ERC20 codebase:e(address owner, address spender) external view returns (uint256)
 
-```solidity
+```
 pragma solidity ^0.6.0;
 
 interface IERC20 {
@@ -103,7 +103,7 @@ Our new **DEX** smart contract will deploy the ERC-20 and get all the supplied:
 
 **`contract DEX {`**
 
-```solidity
+```
 IERC20 public token;
 
 event Bought(uint256 amount);
@@ -161,7 +161,7 @@ The function responsible for the sell will first **require** the user to have **
 
 `contract DEX {`
 
-```solidity
+```
 event Bought(uint256 amount);
 event Sold(uint256 amount);
 

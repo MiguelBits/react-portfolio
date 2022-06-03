@@ -16,7 +16,7 @@ These leaves come from an array of length = 2^n, if the length does not meet thi
 
 Reference: [https://medium.com/codex/using-merkle-trees-for-smart-contracts-24ccf6f75a0a](https://medium.com/codex/using-merkle-trees-for-smart-contracts-24ccf6f75a0a)
 
-```solidity
+```
 // Some code
 const {MerkleTree} = require("merkletreejs")
 const keccak256 = require("keccak256")
@@ -42,7 +42,7 @@ Now that we have our root hash, our tree, and the leaves, we can verify if a giv
 
 Next, we hash the address with `keccak256` and retrieve the proof using `getHexProof()` . This proof is then sent alongside the transaction to the smart contract.
 
-```solidity
+```
 // 'Serverside' code
 let address = addresses[0]
 let hashedAddress = keccak256(address)
@@ -56,7 +56,7 @@ We can also verify it within the backend already if we really want to. It isn’
 
 The smart contract will simply do the same as the final code snippet in the last paragraph. It will verify the proof with the leaf and the root hash using a simple function from another library.
 
-```solidity
+```
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.8.0 <0.9.0;
 
@@ -78,7 +78,7 @@ We use **OpenZeppelin’s** contract to help with verifying the Merkle proof. In
 
 Reference: [https://solidity-by-example.org/app/merkle-tree](https://solidity-by-example.org/app/merkle-tree)
 
-```solidity
+```
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.10;
 

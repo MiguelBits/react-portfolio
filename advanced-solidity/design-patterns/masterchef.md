@@ -305,6 +305,8 @@ function withdraw(uint256 _pid, uint256 _amount) public {
 
 ## Pending Sushi
 
+Tokens are minted for each block and distributed between all Stakers according to their participation in the pool.
+
 ```solidity
 function pendingSushi(uint256 _pid, address _user)
     external
