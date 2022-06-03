@@ -6,6 +6,24 @@ description: >-
 
 # Smart Contract Security
 
+## Consensys Know Smart Contract attacks
+
+The following is a list of known attacks which you should be aware of, and defend against when writing smart contracts.
+
+Reference: [https://consensys.github.io/smart-contract-best-practices/attacks/](https://consensys.github.io/smart-contract-best-practices/attacks/)
+
+| Category                | Description                                                                                                                               | Links                                                                                                                                                                              |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Reentrancy              | Intra- and inter-function reentrancy attacks and potentially faulty solutions to them.                                                    | [https://consensys.github.io/smart-contract-best-practices/attacks/reentrancy/](https://consensys.github.io/smart-contract-best-practices/attacks/reentrancy/)                     |
+| Oracle Manipulation     | Manipulation of external data providers and potential solutions to oracle security issues.                                                | [https://consensys.github.io/smart-contract-best-practices/attacks/oracle-manipulation/](https://consensys.github.io/smart-contract-best-practices/attacks/oracle-manipulation/)   |
+| FrontRunning            | A definition and taxonomy around frontrunning and related attacks. Someone getting done something that you did, before you can finish it. | [https://consensys.github.io/smart-contract-best-practices/attacks/frontrunning/](https://consensys.github.io/smart-contract-best-practices/attacks/frontrunning/)                 |
+| TimeStamp dependence    | Attacks relating to the timing of a transaction.                                                                                          | [https://consensys.github.io/smart-contract-best-practices/attacks/timestamp-dependence/](https://consensys.github.io/smart-contract-best-practices/attacks/timestamp-dependence/) |
+| Insecure Arithmetic     | Integer overflows and underflows.                                                                                                         | [https://consensys.github.io/smart-contract-best-practices/attacks/insecure-arithmetic/](https://consensys.github.io/smart-contract-best-practices/attacks/insecure-arithmetic/)   |
+| Denial Of Service       | Denial of service attacks through unexpected reverts and the block gas limit.                                                             | [https://consensys.github.io/smart-contract-best-practices/attacks/denial-of-service/](https://consensys.github.io/smart-contract-best-practices/attacks/denial-of-service/)       |
+| Griefing                | Attacks relating to bad faith players around a smart contract system.                                                                     | [https://consensys.github.io/smart-contract-best-practices/attacks/griefing/](https://consensys.github.io/smart-contract-best-practices/attacks/griefing/)                         |
+| Force Feeding           | Forcing Ether to be sent to smart contracts to manipulate balance checks                                                                  | [https://consensys.github.io/smart-contract-best-practices/attacks/force-feeding/](https://consensys.github.io/smart-contract-best-practices/attacks/force-feeding/)               |
+| Deprecated / Historical | Attacks that are part of Ethereum's history and vulnerabilities that have been fixes on a (Solidity) compiler level.                      | [https://consensys.github.io/smart-contract-best-practices/attacks/deprecated/](https://consensys.github.io/smart-contract-best-practices/attacks/deprecated/)                     |
+
 #### Safe Transfer functions
 
 * They protect **users** from typos, from sending tokens to the wrong address,
