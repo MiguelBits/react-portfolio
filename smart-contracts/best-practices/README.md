@@ -78,7 +78,7 @@ When a function takes a contract address as an argument, it is better to pass an
 
 Here we see two alternatives:
 
-```javascript
+```solidity
 contract Validator {
     function validate(uint) external returns(bool);
 }
@@ -103,7 +103,7 @@ contract TypeUnsafeAuction {
 
 The benefits of using the `TypeSafeAuction` contract above can then be seen from the following example. If `validateBet()` is called with an `address` argument, or a contract type other than `Validator`, the compiler will throw this error:
 
-```javascript
+```solidity
 contract NonValidator{}
 
 contract Auction is TypeSafeAuction {
@@ -121,7 +121,7 @@ contract Auction is TypeSafeAuction {
 
 It is currently possible to [shadow](https://en.wikipedia.org/wiki/Variable\_shadowing) built-in globals in Solidity. This allows contracts to override the functionality of built-ins such as `msg` and `revert()`. Although this [is intended](https://github.com/ethereum/solidity/issues/1249), it can mislead users of a contract as to the contract’s true behavior.
 
-```
+```solidity
 contract PretendingToRevert {
     function revert() internal constant {}
 }
@@ -139,7 +139,7 @@ Contract users (and auditors) should be aware of the full smart contract source 
 
 It can be useful to have a way to monitor the contract’s activity after it was deployed. One way to accomplish this is to look at all transactions of the contract, however that may be insufficient, as message calls between contracts are not recorded in the blockchain. Moreover, it shows only the input parameters, not the actual changes being made to the state. Also events could be used to trigger functions in the user interface.
 
-```javascript
+```solidity
 contract Charity {
     mapping(address => uint) balances;
 
@@ -160,7 +160,7 @@ Here, `Game` contract will make an internal call to `Charity.donate()`. This tra
 
 An event is a convenient way to log something that happened in the contract. Events that were emitted stay in the blockchain along with the other contract data and they are available for future audit. Here is an improvement to the example above, using events to provide a history of the Charity’s donations.
 
-```javascript
+```solidity
 contract Charity {
     // define event
     event LogDonate(uint _amount);
@@ -192,7 +192,7 @@ Here, all transactions that go through the `Charity` contract, either directly o
 
 Contracts should be deployed with the same compiler version and flags that they have been tested the most with. Locking the pragma helps ensure that contracts do not accidentally get deployed using, for example, the latest compiler which may have higher risks of undiscovered bugs. Contracts may also be deployed by others and the pragma indicates the compiler version intended by the original authors.
 
-```javascript
+```solidity
 // bad
 pragma solidity ^0.4.4;
 
@@ -211,7 +211,7 @@ See [SWC-103](https://swcregistry.io/docs/SWC-103)
 
 The code inside a modifier is usually executed before the function body, so any state changes or external calls will violate the [Checks-Effects-Interactions](https://solidity.readthedocs.io/en/develop/security-considerations.html#use-the-checks-effects-interactions-pattern) pattern. Moreover, these statements may also remain unnoticed by the developer, as the code for modifier may be far from the function declaration. For example, an external call in modifier can lead to the reentrancy attack:
 
-```javascript
+```solidity
 contract Registry {
     address owner;
 
