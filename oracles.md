@@ -19,7 +19,7 @@ Reference: [https://betterprogramming.pub/what-is-a-blockchain-oracle-f5ccab8dbd
 
 ### The solution <a href="#7931" id="7931"></a>
 
-[Chainlink](https://chain.link) solves both of these and is the standard for decentralized oracles.
+[Chainlink](https://chain.link/) solves both of these and is the standard for decentralized oracles.
 
 ### What is a decentralized oracle? <a href="#44aa" id="44aa"></a>
 

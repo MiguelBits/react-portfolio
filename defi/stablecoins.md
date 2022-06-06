@@ -6,13 +6,13 @@ description: >-
 
 # Stablecoins
 
-![](<../.gitbook/assets/image (17).png>)![](<../.gitbook/assets/image (9).png>)&#x20;
+![](<../.gitbook/assets/image (17) (1).png>)![](<../.gitbook/assets/image (9).png>)&#x20;
 
 ![](<../.gitbook/assets/image (1) (1).png>)
 
-![](<../.gitbook/assets/image (15).png>)
+![](<../.gitbook/assets/image (15) (1).png>)
 
-![](<../.gitbook/assets/image (10) (1).png>)
+![](<../.gitbook/assets/image (10) (1) (1).png>)
 
 ![](<../.gitbook/assets/image (6) (1).png>)
 
@@ -20,7 +20,7 @@ description: >-
 
 ![](<../.gitbook/assets/image (11) (1).png>)
 
-![](<../.gitbook/assets/image (8).png>)<img src="../.gitbook/assets/image (13) (1).png" alt="" data-size="original">
+![](<../.gitbook/assets/image (8).png>)<img src="../.gitbook/assets/image (13) (1) (1).png" alt="" data-size="original">
 
 ![](<../.gitbook/assets/image (7).png>)
 
