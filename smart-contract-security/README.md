@@ -57,7 +57,7 @@ Example of unsafe external function call, that results in the batch mint of more
 
 Given that there's an unsafe external call, we can begin minting 20 NFTs, reaching the supply cap, when we pass the 5 require checks, we are going to receive a callback, during this callback we can choose to mint another 19 NFTs, because only 1 NFT is in minting process and it's what's left to reach to max supply cap.
 
-![The result is that we have minted +19 NFTs that the programmer did not intend us to](<../.gitbook/assets/image (3).png>)
+![The result is that we have minted +19 NFTs that the programmer did not intend us to](<../.gitbook/assets/image (3) (1).png>)
 
 ## Executing in the Mempool
 

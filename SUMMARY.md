@@ -50,4 +50,5 @@
     * [Compound Contracts](advanced-solidity/defi-protocols/compound-finance/compound-contracts/README.md)
       * [CTokens](advanced-solidity/defi-protocols/compound-finance/compound-contracts/ctokens.md)
       * [Comptroller](advanced-solidity/defi-protocols/compound-finance/compound-contracts/comptroller.md)
-  * [Olympus OHM v2](advanced-solidity/defi-protocols/olympus-ohm-v2.md)
+  * [Olympus OHM v2](advanced-solidity/defi-protocols/olympus-ohm-v2/README.md)
+    * [Bonds](advanced-solidity/defi-protocols/olympus-ohm-v2/bonds.md)
