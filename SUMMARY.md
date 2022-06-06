@@ -51,4 +51,7 @@
       * [CTokens](advanced-solidity/defi-protocols/compound-finance/compound-contracts/ctokens.md)
       * [Comptroller](advanced-solidity/defi-protocols/compound-finance/compound-contracts/comptroller.md)
   * [Olympus OHM v2](advanced-solidity/defi-protocols/olympus-ohm-v2/README.md)
-    * [Bonds](advanced-solidity/defi-protocols/olympus-ohm-v2/bonds.md)
+    * [Bonds](advanced-solidity/defi-protocols/olympus-ohm-v2/bonds/README.md)
+      * [Inverse Bonds](advanced-solidity/defi-protocols/olympus-ohm-v2/bonds/inverse-bonds.md)
+    * [Treasury](advanced-solidity/defi-protocols/olympus-ohm-v2/treasury.md)
+    * [Protocol-owned liquidity (POL)](advanced-solidity/defi-protocols/olympus-ohm-v2/protocol-owned-liquidity-pol.md)
