@@ -81,6 +81,25 @@ The roughly 8-hour period is called an Epoch and that's when rebase rewards are 
     }
 ```
 
+### Distribute Tokens
+
+```solidity
+
+    /**
+        @notice send epoch reward to staking contract
+     */
+    function distribute() external override {
+        require(msg.sender == staking, "Only staking");
+        // distribute rewards to each recipient
+        for (uint256 i = 0; i < info.length; i++) {
+            if (info[i].rate > 0) {
+                treasury.mint(info[i].recipient, nextRewardAt(info[i].rate)); // mint and send tokens
+                adjust(i); // check for adjustment
+            }
+        }
+    }
+```
+
 ## What is the relationship between staking and reward rate?
 
 The level of OHM staking rewards is determined by the overall reward rate, and was codified by the community (via the OIP-18 vote). The reward yield, which is a function of reward rate, is also dependent on how many other individuals are staking their OHM. When more individuals are staking the reward yield declines and the opposite occurs when the reward rate increases.
