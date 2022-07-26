@@ -4,6 +4,8 @@ description: 'Reference: https://learn.figment.io/tutorials/create-an-amm-on-ava
 
 # AMM
 
+Vitalik's reddit post about AMM's: [https://www.reddit.com/r/ethereum/comments/55m04x/lets\_run\_onchain\_decentralized\_exchanges\_the\_way/](https://www.reddit.com/r/ethereum/comments/55m04x/lets\_run\_onchain\_decentralized\_exchanges\_the\_way/)
+
 ## Automated Market Maker
 
 Automated Market Maker(**AMM**) is a type of decentralized exchange which is based on a mathematical formula of price assets. It allows digital assets to be traded without any permissions and automatically by using liquidity pools instead of any traditional buyers and sellers which uses an order book that was used in traditional exchange, here assets are priced according to a pricing algorithm.

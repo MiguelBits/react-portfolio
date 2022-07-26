@@ -6,6 +6,7 @@
   * [2. Compute Layer](blockchain-technologies/2.-compute-layer.md)
   * [3. Decentralized Applications](blockchain-technologies/3.-decentralized-applications.md)
   * [4. User Facing tools](blockchain-technologies/4.-user-facing-tools.md)
+* [Check the chain](check-the-chain.md)
 * [Scaling Blockchain](scaling-blockchain/README.md)
   * [(1) Scaling Bitcoin using Payment Channels](scaling-blockchain/1-scaling-bitcoin-using-payment-channels.md)
   * [(2) Scaling Ethereum using Rollup](scaling-blockchain/2-scaling-ethereum-using-rollup/README.md)
@@ -41,6 +42,7 @@
 
 ## Advanced Solidity
 
+* [EVM Basics](advanced-solidity/evm-basics.md)
 * [Design patterns](advanced-solidity/design-patterns/README.md)
   * [MasterChef](advanced-solidity/design-patterns/masterchef.md)
   * [Router](advanced-solidity/design-patterns/router.md)
@@ -55,3 +57,5 @@
       * [Inverse Bonds](advanced-solidity/defi-protocols/olympus-ohm-v2/bonds/inverse-bonds.md)
     * [Treasury](advanced-solidity/defi-protocols/olympus-ohm-v2/treasury.md)
     * [Protocol-owned liquidity (POL)](advanced-solidity/defi-protocols/olympus-ohm-v2/protocol-owned-liquidity-pol.md)
+* [Advanced DeFi](advanced-solidity/advanced-defi/README.md)
+  * [Whitepapers](advanced-solidity/advanced-defi/whitepapers.md)
