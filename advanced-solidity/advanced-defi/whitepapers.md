@@ -4,7 +4,7 @@ Reading a project’s whitepaper is the most complete way to understand it, and 
 
 #### MakerDAO
 
-[https://makerdao.com/en/whitepaper/#abstract](https://makerdao.com/en/whitepaper/#abstract)
+[https://makerdao.com/whitepaper/White%20Paper%20-The%20Maker%20Protocol\_%20MakerDAO%E2%80%99s%20Multi-Collateral%20Dai%20(MCD)%20System-FINAL-%20021720.pdf](https://makerdao.com/whitepaper/White%20Paper%20-The%20Maker%20Protocol\_%20MakerDAO%E2%80%99s%20Multi-Collateral%20Dai%20\(MCD\)%20System-FINAL-%20021720.pdf)
 
 #### Uniswap V2 & V3
 
