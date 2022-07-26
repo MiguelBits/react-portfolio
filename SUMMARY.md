@@ -42,6 +42,7 @@
 
 ## Advanced Solidity
 
+* [Bridges](advanced-solidity/bridges.md)
 * [EVM Basics](advanced-solidity/evm-basics.md)
 * [Design patterns](advanced-solidity/design-patterns/README.md)
   * [MasterChef](advanced-solidity/design-patterns/masterchef.md)
@@ -59,3 +60,7 @@
     * [Protocol-owned liquidity (POL)](advanced-solidity/defi-protocols/olympus-ohm-v2/protocol-owned-liquidity-pol.md)
 * [Advanced DeFi](advanced-solidity/advanced-defi/README.md)
   * [Whitepapers](advanced-solidity/advanced-defi/whitepapers.md)
+
+## Game Theory
+
+* [Game Theory and Mechanism Design](game-theory/game-theory-and-mechanism-design.md)

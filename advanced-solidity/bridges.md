@@ -1,0 +1,3 @@
+# Bridges
+
+Web3 is now an ecosystem of L1 blockchains and L2 scaling solutions, each with unique capabilities and trade-offs. As the number of blockchains protocols increases, so does the demand to move assets across chains. To fulfill this demand, we need bridges. It is important to understand the different types of bridges and how they are classified based on how they work (trusted vs. trustless), on what they connect (L1 <> L1 vs. L1/L2 <> L2), on how they move assets (lock & mint vs. burn & mint vs. atomic swaps) or on their function (chain to chain, multichain, specialized, wrapped assets, data specific, dApp specific). Read [**this page**](https://ethereum.org/en/bridges/) and the ‘further reading’ links at the end
