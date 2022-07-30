@@ -60,6 +60,7 @@
     * [Protocol-owned liquidity (POL)](advanced-solidity/defi-protocols/olympus-ohm-v2/protocol-owned-liquidity-pol.md)
 * [GMX (& GLP)](advanced-solidity/gmx-and-glp/README.md)
   * [Rewards](advanced-solidity/gmx-and-glp/rewards.md)
+* [GMX Technical Overview](advanced-solidity/gmx-technical-overview.md)
 * [Advanced DeFi](advanced-solidity/advanced-defi/README.md)
   * [Whitepapers](advanced-solidity/advanced-defi/whitepapers.md)
 

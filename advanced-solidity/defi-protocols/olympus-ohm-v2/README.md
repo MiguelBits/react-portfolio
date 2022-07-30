@@ -11,7 +11,7 @@ Staking is the primary value accrual strategy of Olympus. Stakers stake their OH
 > **What is a rebase?**\
 > Rebase is a mechanism by which your staked OHM balance increases automatically. When new OHM are minted by the protocol, a large portion of it goes to the stakers. Because stakers only see staked OHM balance instead of OHM, the protocol utilizes the rebase mechanism to increase the staked OHM balance so that 1 staked OHM is always redeemable for 1 OHM.
 
-![](<../../../.gitbook/assets/image (3).png>)
+![](<../../../.gitbook/assets/image (3) (2).png>)
 
 The roughly 8-hour period is called an Epoch and that's when rebase rewards are added to your wallet in the form of sOHM. And since it's already in sOHM, it means that the rewards are automatically staked which increases the rebase rewards you get each Epoch.
 
