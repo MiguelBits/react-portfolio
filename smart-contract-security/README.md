@@ -77,5 +77,5 @@ To do this understand this first:
 
 So anyone scanning the **mempool** can actually see what your transaction is and what it's going to do, and react accordingly.
 
-To exploit this: ![](<../.gitbook/assets/image (4).png>)Note: **Frontrunning** is sending the same transaction with more gas paid than the other transaction in order to get included in the block first then the other transaction.
+To exploit this: ![](<../.gitbook/assets/image (4) (2).png>)Note: **Frontrunning** is sending the same transaction with more gas paid than the other transaction in order to get included in the block first then the other transaction.
 

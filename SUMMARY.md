@@ -58,6 +58,8 @@
       * [Inverse Bonds](advanced-solidity/defi-protocols/olympus-ohm-v2/bonds/inverse-bonds.md)
     * [Treasury](advanced-solidity/defi-protocols/olympus-ohm-v2/treasury.md)
     * [Protocol-owned liquidity (POL)](advanced-solidity/defi-protocols/olympus-ohm-v2/protocol-owned-liquidity-pol.md)
+* [GMX (& GLP)](advanced-solidity/gmx-and-glp/README.md)
+  * [Rewards](advanced-solidity/gmx-and-glp/rewards.md)
 * [Advanced DeFi](advanced-solidity/advanced-defi/README.md)
   * [Whitepapers](advanced-solidity/advanced-defi/whitepapers.md)
 
