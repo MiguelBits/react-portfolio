@@ -39,6 +39,7 @@
 * [Oracles](oracles.md)
 * [Smart Contract Security](smart-contract-security/README.md)
   * [Re-Entrancy](smart-contract-security/re-entrancy.md)
+* [EIP](eip.md)
 
 ## Advanced Solidity
 
