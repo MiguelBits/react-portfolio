@@ -38,7 +38,7 @@
   * [Tokenized Vault Standard ERC4626](defi/tokenized-vault-standard-erc4626.md)
 * [Oracles](oracles.md)
 * [Smart Contract Security](smart-contract-security/README.md)
-  * [Re-Entrancy](smart-contract-security/re-entrancy/README.md)
+  * [Re-Entrancy](smart-contract-security/re-entrancy.md)
     * [Scenarios](smart-contract-security/re-entrancy/scenarios.md)
 * [EIP](eip.md)
 

@@ -4,9 +4,17 @@ description: 'Reference: https://hackernoon.com/hack-solidity-reentrancy-attack'
 
 # Scenarios
 
-### Reentrancy Attack Scenario
+## Reentrancy Attack Scenario
+
+### &#x20;How Does Reentrancy Attack Work?
+
+A reentrancy attack involves two smart contracts. A vulnerable contract and an untrusted attacker’s contract.
 
 \
+
+
+![](data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27567%27%20height=%27352%27/%3e)![Source: https://cryptomarketpool.com/reentrancy-attack-in-a-solidity-smart-contract/](https://hackernoon.com/\_next/image?url=https%3A%2F%2Fcdn.hackernoon.com%2Fimages%2F2VftJjxuwsZ19AsybJmsSIp6DX53-mn02f8j.jpeg\&w=1200\&q=75)
+
 
 
 1. The vulnerable smart contract has 10 eth.
