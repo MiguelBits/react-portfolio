@@ -51,6 +51,7 @@
   * [Router](advanced-solidity/design-patterns/router.md)
   * [Factory](advanced-solidity/design-patterns/factory.md)
 * [DeFi Protocols](advanced-solidity/defi-protocols/README.md)
+  * [Olympus OHM v1](advanced-solidity/defi-protocols/olympus-ohm-v1.md)
   * [Compound Finance](advanced-solidity/defi-protocols/compound-finance/README.md)
     * [Compound Contracts](advanced-solidity/defi-protocols/compound-finance/compound-contracts/README.md)
       * [CTokens](advanced-solidity/defi-protocols/compound-finance/compound-contracts/ctokens.md)
