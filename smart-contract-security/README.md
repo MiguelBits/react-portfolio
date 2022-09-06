@@ -53,7 +53,7 @@ Example of unsafe external function call, that results in the batch mint of more
 
 ![Call to the \_safeMint Function should be looked into](<../.gitbook/assets/image (13) (1).png>)
 
-!["to" function external call is exploitable](<../.gitbook/assets/image (6) (2).png>)
+!["to" function external call is exploitable](<../.gitbook/assets/image (6).png>)
 
 Given that there's an unsafe external call, we can begin minting 20 NFTs, reaching the supply cap, when we pass the 5 require checks, we are going to receive a callback, during this callback we can choose to mint another 19 NFTs, because only 1 NFT is in minting process and it's what's left to reach to max supply cap.
 

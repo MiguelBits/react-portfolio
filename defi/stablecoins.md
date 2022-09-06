@@ -6,7 +6,7 @@ description: >-
 
 # Stablecoins
 
-![](<../.gitbook/assets/image (17) (1).png>)![](<../.gitbook/assets/image (9).png>)&#x20;
+![](<../.gitbook/assets/image (17) (1).png>)![](<../.gitbook/assets/image (9) (2).png>)&#x20;
 
 ![](<../.gitbook/assets/image (1) (1).png>)
 
