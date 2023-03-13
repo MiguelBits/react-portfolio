@@ -27,3 +27,28 @@ On the other hand, when you return a struct of three uints, the compiler generat
 In addition, returning a struct can make your code more readable and maintainable, especially if you need to return multiple values from a function.
 
 As with any gas optimization, it's important to measure the gas usage of different approaches in the specific context of your contract to determine the most efficient option.
+
+### QUESTION 3
+
+I have this input `function setValues(bytes memory data) public`, this struct: struct EncodedData { uint64 volatilityIndex; uint64 beta; uint64 alpha; }; and then I decode like this: (address \_asset, EncodedData memory decodedData) = abi.decode(data, (address, EncodedData)); Is this a good way to optimize gas or should I just pass an address and the struct?
+
+In your case, the input data contains an address and a struct with three uint64 values. If you pass the address and struct directly as input parameters, the Solidity compiler generates separate memory copy operations for each member of the struct and the address, which can be relatively expensive in terms of gas cost.
+
+On the other hand, if you encode the address and struct as a single `bytes` variable and then decode the data using `abi.decode()`, the Solidity compiler generates a single memory copy operation, which can be cheaper in terms of gas cost.
+
+So, in general, encoding the data as a `bytes` variable and then decoding it using `abi.decode()` can be a good way to optimize gas usage, especially if your input data is relatively large or complex. However, as with any gas optimization, it's important to measure the gas usage of different approaches in the specific context of your contract to determine the most efficient option.
+
+{% code overflow="wrap" %}
+```solidity
+    // function 2 is cheaper in this scenario
+
+    function test_gasSetValues1() public {
+        oracle.setValues(abi.encode(WETH,IVXOracle.EncodedData({volatilityIndex: 100, beta: 200, alpha: 300})));
+
+    }
+
+    function test_gasSetValues2() public {
+        oracle.setValues(WETH,IVXOracle.EncodedData({volatilityIndex: 100, beta: 200, alpha: 300}));
+    }
+```
+{% endcode %}
