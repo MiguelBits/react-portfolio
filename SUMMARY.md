@@ -69,6 +69,8 @@
   * [GMX Technical Overview](advanced-solidity/gmx-and-glp/gmx-technical-overview.md)
 * [Advanced DeFi](advanced-solidity/advanced-defi/README.md)
   * [Whitepapers](advanced-solidity/advanced-defi/whitepapers.md)
+* [GAS OPTIMIZATION](advanced-solidity/gas-optimization/README.md)
+  * [Mappings and Structs](advanced-solidity/gas-optimization/mappings-and-structs.md)
 
 ## Game Theory
 
