@@ -44,6 +44,7 @@
 
 ## Advanced Solidity
 
+* [Revert() vs Require()](advanced-solidity/revert-vs-require.md)
 * [Bridges](advanced-solidity/bridges.md)
 * [EVM Basics](advanced-solidity/evm-basics.md)
 * [Design patterns](advanced-solidity/design-patterns/README.md)
@@ -70,6 +71,7 @@
 * [Advanced DeFi](advanced-solidity/advanced-defi/README.md)
   * [Whitepapers](advanced-solidity/advanced-defi/whitepapers.md)
 * [GAS OPTIMIZATION](advanced-solidity/gas-optimization/README.md)
+  * [Function Calls](advanced-solidity/gas-optimization/function-calls.md)
   * [Mappings and Structs](advanced-solidity/gas-optimization/mappings-and-structs.md)
 
 ## Game Theory
